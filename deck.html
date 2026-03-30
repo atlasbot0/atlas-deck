@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Atlas — System Overview</title>
+<style>
+/* ═══════════════════════════════════════════════════════
+   ATLAS OS — Design System
+   Dieter Rams × Teenage Engineering
+   
+   Palette (warm, not cold):
+   Cream:       #F2EDE4   TE product body
+   Near-black:  #1A1714   Warm ink, not pure black
+   Warm dark:   #1E1C17   Dark panels — warm charcoal
+   Signal:      #FF4713   One accent. Used sparingly.
+   Grey:        #8C8782   Secondary text
+   Rule:        #D4CEC7   Hairlines on cream
+   Rule-inv:    rgba(242,237,228,0.1) Hairlines on dark
+═══════════════════════════════════════════════════════ */
+:root {
+  --cr:  #F2EDE4;
+  --ink: #1A1714;
+  --wdark: #1E1C17;
+  --sig: #FF4713;
+  --grey:#8C8782;
+  --rule:#D4CEC7;
+  --ri:  rgba(242,237,228,0.10);
+  --dim: rgba(26,23,20,0.44);
+  --di:  rgba(242,237,228,0.44);
+  --f:  "Helvetica Neue","Arial",system-ui,sans-serif;
+  --fm: "SF Mono","Fira Mono","Courier New",monospace;
+  --e:  cubic-bezier(0.77,0,0.175,1);
+  --eo: cubic-bezier(0.16,1,0.3,1);
+  --d:  520ms;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
+  font-family:var(--f);-webkit-font-smoothing:antialiased;color:var(--ink);user-select:none}
+
+/* ── PROGRESS ── */
+#prog{position:fixed;top:0;left:0;z-index:500;height:1px;width:0;
+  background:var(--sig);transition:width 380ms var(--e)}
+#ctr{position:fixed;top:18px;right:20px;z-index:500;
+  font-family:var(--fm);font-size:9px;letter-spacing:.12em;color:rgba(242,237,228,.22)}
+
+/* ── DECK / SLIDES ── */
+#deck{position:fixed;inset:0;overflow:hidden}
+.slide{position:absolute;inset:0;transform:translateX(100%);
+  transition:transform var(--d) var(--e);will-change:transform;
+  overflow:hidden;display:flex;flex-direction:column}
+.slide.active{transform:translateX(0)}
+.slide.prev  {transform:translateX(-100%)}
+
+/* Entrance */
+.slide.active .e{animation:eu 480ms var(--eo) both;opacity:0}
+.slide.active .e1 {animation-delay:60ms}
+.slide.active .e2 {animation-delay:120ms}
+.slide.active .e3 {animation-delay:180ms}
+.slide.active .e4 {animation-delay:240ms}
+.slide.active .e5 {animation-delay:300ms}
+.slide.active .e6 {animation-delay:360ms}
+.slide.active .e7 {animation-delay:420ms}
+.slide.active .e8 {animation-delay:480ms}
+.slide.active .e9 {animation-delay:540ms}
+.slide.active .e10{animation-delay:600ms}
+@keyframes eu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── DOTS ── */
+#dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:500;display:flex;gap:5px;align-items:center}
+.dot{width:4px;height:4px;border-radius:50%;background:rgba(242,237,228,.18);
+  transition:width 280ms var(--e),background 280ms;cursor:pointer;border:none;padding:0}
+.dot.active{width:16px;border-radius:2px;background:var(--sig)}
+
+/* ── NAV ── */
+.nb{position:fixed;top:50%;z-index:500;transform:translateY(-50%);
+  width:32px;height:32px;background:transparent;
+  border:1px solid rgba(242,237,228,.08);color:rgba(242,237,228,.22);
+  font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:border-color 140ms,color 140ms}
+.nb:hover{border-color:rgba(242,237,228,.2);color:rgba(242,237,228,.6)}
+#bp{left:8px}#bn{right:8px}
+
+/* ═══ PRIMITIVES ═══ */
+.cr {background:var(--cr);flex:1;display:flex;flex-direction:column;overflow:hidden}
+.dk {background:var(--wdark);flex:1;display:flex;flex-direction:column;overflow:hidden}
+.p  {padding:24px 22px 18px}
+.p2 {padding:14px 22px}
+@media(min-width:640px){.p{padding:36px 36px 26px}.p2{padding:16px 36px}}
+
+.hr {height:1px;background:var(--rule);flex-shrink:0}
+.hri{height:1px;background:var(--ri);flex-shrink:0}
+.vr {width:1px;background:var(--rule);align-self:stretch;flex-shrink:0}
+.vri{width:1px;background:var(--ri);align-self:stretch;flex-shrink:0}
+.cols{display:flex;flex:1;min-height:0;overflow:hidden}
+.col {flex:1;display:flex;flex-direction:column;min-width:0}
+
+/* ═══ TYPE ═══ */
+.lbl {font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.lbl-i{color:var(--di)}
+.lbl-s{color:var(--sig)}
+.disp{font-size:clamp(60px,15vw,116px);font-weight:900;letter-spacing:-.048em;line-height:.88;color:var(--ink)}
+.disp-i{color:var(--cr)}
+.h1  {font-size:clamp(26px,6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.h1-i{color:var(--cr)}
+.h2  {font-size:clamp(18px,4vw,30px);font-weight:800;letter-spacing:-.025em;line-height:1.05}
+.body{font-size:14px;font-weight:400;line-height:1.65;color:var(--dim);letter-spacing:.005em}
+.body-i{color:var(--di)}
+.cap {font-size:12px;font-weight:400;line-height:1.55;color:var(--grey);letter-spacing:.02em}
+.cap-i{color:rgba(242,237,228,.52)}
+.mono{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--grey)}
+.mono-s{color:var(--sig)}
+
+/* ═══ COMPONENTS ═══ */
+
+/* Spec row */
+.sr{display:flex;align-items:baseline;justify-content:space-between;
+  padding:9px 0;border-bottom:1px solid var(--rule);gap:12px}
+.sr:first-child{border-top:1px solid var(--rule)}
+.sk{font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.01em}
+.sv{font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.08em;text-align:right}
+
+.sr-i{border-bottom-color:var(--ri)}
+.sr-i:first-child{border-top-color:var(--ri)}
+.sr-i .sk{color:var(--cr)}
+
+/* Chip */
+.chip{display:inline-block;padding:4px 9px;border:1px solid var(--rule);
+  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--grey);font-family:var(--fm)}
+.chip-s{border-color:var(--sig);color:var(--sig)}
+.chip-i{border-color:rgba(242,237,228,.2);color:rgba(242,237,228,.45)}
+
+/* Time badge */
+.tbadge{font-family:var(--fm);font-size:9px;letter-spacing:.08em;color:var(--sig);
+  padding:2px 7px;border:1px solid rgba(255,71,19,.3)}
+
+/* Expandable row */
+.xr{border-bottom:1px solid var(--rule);cursor:pointer;transition:background 120ms}
+.xr:hover{background:rgba(26,23,20,.035)}
+.xr:first-child{border-top:1px solid var(--rule)}
+.xr-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px}
+.xr-l{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.xr-ico{width:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.xr-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.xr-meta{font-size:11px;color:var(--grey);margin-top:1px;letter-spacing:.02em}
+.xr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.xr-arr{font-size:10px;color:var(--grey);transition:transform 240ms var(--e)}
+.xr.open .xr-arr{transform:rotate(180deg)}
+.xr-bd{max-height:0;overflow:hidden;transition:max-height 320ms var(--e),padding 240ms;padding-bottom:0}
+.xr.open .xr-bd{max-height:120px;padding-bottom:14px}
+.xr-desc{font-size:13px;line-height:1.65;color:var(--dim);padding-left:32px}
+
+/* Dark xr */
+.xr-dk{border-bottom-color:var(--ri)}
+.xr-dk:first-child{border-top-color:var(--ri)}
+.xr-dk:hover{background:rgba(242,237,228,.03)}
+.xr-dk .xr-name{color:var(--cr)}
+.xr-dk .xr-desc{color:rgba(242,237,228,.5)}
+.xr-dk .xr-arr{color:rgba(242,237,228,.3)}
+
+.scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0}
+.scroll::-webkit-scrollbar{width:2px}
+.scroll::-webkit-scrollbar-thumb{background:var(--rule)}
+
+/* Node (agent selector) */
+.node{font-size:11px;font-weight:700;padding:5px 11px;border:1px solid var(--rule);
+  color:var(--ink);letter-spacing:.01em;cursor:pointer;
+  transition:background 120ms,border-color 120ms;
+  display:inline-flex;align-items:center;gap:6px}
+.node:hover{background:rgba(26,23,20,.05)}
+.node.sel{background:var(--ink);color:var(--cr);border-color:var(--ink)}
+.node-root{border-width:2px;border-color:var(--ink)}
+.node-dom{border-style:dashed;color:rgba(26,23,20,.6)}
+
+/* ═══ SLIDES ═══ */
+
+/* S1 hero */
+.s1b{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:28px 24px 24px}
+.wm{font-size:clamp(76px,22vw,172px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--ink)}
+
+/* S2 principle */
+.s2c{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:18px 18px}
+.big{font-size:clamp(60px,17vw,124px);font-weight:900;letter-spacing:-.052em;line-height:.88;color:var(--ink)}
+
+/* S3 infra */
+.ir{display:flex;align-items:stretch;flex:1;border-bottom:1px solid var(--ri)}
+.in{width:40px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;
+  padding-top:14px;font-family:var(--fm);font-size:13px;color:rgba(242,237,228,.55);
+  letter-spacing:.1em;border-right:1px solid var(--ri)}
+.ic{flex:1;padding:13px 16px}
+.ib{flex-shrink:0;padding:14px 12px;display:flex;align-items:flex-start}
+
+/* S4 models — warm tinted darks */
+.mc{flex:1;display:flex;flex-direction:column;padding:20px 16px;min-width:0}
+.mc+.mc{border-left:1px solid var(--ri)}
+.mc.m1{background:#261F18}
+.mc.m2{background:#1E1C17}
+.mc.m3{background:#1A1916}
+.mt{font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:rgba(242,237,228,.45);margin-bottom:12px}
+.mn{font-size:clamp(22px,5vw,36px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--cr)}
+.ms{font-family:var(--fm);font-size:11px;color:var(--sig);letter-spacing:.06em;margin-top:8px}
+.md{font-size:13px;line-height:1.6;color:rgba(242,237,228,.55);margin-top:10px}
+
+/* S7 agents */
+.nstrip{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:12px 22px 10px}
+#apanel{padding:12px 22px 14px;min-height:64px;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);background:rgba(26,23,20,.025);display:flex;align-items:center}
+
+/* Domain info cards */
+.domcard{flex:1;padding:14px 16px;background:rgba(26,23,20,.02);border:1px solid var(--rule)}
+.domcard+.domcard{border-left:none}
+
+/* S10 security */
+.sq{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.sc{padding:18px 18px;display:flex;flex-direction:column;
+  border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.sc:nth-child(2n){border-right:none}
+.sc:nth-child(n+3){border-bottom:none}
+.sn{font-family:var(--fm);font-size:34px;font-weight:900;letter-spacing:-.04em;color:var(--sig);line-height:1;margin-bottom:8px}
+
+/* S11 MOAT */
+.moat-row{display:flex;padding:10px 0;border-bottom:1px solid var(--ri);align-items:baseline;gap:16px}
+.moat-before{flex:1;font-size:12px;color:rgba(242,237,228,.38);letter-spacing:.01em}
+.moat-after {flex:1;font-size:12px;color:var(--cr);letter-spacing:.01em}
+.moat-arr{color:var(--sig);font-size:10px;flex-shrink:0}
+
+/* S12 day — timeline */
+.tl{display:flex;flex-direction:column;flex:1}
+.tlr{flex:1;display:flex;min-height:0;border-bottom:1px solid var(--rule)}
+.tlt{width:72px;flex-shrink:0;padding:10px 8px 10px 18px;border-right:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:flex-end;
+  font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--grey)}
+.tlc{flex:1;padding:10px 16px;display:flex;flex-direction:column;justify-content:center}
+.tln{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.tls{font-size:11px;color:var(--grey);margin-top:2px;line-height:1.45}
+.tlr.hl{background:var(--ink)}
+.tlr.hl .tlt{color:rgba(242,237,228,.35);border-right-color:var(--ri)}
+.tlr.hl .tln{color:var(--cr)}
+.tlr.hl .tls{color:rgba(242,237,228,.4)}
+
+/* S13 close */
+.clb{flex:1;padding:28px 24px 24px;display:flex;flex-direction:column;
+  justify-content:space-between;position:relative;overflow:hidden}
+.clg{position:absolute;right:-12px;bottom:-28px;
+  font-size:clamp(100px,28vw,210px);font-weight:900;
+  letter-spacing:-.06em;color:rgba(26,23,20,.04);pointer-events:none}
+.clm{font-size:clamp(34px,9vw,60px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--ink)}
+
+
+@media(max-width:639px){
+  .lbl{font-size:9px}
+  .body{font-size:13px}
+  .cap{font-size:11px}
+  .chip{font-size:10px;padding:3px 8px}
+  .xr-name{font-size:13px}
+  .xr-desc{font-size:12px}
+  .mn{font-size:20px}
+  .mt{font-size:9px}
+  .in{font-size:11px}
+}
+
+@media(max-width:480px){
+  .mc{padding:14px 12px}
+  .mn{font-size:20px}
+  .sq{grid-template-columns:1fr 1fr}
+  .s1b{padding:24px 20px 20px}
+}
+@media(min-width:768px){
+  .s1b{padding:44px 44px 36px}
+  .nstrip{padding:14px 32px 12px}
+  #apanel{padding:14px 32px 16px}
+  .p{padding:32px 36px 22px}
+  .p2{padding:14px 36px}
+  .tlt{width:80px}
+  .tlc{padding:12px 20px}
+}
+@media(min-width:1100px){
+  .s2c{padding:28px 28px}
+  .mc{padding:28px 24px}
+  .sc{padding:22px 20px}
+}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="ctr">01 / 15</div>
+<div id="deck">
+
+<!-- ══ 01 IDENTITY ══ -->
+<div class="slide active" id="s1">
+<div class="cr">
+<div class="s1b">
+  <div>
+    <div class="e e1" style="display:flex;flex-direction:column;gap:5px;margin-bottom:16px;">
+      <div style="height:2px;width:36px;background:var(--sig)"></div>
+      <div style="height:1px;width:80px;background:var(--rule)"></div>
+      <div style="height:1px;width:100%;background:var(--rule)"></div>
+    </div>
+    <div class="wm e e2">ATLAS</div>
+    <div style="margin-top:18px;max-width:300px" class="e e3">
+      <div class="body">An AI operating system built for a founder. Handles the 95%. Protects the 5%.</div>
+    </div>
+  </div>
+  <div class="e e4">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;">
+      <div><div class="lbl" style="margin-bottom:3px">Product</div>
+        <div style="font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.02em">Atlas OS — Rev. 2026.03</div></div>
+      <div style="text-align:right"><div class="lbl" style="margin-bottom:3px">Origin</div>
+        <div style="font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.02em">Melbourne, AU</div></div>
+    </div>
+    <div class="hr" style="margin-top:12px"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px">
+      <div class="mono">VINCE LEBON / FOUNDER</div>
+      <div class="mono" id="ltime">—</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══ 02 PRINCIPLE ══ -->
+<div class="slide" id="s2">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:14px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Operating Principle</div>
+  </div>
+  <div class="cols e e2" style="flex:1;min-height:0">
+    <div class="s2c">
+      <div class="lbl">Handle the</div>
+      <div>
+        <div class="big">95<span style="font-size:.38em;vertical-align:super;font-weight:800">%</span></div>
+        <div class="body" style="margin-top:14px">Briefs. Research. Email. CRM. Scheduling. All executed without asking. The operational load — invisible.</div>
+      </div>
+    </div>
+    <div class="vr"></div>
+    <div class="s2c">
+      <div class="lbl">Surface the</div>
+      <div>
+        <div class="big">5<span style="font-size:.38em;vertical-align:super;font-weight:800">%</span></div>
+        <div class="body" style="margin-top:14px">Decisions. Opportunities. Relationships. What actually compounds. Elevated, filtered, preserved.</div>
+      </div>
+    </div>
+  </div>
+  <div class="hr e e3"></div>
+  <div class="p e e4" style="padding-top:14px;padding-bottom:18px">
+    <div class="body" style="max-width:440px;font-style:italic;color:var(--ink)">"Vince thinks at altitude. Atlas handles the ground."</div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 03 INFRASTRUCTURE ══ -->
+<div class="slide" id="s3">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:14px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-i">Infrastructure</div>
+    <div class="h1-i" style="margin-top:6px">Always on.<br>Never sleeps.</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;min-height:0">
+    <div class="ir e e2">
+      <div class="in">01</div>
+      <div class="ic">
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">OpenClaw Gateway</div>
+        <div class="cap-i" style="margin-top:3px">Port 18789 · Token auth · Telegram bridge · Heartbeat 60s</div>
+      </div>
+      <div class="ib"><span class="chip chip-s" style="font-size:8px;padding:2px 6px">LIVE</span></div>
+    </div>
+    <div class="ir e e3">
+      <div class="in">02</div>
+      <div class="ic">
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">13 LaunchAgent Daemons</div>
+        <div class="cap-i" style="margin-top:3px">Auto-start on boot · FD limits 32,768/65,536 · pmset sleep 0 · plist-managed</div>
+      </div>
+      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">BOOT</span></div>
+    </div>
+    <div class="ir e e4">
+      <div class="in">03</div>
+      <div class="ic">
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">HealthGuard Monitor</div>
+        <div class="cap-i" style="margin-top:3px">Every 5 min · Gateway + sessions + FDs + Ollama · Auto-recovery · Telegram alerts (15 min cooldown)</div>
+      </div>
+      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">5 MIN</span></div>
+    </div>
+    <div class="ir e e5">
+      <div class="in">04</div>
+      <div class="ic">
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Emergency Kill Switch</div>
+        <div class="cap-i" style="margin-top:3px">3-layer safety: SSH kill · Siri Shortcut · HTTP endpoint :18700 · LaunchAgent service</div>
+      </div>
+      <div class="ib"><span class="chip chip-s" style="font-size:8px;padding:2px 6px">SAFE</span></div>
+    </div>
+    <div class="ir e e6">
+      <div class="in">05</div>
+      <div class="ic">
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Telegram Bridge</div>
+        <div class="cap-i" style="margin-top:3px">@AtlasOperator_Bot · Primary I/O · Global reach · Allowlist access control</div>
+      </div>
+      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">LINK</span></div>
+    </div>
+    <div style="flex:1"></div>
+  </div>
+  <div class="hri e e7"></div>
+  <div class="p2 e e8"><div class="cap-i">7 core services · 13 LaunchAgent daemons · Mac mini · Melbourne · Recovery &lt;5 min</div></div>
+</div>
+</div>
+
+<!-- ══ 04 MODELS ══ -->
+<div class="slide" id="s4">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-i">Intelligence Tiers</div>
+    <div class="cap-i" style="margin-top:3px">Right model · Right task · Right cost</div>
+  </div>
+  <div class="cols e e2" style="flex:1;min-height:0">
+    <div class="mc m1">
+      <div class="mt">TIER 01 / DEFAULT</div>
+      <div class="mn">Atlas<br>Haiku</div>
+      <div class="ms">claude-haiku-4-5</div>
+      <div style="flex:1"></div>
+      <div class="md">Most tasks. Fast, cost-effective. Briefs, crons, daily ops. Default for all OpenClaw routing.</div>
+    </div>
+    <div class="vri"></div>
+    <div class="mc m2">
+      <div class="mt">TIER 02 / ESCALATION</div>
+      <div class="mn">Atlas<br>Sonnet</div>
+      <div class="ms">claude-sonnet-4-6</div>
+      <div style="flex:1"></div>
+      <div class="md">Complex reasoning. Strategy. Builds. Coaching. Escalated when the task genuinely warrants it.</div>
+    </div>
+    <div class="vri"></div>
+    <div class="mc m3">
+      <div class="mt">TIER 03 / LOCAL</div>
+      <div class="mn">Atlas<br>Ollama</div>
+      <div class="ms">qwen2.5:7b · local</div>
+      <div style="flex:1"></div>
+      <div class="md">Monitoring. Keep-warm. Local inference. VaultBot. Zero cloud — ever. openrouter/auto for most crons.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 05 KNOWLEDGE ══ -->
+<div class="slide" id="s5">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Knowledge Layer</div>
+    <div class="h2" style="margin-top:5px;color:var(--ink)">Two knowledge graphs.<br>Always grounded in source truth.</div>
+  </div>
+  <div class="cols e e2" style="flex:1;min-height:0">
+    <div class="col" style="padding:18px 18px">
+      <div class="lbl-s" style="margin-bottom:10px">ROLLIE</div>
+      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">9</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Brand Documents</div>
+      <div class="hr" style="margin:14px 0"></div>
+      <div class="cap" style="margin-bottom:12px">Brand Bible · TOV · Brand Constitution · FY26 Strategy · Annual Brand Plan · Product/Ops Strategy · Company One Page + 2 more</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span class="chip chip-s" style="align-self:flex-start">Cohere Rerank</span>
+        <span class="chip" style="align-self:flex-start">text-embedding-3-small</span>
+      </div>
+    </div>
+    <div class="vr"></div>
+    <div class="col" style="padding:18px 18px">
+      <div class="lbl" style="margin-bottom:10px">PERSONAL</div>
+      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">∞</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Growing</div>
+      <div class="hr" style="margin:14px 0"></div>
+      <div class="cap" style="margin-bottom:12px">Vince's frameworks, decisions, philosophy, institutional memory. Every output grounded here — not AI guesswork.</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span class="chip" style="align-self:flex-start">Render hosted</span>
+        <span class="chip" style="align-self:flex-start">Always indexed</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 06 ROO ══ -->
+<div class="slide" id="s6">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-s">Voice Agent</div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:20px 24px 24px" class="e e2">
+    <div>
+      <div style="font-size:clamp(72px,20vw,158px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--cr)">Roo</div>
+      <div style="font-size:clamp(13px,2.5vw,17px);font-weight:400;color:rgba(242,237,228,.48);margin-top:16px;max-width:340px;line-height:1.5">Rollie Nation's voice agent. Jonny aka Roo. A custom-trained voice that speaks in the brand's tone — comfort-first, distinctly Rollie.</div>
+    </div>
+    <div>
+      <div class="hri" style="margin-bottom:18px"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div><div class="lbl-i" style="margin-bottom:4px">Voice</div><div style="font-size:14px;font-weight:700;color:var(--cr)">ElevenLabs</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Phone</div><div style="font-size:14px;font-weight:700;color:var(--sig)">Twilio</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">LLM</div><div style="font-size:14px;font-weight:700;color:var(--cr)">GPT-4o-mini</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny / Roo · AU</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Products</div><div style="font-size:14px;font-weight:700;color:var(--sig)">509 queryable live</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">KB docs</div><div style="font-size:14px;font-weight:700;color:var(--cr)">5 · 4 tools</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 07 AGENTS ══ -->
+<div class="slide" id="s7">
+<div class="cr" style="overflow:hidden">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Agent Architecture</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
+      <div class="h2" style="color:var(--ink)">16 specialist agents · 1 Orchestrator</div>
+      <div class="cap">Tap to explore</div>
+    </div>
+  </div>
+  <!-- Node strip -->
+  <div class="nstrip e e2">
+    <span class="node node-root" onclick="pickA('atlas',this)">Atlas</span>
+    <span class="mono" style="color:var(--grey)">›</span>
+    <span class="node" onclick="pickA('pa',this)">PA</span>
+    <span class="node" onclick="pickA('ea',this)">EA</span>
+    <span class="node node-dom" onclick="pickA('build',this)">Build & Systems</span>
+    <span class="node node-dom" onclick="pickA('growth',this)">Growth & Signal</span>
+  </div>
+  <!-- Detail panel -->
+  <div id="apanel" class="e e3">
+    <div class="cap" style="font-style:italic">Select a node above to see its mandate.</div>
+  </div>
+  <!-- Domain explanation -->
+  <div class="e e4" style="display:flex;border-bottom:1px solid var(--rule);flex-shrink:0">
+    <div class="domcard">
+      <div class="lbl" style="margin-bottom:5px">Build & Systems</div>
+      <div class="cap">Coordinates the technical infrastructure agents — Code Developer → GitHub Expert, Security Agent, API Optimiser, Network Monitor, Crons Manager. One question: <em>"Is the system fast, safe, reliable, and sane?"</em></div>
+    </div>
+    <div class="domcard">
+      <div class="lbl" style="margin-bottom:5px">Growth & Signal</div>
+      <div class="cap">Coordinates brand and growth agents — Content & Marketing, Outreach & Comms, Research & Briefing. One question: <em>"What signal are we sending into the world — and is it working?"</em></div>
+    </div>
+  </div>
+  <div class="scroll" style="padding:0 22px 16px" id="alist"></div>
+</div>
+</div>
+
+<!-- ══ 08 AUTOMATIONS ══ -->
+<div class="slide" id="s8">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-i">Automation Layer</div>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-top:6px">
+      <div style="font-size:clamp(52px,13vw,84px);font-weight:900;letter-spacing:-.05em;color:var(--cr);line-height:1" class="cnum" data-t="20">0</div>
+      <div style="font-size:clamp(18px,4vw,28px);font-weight:700;color:var(--cr);letter-spacing:-.025em;line-height:1.1">scheduled<br>jobs.</div>
+    </div>
+    <div class="cap-i" style="margin-top:6px">Zero input · Timezone-aware · Auto-recover · +37 automation scripts · Tap to expand</div>
+  </div>
+  <div class="scroll" style="padding:0 22px 20px" id="clist"></div>
+</div>
+</div>
+
+<!-- ══ 09 INTEGRATIONS ══ -->
+<div class="slide" id="s9">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Integration Map</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
+      <div class="h2" style="color:var(--ink)">21 live integrations.</div>
+      <div class="cap">Tap to expand</div>
+    </div>
+  </div>
+  <div class="scroll e e2" style="padding:0 22px 20px" id="ilist"></div>
+</div>
+</div>
+
+<!-- ══ 10 SECURITY ══ -->
+<div class="slide" id="s10">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Reliability & Security</div>
+    <div class="h2" style="margin-top:4px;color:var(--ink)">Security first.</div>
+  </div>
+  <div class="sq e e2" style="flex:1">
+    <div class="sc">
+      <div class="sn" style="font-size:22px;letter-spacing:-.02em">KILL</div>
+      <div style="flex:1"></div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Emergency Kill Switch</div>
+      <div class="cap">3-layer safety: SSH kill · Siri Shortcut · HTTP endpoint :18700. Stops all agents instantly. LaunchAgent service.</div>
+    </div>
+    <div class="sc">
+      <div class="sn" style="font-size:22px;letter-spacing:-.02em">HLTH</div>
+      <div style="flex:1"></div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">HealthGuard Auto-Recovery</div>
+      <div class="cap">5-min monitoring: gateway, stuck sessions, FD counts, Ollama. Auto-recover on detection. Telegram alert (15 min cooldown).</div>
+    </div>
+    <div class="sc">
+      <div class="sn">65</div>
+      <div style="flex:1"></div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Governance Policies</div>
+      <div class="cap">13 categories. 41 locked + 24 toggleable. Session approval windows. 3-layer enforcement. Langfuse audit trail. See next slide →</div>
+    </div>
+    <div class="sc">
+      <div class="sn">A</div>
+      <div style="flex:1"></div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">System Score</div>
+      <div class="cap">Security audit v2.5 passed. 12/12 attack vectors covered. 3-layer enforcement + session approval windows — security maintained, friction reduced. VaultBot: secrets never leave the Mac mini. chmod 600 enforced.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 11 GOVERNANCE ══ -->
+<div class="slide" id="s11">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-s">Governance System · v2.5</div>
+    <div class="h1-i" style="margin-top:5px;font-size:clamp(22px,5vw,38px)">65 policies.<br>3-layer enforcement.</div>
+    <div class="cap-i" style="margin-top:4px">The safety architecture that makes autonomous AI operation trustworthy — tuned for operator efficiency.</div>
+  </div>
+  <div class="cols e e2" style="flex:1;min-height:0">
+    <div style="flex:1.4;display:flex;flex-direction:column;padding:18px 20px;gap:10px">
+      <div class="lbl-i" style="margin-bottom:4px">Enforcement Stack</div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--ri)">
+        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L1</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--cr)">Settings Deny Rules</div><div class="cap-i" style="margin-top:2px">Hardcoded at OS level. Cannot be overridden by any instruction.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--ri)">
+        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L2</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--cr)">CLAUDE.md Policies</div><div class="cap-i" style="margin-top:2px">Behavioural guardrails + operational rules injected at every session start.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(255,71,19,.3)">
+        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L3</div>
+        <div><div style="font-size:12px;font-weight:700;color:var(--sig)">FastMCP Policy Gateway</div><div class="cap-i" style="margin-top:2px">Runtime enforcement. Every tool call validated before execution.</div></div>
+      </div>
+      <div style="margin-top:4px">
+        <div class="cap-i">Langfuse audit trail on every LLM call · Full trace, cost, latency per request</div>
+      </div>
+      <div class="hri" style="margin-top:8px"></div>
+      <div class="lbl-i" style="margin-bottom:6px;margin-top:4px">Why Atlas governance is different</div>
+      <div style="display:grid;gap:5px">
+        <div style="padding:6px 9px;background:rgba(242,237,228,.04);border:1px solid var(--ri)">
+          <div style="font-size:10px;font-weight:700;color:rgba(242,237,228,.4);letter-spacing:.05em">STOCK CLAUDE</div>
+          <div class="cap-i" style="margin-top:2px">Single trust boundary · No audit trail · No policy enforcement</div>
+        </div>
+        <div style="padding:6px 9px;background:rgba(242,237,228,.04);border:1px solid var(--ri)">
+          <div style="font-size:10px;font-weight:700;color:rgba(242,237,228,.4);letter-spacing:.05em">STANDARD OPENCLAW</div>
+          <div class="cap-i" style="margin-top:2px">Basic deny rules · Informal CLAUDE.md · No real-time evaluation</div>
+        </div>
+        <div style="padding:6px 9px;background:rgba(255,71,19,.07);border:1px solid rgba(255,71,19,.35)">
+          <div style="font-size:10px;font-weight:700;color:var(--sig);letter-spacing:.05em">ATLAS v2.5</div>
+          <div class="cap-i" style="margin-top:2px;color:var(--cr)">3 independent enforcement layers · 65 formal policies · Real-time FastMCP gateway · Langfuse audit · Session approval windows · Mission Control UI</div>
+        </div>
+      </div>
+    </div>
+    <div class="vri"></div>
+    <div style="flex:1;display:flex;flex-direction:column;padding:18px 16px;gap:14px">
+      <div class="lbl-i" style="margin-bottom:4px">Policy Stats</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--cr);line-height:1">65</div><div class="cap-i" style="margin-top:3px">total policies</div></div>
+        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--cr);line-height:1">13</div><div class="cap-i" style="margin-top:3px">categories</div></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--sig);line-height:1">41</div><div class="cap-i" style="margin-top:3px">locked (immutable)</div></div>
+        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:rgba(242,237,228,.6);line-height:1">24</div><div class="cap-i" style="margin-top:3px">toggleable</div></div>
+      </div>
+      <div class="hri"></div>
+      <div style="padding:8px 10px;border:1px solid rgba(255,71,19,.3)">
+        <div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:var(--sig)">AUDIT PASSED v2.5</div>
+        <div style="font-size:11px;color:var(--cr);margin-top:3px;font-weight:600">12/12 attack vectors covered</div>
+      </div>
+      <div class="hri"></div>
+      <div class="lbl-i" style="margin-bottom:6px">v2.5 — Session Approval Windows</div>
+      <div class="cap-i" style="line-height:1.6">
+        · Operator confirms plan → 10-min auto-approval window<br>
+        · Covers: file reads/writes, local API calls, Telegram, Asana/Notion/NotePlan reads, web searches<br>
+        · Always blocked: destructive ops, credentials, elevated commands<br>
+        · Every auto-approved action audit-logged to Langfuse<br>
+        · Extend: "keep going" · Revoke: "stop" or "pause"
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 11b DEFENCE IN DEPTH ══ -->
+<style>
+.s11b-col-details {
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+  opacity:0;
+}
+.s11b-col-details.open {
+  max-height:220px;opacity:1;
+}
+.s11b-toggle {
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(242,237,228,.38);cursor:pointer;border:none;background:none;
+  padding:4px 0 2px;margin-top:6px;
+  transition:color .2s;
+}
+.s11b-toggle:hover{color:rgba(242,237,228,.7);}
+.s11b-toggle .arr{transition:transform .3s ease;display:inline-block;}
+.s11b-toggle.open .arr{transform:rotate(180deg);}
+.s11b-toggle-sig{color:rgba(255,71,19,.55);}
+.s11b-toggle-sig:hover{color:var(--sig);}
+.s11b-saw-details {
+  max-height:0;overflow:hidden;
+  transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+  opacity:0;
+}
+.s11b-saw-details.open{max-height:80px;opacity:1;}
+.s11b-saw-toggle {
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,71,19,.55);cursor:pointer;border:none;background:none;
+  padding:2px 0 0;margin-top:3px;
+  transition:color .2s;
+}
+.s11b-saw-toggle:hover{color:var(--sig);}
+.s11b-saw-toggle .arr{transition:transform .3s ease;display:inline-block;}
+.s11b-saw-toggle.open .arr{transform:rotate(180deg);}
+</style>
+<div class="slide" id="s11b">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-s">Governance v2.5 · Defence in Depth</div>
+    <div class="h1-i" style="margin-top:4px;font-size:clamp(18px,4vw,30px)">Three independent layers.<br>Each catches what others miss.</div>
+  </div>
+  <!-- 3-col comparison — headers always visible, details collapsible -->
+  <div class="cols e e2" style="flex-shrink:0;border-bottom:1px solid var(--ri)">
+    <!-- Col 1: Stock Claude -->
+    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:rgba(242,237,228,.28);text-transform:uppercase">Stock Claude</div>
+      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:rgba(242,237,228,.5)">LLM decides safety. No enforcement layer, no audit.</div>
+      <div id="s11b-col1-details" class="s11b-col-details">
+        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Single trust boundary</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">LLM decides safety from system prompt</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No audit trail</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No policy enforcement layer</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No deny rules</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Hallucinated "safe" → nothing catches it</div>
+          <div class="cap-i" style="padding:3px 0">No operator visibility</div>
+        </div>
+      </div>
+      <button class="s11b-toggle" id="s11b-btn1" onclick="s11bToggle('col1','btn1')">View details <span class="arr">▾</span></button>
+    </div>
+    <div class="vri"></div>
+    <!-- Col 2: Standard OpenClaw -->
+    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:rgba(242,237,228,.28);text-transform:uppercase">Standard OpenClaw</div>
+      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:rgba(242,237,228,.5)">Config + basic deny rules. Informal policies only.</div>
+      <div id="s11b-col2-details" class="s11b-col-details">
+        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Config layer + basic deny rules</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Policies are informal (CLAUDE.md text only)</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No real-time policy evaluation</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No toggleable policies</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No audit trail beyond chat logs</div>
+          <div class="cap-i" style="padding:3px 0">Binary: trust fully or block entirely</div>
+        </div>
+      </div>
+      <button class="s11b-toggle" id="s11b-btn2" onclick="s11bToggle('col2','btn2')">View details <span class="arr">▾</span></button>
+    </div>
+    <div class="vri"></div>
+    <!-- Col 3: Atlas v2.5 -->
+    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0;background:rgba(255,71,19,.06)">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--sig);text-transform:uppercase">Atlas v2.5 ←</div>
+      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:var(--cr)">3 enforcement layers · 65 formal policies · Langfuse audit.</div>
+      <div id="s11b-col3-details" class="s11b-col-details">
+        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">3 independent enforcement layers</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">65 formal policies across 13 categories</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">41 locked (hard enforcement)</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Real-time FastMCP policy gateway</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Langfuse audit trail — every tool call</div>
+          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Mission Control UI for policy management</div>
+          <div class="cap-i" style="padding:3px 0;color:var(--sig);font-weight:600">Session approval windows</div>
+        </div>
+      </div>
+      <button class="s11b-toggle s11b-toggle-sig" id="s11b-btn3" onclick="s11bToggle('col3','btn3')">View details <span class="arr">▾</span></button>
+    </div>
+  </div>
+  <!-- 3-layer horizontal flow — always visible, compact -->
+  <div class="cols e e3" style="flex-shrink:0;border-bottom:1px solid var(--ri)">
+    <div style="flex:1;padding:8px 14px">
+      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 1</div>
+      <div style="font-size:10px;font-weight:700;color:var(--cr);margin-top:2px">DENY RULES</div>
+      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">Hard blocks · 12 vectors · Cannot override</div>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 2px;color:var(--sig);font-size:14px;flex-shrink:0">→</div>
+    <div style="flex:1;padding:8px 14px">
+      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 2</div>
+      <div style="font-size:10px;font-weight:700;color:var(--cr);margin-top:2px">CLAUDE.md</div>
+      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">Behavioural rules · Service mgmt · Data safety</div>
+    </div>
+    <div style="display:flex;align-items:center;padding:0 2px;color:var(--sig);font-size:14px;flex-shrink:0">→</div>
+    <div style="flex:1;padding:8px 14px;background:rgba(255,71,19,.05)">
+      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 3</div>
+      <div style="font-size:10px;font-weight:700;color:var(--sig);margin-top:2px">FASTMCP GATEWAY</div>
+      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">65 policies · Auth-protected · Langfuse audit</div>
+    </div>
+  </div>
+  <!-- Session approval window — collapsible -->
+  <div class="e e4" style="padding:8px 22px;border-bottom:1px solid var(--ri)">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:var(--sig)">v2.5 — SESSION APPROVAL WINDOWS</div>
+      <button class="s11b-saw-toggle" id="s11b-saw-btn" onclick="s11bToggleSaw()">Expand <span class="arr">▾</span></button>
+    </div>
+    <div class="cap-i" style="margin-top:3px;color:rgba(242,237,228,.55)">Operator confirms plan → 10-min auto-approval window for executive actions.</div>
+    <div id="s11b-saw-details" class="s11b-saw-details">
+      <div class="cap-i" style="margin-top:5px;line-height:1.55">Reads always flow. Writes auto-approve during window. Destructive actions NEVER auto-approved. All actions audit-logged to Langfuse with start/end timestamps.</div>
+    </div>
+  </div>
+  <!-- Stats bar — always visible -->
+  <div class="e e5" style="padding:8px 22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">65 policies</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">41 locked</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">13 categories</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">18 pre-approved domains</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">Permission bridge</div>
+    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
+    <div style="font-family:var(--fm);font-size:10px;color:var(--sig);letter-spacing:.06em">Langfuse audit</div>
+  </div>
+</div>
+</div>
+<script>
+function s11bToggle(colId, btnId) {
+  var det = document.getElementById('s11b-' + colId + '-details');
+  var btn = document.getElementById('s11b-' + btnId);
+  var isOpen = det.classList.contains('open');
+  det.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.childNodes[0].textContent = isOpen ? 'View details ' : 'Collapse ';
+}
+function s11bToggleSaw() {
+  var det = document.getElementById('s11b-saw-details');
+  var btn = document.getElementById('s11b-saw-btn');
+  var isOpen = det.classList.contains('open');
+  det.classList.toggle('open', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+  btn.childNodes[0].textContent = isOpen ? 'Expand ' : 'Collapse ';
+}
+</script>
+
+<!-- ══ 12 THE MOAT ══ -->
+<div class="slide" id="s12m">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-s">Competitive Advantage</div>
+    <div class="h1-i" style="margin-top:5px;font-size:clamp(22px,5vw,38px)">The Moat.</div>
+    <div class="cap-i" style="margin-top:4px">What makes this different from base Claude, base OpenClaw, or any off-the-shelf AI tool.</div>
+  </div>
+  <div class="scroll e e2" style="padding:0 22px 20px">
+    <div class="moat-row" style="padding-top:14px">
+      <div class="moat-before">Resets every session</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Persistent memory.</strong> MEMORY.md + LightRAG. Every decision, correction, preference — retained across all time.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Generic AI knowledge</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Brand-grounded.</strong> Two LightRAG knowledge bases. 9 Rollie brand docs + 350+ personal notes — every output grounded in real documents, not AI inference.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Manual prompting only</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">21 scheduled jobs + 37 automation scripts.</strong> Research brief before you wake. Wellness before gym. SOD brief pulls your live calendar. Zero prompting.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">One generic assistant</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">16 specialist agents.</strong> Security runs its own audit. Research has its own intelligence filter. Each domain has deep, calibrated expertise.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">No voice layer</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Roo.</strong> A brand asset. Custom-trained ElevenLabs voice that sounds like Rollie — not a generic TTS voice.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Third-party CRM</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Beings CRM — your own platform.</strong> Full Atlas integration. Every meeting logged, every relationship tracked, full ownership.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Disconnected tools</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">21 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook + Tailscale — connected and coordinated.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">No safety layer</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">65-policy governance v2.5.</strong> 3 independent enforcement layers + session approval windows + Langfuse audit. Kill switch. HealthGuard. 12/12 attack vectors covered. Stock Claude: no audit trail. Standard OpenClaw: basic deny rules only. Atlas: real-time FastMCP gateway, formal policies, Mission Control UI.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Session-only memory</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">5-layer memory architecture.</strong> MEMORY.md + SOUL.md + AGENTS.md + .learnings/ + LightRAG knowledge graph. Weekly prune + monthly Notion export.</div>
+    </div>
+    <div class="moat-row" style="border-bottom:none">
+      <div class="moat-before">Static capability</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Self-improving.</strong> Reflection Loop v2: weekly self-analysis (Sun), self-improvement review (Wed). LEARNINGS.md. Every session sharper.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 12 THE DAY ══ -->
+<div class="slide" id="s12">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Daily Operating Rhythm</div>
+    <div class="h2" style="margin-top:4px;color:var(--ink)">Every. Single. Day.</div>
+  </div>
+  <div class="tl e e2">
+    <div class="tlr"><div class="tlt">06:00</div><div class="tlc"><div class="tln">Research Brief</div><div class="tls">DTC news, competitor intel, AI trends — before you wake.</div></div></div>
+    <div class="tlr"><div class="tlt">07:30</div><div class="tlc"><div class="tln">Wellness Check-in</div><div class="tls">Training, recovery, nutrition — aligned to your program.</div></div></div>
+    <div class="tlr"><div class="tlt">07:50</div><div class="tlc"><div class="tln">SOD Pre-fetch</div><div class="tls">Python prefetches Outlook, Asana, NotePlan — cached and ready.</div></div></div>
+    <div class="tlr"><div class="tlt">08:00</div><div class="tlc"><div class="tln">Start of Day Brief</div><div class="tls">MCP dispatch: live brief generated from cache. OpenClaw fallback at 8:15 if needed. <em>Mondays: delivers Command Brief — compiled at 6:30am from Weekly Task Review (Sun 7pm) pipeline.</em></div></div></div>
+    <div class="tlr hl"><div class="tlt">ALL<br>DAY</div><div class="tlc"><div class="tln">On demand</div><div class="tls">Draft emails · Research · Log CRM · Post to X · Build.</div></div></div>
+    <div class="tlr"><div class="tlt">18:15</div><div class="tlc"><div class="tln">End of Day Brief</div><div class="tls">What happened · What carries forward · What's tomorrow.</div></div></div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 13 CLOSE ══ -->
+<div class="slide" id="s13">
+<div class="cr">
+<div class="clb">
+  <div class="clg">ATLAS</div>
+  <div class="e e1">
+    <div class="lbl" style="margin-bottom:12px">2026 · Melbourne · OpenClaw</div>
+    <div class="clm">Built with<br>intention.</div>
+    <div class="body" style="margin-top:16px;max-width:280px;color:var(--dim)">Not a product. A system that compounds. Every session sharper than the last.</div>
+  </div>
+  <div class="e e2">
+    <div class="hr" style="margin-bottom:14px"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:5px">
+      <span class="chip chip-s">Atlas Claude</span>
+      <span class="chip">Operator</span>
+      <span class="chip">Ollama</span>
+      <span class="chip chip-s">Roo</span>
+      <span class="chip">LightRAG</span>
+      <span class="chip">10 Personas</span>
+      <span class="chip">21 Jobs</span>
+      <span class="chip">20 Integrations</span>
+      <span class="chip chip-s">Governance 68</span>
+    </div>
+    <div class="mono" style="margin-top:14px;color:var(--grey)">VINCE LEBON / FOUNDER / ROLLIE NATION</div>
+  </div>
+</div>
+</div>
+</div>
+
+</div><!-- /deck -->
+
+<div id="dots"></div>
+<button class="nb" id="bp" onclick="prev()">‹</button>
+<button class="nb" id="bn" onclick="next()">›</button>
+
+<script>
+/* ═══ ICON SYSTEM — Braun/TE geometric SVG ═══ */
+const P = {
+  globe:    `<circle cx="10" cy="10" r="7.5"/><ellipse cx="10" cy="10" rx="3.5" ry="7.5"/><line x1="2.5" y1="10" x2="17.5" y2="10"/>`,
+  person:   `<circle cx="10" cy="6.5" r="2.8"/><path d="M4.5 18.5c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5"/>`,
+  brief:    `<rect x="3" y="7.5" width="14" height="10" rx="1.5"/><path d="M7.5 7.5V6a2.5 2.5 0 0 1 5 0v1.5"/>`,
+  heart:    `<path d="M10 16.5S2.5 11.5 2.5 6.5a3.8 3.8 0 0 1 7.5 0 3.8 3.8 0 0 1 7.5 0c0 5-7.5 10-7.5 10z"/>`,
+  target:   `<circle cx="10" cy="10" r="7.5"/><circle cx="10" cy="10" r="4"/><circle cx="10" cy="10" r="1.2" fill="currentColor"/>`,
+  chart:    `<line x1="4" y1="16" x2="4" y2="9"/><line x1="8.5" y1="16" x2="8.5" y2="6"/><line x1="13" y1="16" x2="13" y2="11"/><line x1="17.5" y1="16" x2="17.5" y2="8"/><line x1="2" y1="17.5" x2="18.5" y2="17.5"/>`,
+  search:   `<circle cx="8.5" cy="8.5" r="5.8"/><line x1="13" y1="13" x2="18" y2="18"/>`,
+  terminal: `<rect x="2" y="3.5" width="16" height="13" rx="1.5"/><polyline points="5.5,8.5 8.5,11 5.5,13.5"/><line x1="10" y1="13.5" x2="15" y2="13.5"/>`,
+  git:      `<circle cx="6" cy="14" r="2"/><circle cx="14" cy="6" r="2"/><circle cx="14" cy="14" r="2"/><path d="M6 12V9c0-1.7 1.3-3 3-3h5"/><line x1="14" y1="8" x2="14" y2="12"/>`,
+  lock:     `<rect x="4" y="9.5" width="12" height="9" rx="1.5"/><path d="M7 9.5V7a3 3 0 0 1 6 0v2.5"/><circle cx="10" cy="14" r="1" fill="currentColor"/>`,
+  cpu:      `<rect x="5" y="5" width="10" height="10" rx="1"/><rect x="7.5" y="7.5" width="5" height="5"/><line x1="5" y1="10" x2="2" y2="10"/><line x1="18" y1="10" x2="15" y2="10"/><line x1="10" y1="5" x2="10" y2="2"/><line x1="10" y1="18" x2="10" y2="15"/>`,
+  radio:    `<path d="M1.5 10a8.5 8.5 0 0 1 17 0"/><path d="M5 10a5 5 0 0 1 10 0"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/>`,
+  clock:    `<circle cx="10" cy="10" r="7.5"/><polyline points="10,5.5 10,10 13.5,12.5"/>`,
+  edit:     `<path d="M12.5 3l4.5 4.5-9 9H4v-4.5L12.5 3z"/>`,
+  mail:     `<rect x="2" y="5.5" width="16" height="11" rx="1.5"/><polyline points="2,5.5 10,12 18,5.5"/>`,
+  layers:   `<polygon points="10,1.5 18.5,6 10,10.5 1.5,6"/><polyline points="1.5,10.5 10,15 18.5,10.5"/>`,
+  signal:   `<line x1="3.5" y1="17" x2="3.5" y2="13"/><line x1="7.5" y1="17" x2="7.5" y2="9"/><line x1="11.5" y1="17" x2="11.5" y2="6"/><line x1="15.5" y1="17" x2="15.5" y2="3"/>`,
+  mic:      `<rect x="7" y="2" width="6" height="10" rx="3"/><path d="M4 11a6 6 0 0 0 12 0"/><line x1="10" y1="17" x2="10" y2="19.5"/><line x1="7" y1="19.5" x2="13" y2="19.5"/>`,
+  shield:   `<path d="M10 1.5L2.5 5v5.5c0 4.2 3.2 8.1 7.5 9.5 4.3-1.4 7.5-5.3 7.5-9.5V5L10 1.5z"/>`,
+  zap:      `<polygon points="12,1.5 4.5,11.5 9.5,11.5 7,18.5 15,8 9.5,8"/>`,
+  refresh:  `<path d="M2.5 10a7.5 7.5 0 1 1 1.5 4.5"/><polyline points="2.5,15 2.5,10 7.5,10"/>`,
+  dollar:   `<line x1="10" y1="1.5" x2="10" y2="3.5"/><line x1="10" y1="16.5" x2="10" y2="18.5"/><path d="M6.5 5h4.5a2.5 2.5 0 0 1 0 5H8.5a2.5 2.5 0 0 0 0 5H14"/>`,
+  link:     `<path d="M9.5 14l-2.5 2.5a3.5 3.5 0 0 1-5-5L4.5 9"/><path d="M10.5 6l2.5-2.5a3.5 3.5 0 0 1 5 5L15.5 11"/><line x1="7" y1="13" x2="13" y2="7"/>`,
+  box:      `<path d="M2.5 7.5l7.5-5 7.5 5v7l-7.5 5-7.5-5v-7z"/><line x1="2.5" y1="7.5" x2="10" y2="12.5"/><line x1="17.5" y1="7.5" x2="10" y2="12.5"/><line x1="10" y1="12.5" x2="10" y2="18.5"/>`,
+  brain:    `<path d="M9.5 5c0-1.7 1.2-3 2.8-3 1.6 0 2.7 1.3 2.7 3 1 .5 1.8 1.6 1.8 3.2 0 1.9-1.4 3.3-3.3 3.3H9.5"/><path d="M9.5 5c0-1.7-1.2-3-2.7-3-1.6 0-2.8 1.3-2.8 3-1 .5-1.8 1.6-1.8 3.2 0 1.9 1.4 3.3 3.3 3.3H9.5"/><line x1="9.5" y1="11.5" x2="9.5" y2="18.5"/><line x1="7" y1="16" x2="12" y2="16"/>`,
+  trending: `<polyline points="1.5,17.5 7,12 11,15.5 18.5,7.5"/><polyline points="13.5,7.5 18.5,7.5 18.5,12.5"/>`,
+  key:      `<circle cx="7.5" cy="10" r="4.8"/><line x1="12.3" y1="10" x2="18" y2="10"/><line x1="16" y1="8" x2="16" y2="12"/>`,
+  eye:      `<path d="M1 10s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7z"/><circle cx="10" cy="10" r="2.8"/>`,
+  nodes:    `<circle cx="5" cy="5" r="2.5"/><circle cx="15" cy="5" r="2.5"/><circle cx="10" cy="15" r="2.5"/><line x1="7.5" y1="5" x2="12.5" y2="5"/><line x1="6.5" y1="7" x2="9" y2="13"/><line x1="13.5" y1="7" x2="11" y2="13"/>`,
+};
+function ico(k,sz=16,c='currentColor'){
+  return `<svg width="${sz}" height="${sz}" viewBox="0 0 20 20" fill="none" stroke="${c}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${P[k]||''}</svg>`;
+}
+
+/* ═══ DATA ═══ */
+const AGENTS = [
+  {id:'atlas',  k:'globe',   name:'Atlas',              role:'Orchestrator',           desc:'The master agent. Routes every task, holds all context, runs 24/7. The only agent Vince talks to — everything else delegated without friction.'},
+  {id:'pa',     k:'person',  name:'Personal Assistant', role:'PA · Daily Ops',         desc:'Generates SOD and EOD briefs. Pulls Outlook calendar live, fetches Asana tasks due today, reads NotePlan. The daily rhythm of the system.'},
+  {id:'ea',     k:'brief',   name:'Executive Assistant',role:'EA · Business Ops',      desc:'Compiles the Monday Command Brief — consolidated weekly intelligence from Weekly Task Review (Sun 7pm) pipeline. Tech radar, full-week calendar, Asana goal pulse, business coaching, and One Big Thing focus. Exception alerts any day urgency is detected. Scheduler and coordinator — not an executor.'},
+  {id:'wellness',k:'heart',  name:'Wellness Agent',     role:'Health · 7:30am Daily',  desc:'Daily check-in at 7:30am. Training guidance, recovery tracking, nutrition prompts. Aligned to the hypertrophy program. Adjusts for rest vs training days.'},
+  {id:'wealth', k:'dollar',  name:'Wealth Agent',       role:'Finance',                desc:'Financial pulse tracking, spending reviews, portfolio monitoring. Keeps the numbers honest.'},
+  {id:'focus',  k:'target',  name:'Focus Agent',        role:'Goals · Accountability', desc:'Tracks top 5 strategic goals. Flags drift, prompts course-correction. Adapts the framework if completion rate drops below 70%.'},
+  {id:'coach',  k:'chart',   name:'Business Coach',     role:'Strategy · Mon 9am',     desc:'Weekly strategy session every Monday. OKRs, frameworks, accountability. Grounded in LightRAG brand knowledge.'},
+  {id:'research',k:'search', name:'Research & Briefing',role:'Intel · Sat 6am',        desc:'Weekly intelligence brief. DTC news, competitor moves, AI trends. Filter: "Would a top 1% operator care about this in their first 10 minutes?"'},
+  {id:'code',   k:'terminal',name:'Code Developer',     role:'Engineering',            desc:'Technical builds, system changes, CI/CD. Delegates to Claude Code for complex tasks. Owns Mission Control codebase.'},
+  {id:'github', k:'git',     name:'GitHub Expert',      role:'Repo Health · CI/CD',    desc:'PR reviews, CI run monitoring, repository health. Reports to Code Developer. Ensures code quality and deployment integrity.'},
+  {id:'security',k:'lock',   name:'Security Agent',     role:'Audit · Sun 8am',        desc:'Weekly security audit. Checks .env permissions, open ports, API key hygiene, unexpected processes. Keeps the system hardened.'},
+  {id:'api',    k:'cpu',     name:'API Optimiser',      role:'Cost · Sun 9am',         desc:'Reviews model routing, API costs, usage efficiency. Identifies cheaper OpenRouter models, checks billing anomalies. Keeps the stack lean.'},
+  {id:'network',k:'radio',   name:'Network Monitor',    role:'Uptime · Silent',        desc:'Silent infrastructure agent. Monitors gateway health and connectivity. Only surfaces in reports when something is wrong.'},
+  {id:'crons',  k:'clock',   name:'Crons Manager',      role:'Audit · Sun 10am',       desc:'Weekly audit of all 20 scheduled jobs. Checks schedules, error rates, timing conflicts, payload health. Joint guardian with API Optimiser.'},
+  {id:'content',k:'edit',    name:'Content & Marketing',role:'Growth · Brand',         desc:'Content strategy, caption writing, campaign ideation. Uses LightRAG Rollie context so every output is brand-accurate.'},
+  {id:'outreach',k:'mail',   name:'Outreach & Comms',   role:'Growth · Relationships', desc:'Manages outreach cadences from Beings CRM. Flags stale contacts, drafts personalised follow-ups via Missive, logs all interactions.'},
+  {id:'build',  k:'layers',  name:'Build & Systems',    role:'Domain — not an agent',  desc:'Organisational domain (not an individual agent). Coordinates Code Developer, GitHub Expert, Security, API Optimiser, Network Monitor, Crons Manager. Question: "Is the system fast, safe, reliable, and sane?"'},
+  {id:'growth', k:'signal',  name:'Growth & Signal',    role:'Domain — not an agent',  desc:'Organisational domain (not an individual agent). Coordinates Content & Marketing, Outreach & Comms, Research & Briefing. Question: "What signal are we sending into the world — and is it working?"'},
+  {id:'data',   k:'trending',name:'Data & Analytics',   role:'Intel · Mon 7am',        desc:'Monday intelligence: task velocity, completion rates, team performance, blocked trends. Turns raw data into clear signal.'},
+];
+
+const CRONS = [
+  {t:'7:30am', f:'Daily',   k:'heart',    name:'Wellness Check-in',    desc:'Personalised wellness brief. Training guidance, recovery notes, nutrition prompts. Adjusts for rest vs training days.'},
+  {t:'8:15am', f:'Daily',   k:'person',   name:'Start of Day Brief',   desc:'Pulls today\'s Outlook calendar via Microsoft Graph API, fetches Asana tasks due today, reads NotePlan daily note. Generates a prioritised plan. On Mondays, automatically detects and delivers the Monday Command Brief instead of a standard daily brief.'},
+  {t:'6:15pm', f:'Daily',   k:'clock',    name:'End of Day Brief',     desc:'Wraps the day — completed, carries forward, tomorrow. Saves continuity across sessions so nothing is lost overnight.'},
+  {t:'9:00am', f:'Daily',   k:'zap',      name:'Release Monitor',      desc:'Checks GitHub for new OpenClaw releases. Alerts on new versions. Checks known-bad blocklist before flagging an upgrade.'},
+  {t:'30 min', f:'Always',  k:'radio',    name:'Metrics Collection',   desc:'Continuous telemetry every 30 min. Gateway health, FD counts, token usage, session activity. Powers Mission Control dashboard live.'},
+  {t:'5 min',  f:'Always',  k:'shield',   name:'HealthGuard Monitor',  desc:'Monitors gateway health, stuck sessions, file descriptor counts, and Ollama service status. Auto-recovery on failure detection. Telegram alerts with 15-min cooldown to prevent notification spam.'},
+  {t:'Sat 6am',f:'Weekly',  k:'search',   name:'Research & Briefing',  desc:'Weekly intelligence brief. Web search: DTC Australia, founder strategy, AI productivity. Filter: what a top 1% operator cares about.'},
+  {t:'Fri 8am',f:'Weekly',  k:'brief',    name:'EOW Brief',            desc:'End of Week strategic brief. Last week / week ahead. Format locked — clean, strategic, honest. Draws from MEMORY.md, session history, Asana.'},
+  {t:'Sun 7pm', f:'Weekly', k:'target',   name:'Weekly Task Review',   desc:'Sunday evening task pipeline — reviews open Asana tasks, surfaces unclosed loops, primes the Monday Command Brief compiler with this week\'s patterns.'},
+  {t:'Mon 6:30am',f:'Weekly',k:'brief',  name:'Monday Command Brief', desc:'Consolidated weekly intelligence briefing. Compiles tech radar insights, full-week calendar view, Asana goal pulse, business coaching from the previous week\'s patterns, and a single One Big Thing focus recommendation. Delivered at 8am Monday SOD — replaces the standard daily brief with one unified Monday deliverable.'},
+  {t:'Mon 7am',f:'Weekly',  k:'trending', name:'Data & Analytics',     desc:'Monday intelligence: task velocity, completion rates, team performance, blocked trends. Where is the system accelerating or stalling?'},
+  {t:'Mon 9am',f:'Weekly',  k:'chart',    name:'Business Coach',       desc:'Weekly strategy session. OKRs, frameworks, accountability against top 5 goals. Grounded in LightRAG brand context.'},
+  {t:'Sun 8am',f:'Weekly',  k:'lock',     name:'Security Audit',       desc:'Weekly sweep. Checks .env permissions (600), credentials dir (700), open ports, API key hygiene. Reports anomalies immediately.'},
+  {t:'Sun 9am',f:'Weekly',  k:'cpu',      name:'API Optimiser',        desc:'Reviews model routing and costs. Identifies cheaper OpenRouter models, checks billing, optimises fallback chains. Keeps the stack lean.'},
+  {t:'Sun 10am',f:'Weekly', k:'clock',    name:'Crons Manager',        desc:'Audits all 21 scheduled jobs. Checks run status, timing conflicts, error rates, payload health. Flags anything before the week starts.'},
+  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 21 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
+  {t:'Sun 8pm', f:'Weekly', k:'brain',    name:'Memory & Knowledge',   desc:'Sunday knowledge consolidation. Extracts decisions, lessons, patterns, wins from the week. Writes Weekly Capture before Monday resets.'},
+  {t:'Sun 9pm', f:'Weekly', k:'refresh',  name:'Weekly Reflection',    desc:'Self-improvement review. Surfaces corrections, updates LEARNINGS.md, identifies recurring patterns. Keeps the system honest.'},
+  {t:'Sun 10pm',f:'Weekly', k:'eye',      name:'Memory Prune',         desc:'Cleans stale or redundant memory files. Keeps the knowledge base lean. Archives rather than deletes.'},
+  {t:'Wed 9am', f:'Weekly', k:'refresh',  name:'Self-Improvement',     desc:'Mid-week check: have last week\'s learnings been applied? Are patterns repeating? Prevents the same mistake twice.'},
+  {t:'1st 9am', f:'Monthly',k:'box',      name:'MEMORY Export',        desc:'Monthly archival snapshot of MEMORY.md. Ensures institutional memory is preserved even if files change.'},
+];
+
+const INTEGRATIONS = [
+  {cat:'Productivity',   k:'box',      name:'Notion',          tag:'Docs & Workspace',       desc:'Primary workspace — process playbooks, quarterly Rocks, CEO Ways of Working, Atlas Teamspace. All long-form thinking. Atlas creates, reads, updates pages.'},
+  {cat:'Productivity',   k:'target',   name:'Asana',           tag:'Task management',         desc:'Source of truth for all tasks. 19 CEO priority projects in the Focus portfolio. Atlas reads due tasks for SOD brief, flags overdue, creates tasks on command.'},
+  {cat:'Productivity',   k:'layers',   name:'Obsidian',        tag:'Personal second brain',   desc:'Vince\'s private note vault. Atlas can add ideas, capture thoughts, link notes — "log this idea" and it\'s in Obsidian instantly.'},
+  {cat:'Productivity',   k:'edit',     name:'NotePlan',        tag:'Daily notes',             desc:'Daily note layer. SOD brief reads today\'s NotePlan file and surfaces tasks or highlights alongside Outlook and Asana.'},
+  {cat:'Communications', k:'radio',    name:'Telegram',        tag:'Primary I/O channel',     desc:'How Vince talks to Atlas. All briefs, alerts, research, and responses delivered via @AtlasOperator_Bot. Always-on — works globally.'},
+  {cat:'Communications', k:'mail',     name:'Missive',         tag:'Email · 3 accounts',      desc:'Atlas reads, drafts, sends from Vince\'s personal, Rollie, and Atlas accounts. Vince flags in Telegram → Atlas drafts → one-tap approval.'},
+  {cat:'Communications', k:'clock',    name:'Outlook Calendar',tag:'vince@rollienation.com',  desc:'Live calendar pull via Microsoft Graph API. SOD brief shows today\'s meetings in time order. EOD brief previews tomorrow.'},
+  {cat:'Brand & CRM',    k:'link',     name:'Beings CRM',      tag:'73 contacts · Own platform',desc:'Custom CRM Vince built. Full access — log interactions, manage contacts, track follow-ups, flag stale relationships. Every meeting Vince mentions gets logged.'},
+  {cat:'Brand & CRM',    k:'brain',    name:'LightRAG',        tag:'Rollie + Personal',       desc:'Two knowledge bases: Rollie (9 brand docs) and Personal (frameworks, decisions). Every brand output grounded here — not AI guesswork.'},
+  {cat:'Brand & CRM',    k:'signal',   name:'X / Twitter',     tag:'@vincelebon',             desc:'Atlas posts, replies, quotes, searches, reads @vincelebon\'s timeline. Brand content drafted from LightRAG context and posted on command.'},
+  {cat:'Automation',     k:'refresh',  name:'N8N',             tag:'Local + Cloud',           desc:'Workflow automation layer. Connects Atlas to systems without a direct API — Shopify, Klaviyo, webhooks. Local (Mac mini) and N8N Cloud both running.'},
+  {cat:'Automation',     k:'eye',      name:'Apify',           tag:'Web scraping',            desc:'Structured data at scale — competitor pricing, product listings, social scraping. Atlas triggers actors and processes results.'},
+  {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Roo + Atlas TTS',         desc:'Two uses: Roo (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
+  {cat:'Infrastructure', k:'eye',      name:'Langfuse',        tag:'LLM observability',       desc:'Traces every LLM call — latency, token usage, model, cost per request. Audits which agents are expensive, where performance can improve.'},
+  {cat:'Infrastructure', k:'key',      name:'VaultBot',        tag:'Local secret management', desc:'@VaultMacMini_Bot on Telegram. 100% on local Ollama — secrets never leave the Mac mini. Store, retrieve, rotate API keys safely.'},
+  {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history, session approval indicator. /security page: interactive governance explainer. Accessible via Tailscale on any device.'},
+  {cat:'AI Models',      k:'nodes',    name:'Anthropic / Claude',tag:'Default + escalation', desc:'Two tiers: Haiku 4.5 (default, most tasks) and Sonnet 4.6 (escalation, complex reasoning). Only escalates when the task genuinely warrants it.'},
+  {cat:'AI Models',      k:'layers',   name:'OpenRouter',      tag:'100+ models · crons',     desc:'openrouter/auto for most cron and sub-agent tasks. Automatically routes to best available model. Cost-optimised fallback chains.'},
+  {cat:'Infrastructure', k:'radio',    name:'Tailscale',       tag:'3-device mesh network',   desc:'Encrypted mesh VPN across Mac mini, iPhone, and dev devices. Mission Control accessible anywhere at 100.71.55.1:3000. Funnel enables iOS SSH via port 443.'},
+  {cat:'Infrastructure', k:'refresh',  name:'Syncthing',       tag:'File synchronisation',    desc:'Peer-to-peer file sync without a cloud intermediary. Keeps configs, working files, and knowledge bases in sync across devices.'},
+  {cat:'Infrastructure', k:'user',     name:'Clerk',           tag:'Auth · User management',  desc:'Authentication and user management for Mission Control. Handles sessions, sign-in flows, and identity. Hobby plan · app: discrete-bluegill-49.'},
+];
+
+/* ═══ BUILD LISTS ═══ */
+function buildList(elId, items, dark) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  let html = '', lastCat = null;
+  items.forEach((it, i) => {
+    if (it.cat && it.cat !== lastCat) {
+      lastCat = it.cat;
+      html += `<div class="lbl${dark?' lbl-i':''}" style="padding-top:13px;padding-bottom:5px;display:block">${it.cat}</div>`;
+    }
+    const badge = it.t ? `<span class="tbadge">${it.t}</span>` : '';
+    const dk = dark ? ' xr-dk' : '';
+    html += `<div class="xr${dk}" onclick="toggleX(this)">
+      <div class="xr-hd">
+        <div class="xr-l">
+          <div class="xr-ico">${ico(it.k||it.icon||'box',16,dark?'rgba(242,237,228,0.5)':'rgba(26,23,20,0.5)')}</div>
+          <div><div class="xr-name">${it.name}</div><div class="xr-meta">${it.role||it.f||it.tag||''}</div></div>
+        </div>
+        <div class="xr-r">${badge}<span class="xr-arr">▾</span></div>
+      </div>
+      <div class="xr-bd"><div class="xr-desc">${it.desc}</div></div>
+    </div>`;
+  });
+  html += `<div style="height:1px;background:${dark?'var(--ri)':'var(--rule)'}"></div>`;
+  el.innerHTML = html;
+}
+
+function toggleX(el) {
+  const o = el.classList.contains('open');
+  el.parentElement.querySelectorAll('.xr.open').forEach(x => x.classList.remove('open'));
+  if (!o) el.classList.add('open');
+}
+
+/* ═══ AGENT PANEL ═══ */
+function pickA(id, node) {
+  const a = AGENTS.find(x => x.id === id);
+  if (!a) return;
+  document.querySelectorAll('.node').forEach(n => n.classList.remove('sel'));
+  node.classList.add('sel');
+  document.getElementById('apanel').innerHTML =
+    `<div style="display:flex;align-items:flex-start;gap:10px">
+      <div style="flex-shrink:0;margin-top:2px">${ico(a.k,18,'rgba(26,23,20,0.6)')}</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--ink)">${a.name} <span style="font-weight:400;color:var(--grey);font-size:10px;margin-left:4px">${a.role}</span></div>
+        <div style="font-size:12px;line-height:1.6;color:var(--dim);margin-top:4px">${a.desc}</div>
+      </div>
+    </div>`;
+}
+
+/* ═══ COUNT-UP ═══ */
+function countUp(el) {
+  const target = parseInt(el.dataset.t);
+  let n = 0;
+  const t = setInterval(() => { n = Math.min(n+1, target); el.textContent = n; if (n>=target) clearInterval(t); }, 55);
+}
+
+/* ═══ LIVE CLOCK ═══ */
+function tick() {
+  const el = document.getElementById('ltime');
+  if (!el) return;
+  const s = new Date().toLocaleTimeString('en-AU', {hour12:false,hour:'2-digit',minute:'2-digit',second:'2-digit',timeZone:'Australia/Melbourne'});
+  el.textContent = s + ' AEST';
+}
+setInterval(tick, 1000); tick();
+
+/* ═══ NAV ═══ */
+const TOTAL = 15;
+let cur = 0, sx = 0, sy = 0;
+const SL = document.querySelectorAll('.slide');
+const DT = document.getElementById('dots');
+const PR = document.getElementById('prog');
+const CT = document.getElementById('ctr');
+
+// Build dots
+for (let i=0;i<TOTAL;i++) {
+  const b = document.createElement('button');
+  b.className = 'dot' + (i===0?' active':'');
+  b.onclick = () => goTo(i);
+  DT.appendChild(b);
+}
+
+function update() {
+  SL.forEach((s,i) => { s.classList.remove('active','prev'); if(i===cur) s.classList.add('active'); else if(i<cur) s.classList.add('prev'); });
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  PR.style.width = ((cur+1)/TOTAL*100) + '%';
+  CT.textContent = String(cur+1).padStart(2,'0') + ' / ' + TOTAL;
+  document.getElementById('bp').style.opacity = cur===0 ? '.12':'1';
+  document.getElementById('bn').style.opacity = cur===TOTAL-1 ? '.12':'1';
+  if (cur===7) setTimeout(() => document.querySelectorAll('.cnum').forEach(countUp), 240);
+}
+
+function goTo(n) { if(n>=0&&n<TOTAL){cur=n;update();} }
+function next() { goTo(cur+1); }
+function prev() { goTo(cur-1); }
+
+document.addEventListener('keydown', e => {
+  if(['ArrowRight','ArrowDown',' '].includes(e.key)){e.preventDefault();next();}
+  if(['ArrowLeft','ArrowUp'].includes(e.key)){e.preventDefault();prev();}
+});
+document.addEventListener('touchstart', e => { sx=e.touches[0].clientX; sy=e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+  if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>44) dx<0?next():prev();
+}, {passive:true});
+let md=false;
+document.addEventListener('mousedown', e=>{sx=e.clientX;md=true});
+document.addEventListener('mouseup', e=>{if(!md)return;md=false;const dx=e.clientX-sx;if(Math.abs(dx)>60)dx<0?next():prev()});
+
+/* ═══ INIT ═══ */
+buildList('alist', AGENTS, false);
+buildList('clist', CRONS, true);
+buildList('ilist', INTEGRATIONS, false);
+update();
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atlas — Access Required</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+    background: #1A1916;
+    color: #F8F7F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .gate {
+    text-align: center;
+    max-width: 340px;
+    padding: 2rem;
+  }
+  .gate h1 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: #E8500A;
+  }
+  .gate p {
+    font-size: 0.85rem;
+    color: #A09E96;
+    margin-bottom: 1.5rem;
+  }
+  .gate input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #3A3832;
+    border-radius: 6px;
+    background: #2A2824;
+    color: #F8F7F4;
+    font-size: 0.95rem;
+    outline: none;
+    margin-bottom: 0.75rem;
+  }
+  .gate input:focus { border-color: #E8500A; }
+  .gate button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background: #E8500A;
+    color: #F8F7F4;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+  }
+  .gate button:hover { background: #D04A09; }
+  .error { color: #E8500A; font-size: 0.8rem; margin-top: 0.5rem; display: none; }
+</style>
+</head>
+<body>
+<div class="gate">
+  <h1>Atlas Deck</h1>
+  <p>Enter access code to continue</p>
+  <form onsubmit="return checkAccess()">
+    <input type="password" id="code" placeholder="Access code" autofocus>
+    <button type="submit">Enter</button>
+  </form>
+  <p class="error" id="err">Incorrect code</p>
+</div>
+<script>
+function checkAccess() {
+  var code = document.getElementById('code').value;
+  // Simple hash check — not military-grade, but keeps casual visitors out
+  var hash = 0;
+  for (var i = 0; i < code.length; i++) {
+    hash = ((hash << 5) - hash) + code.charCodeAt(i);
+    hash |= 0;
+  }
+  if (hash === 310127076 || hash === -925408679) {
+    sessionStorage.setItem('atlas-auth', '1');
+    window.location.href = '/deck.html';
+    return false;
+  }
+  document.getElementById('err').style.display = 'block';
+  return false;
+}
+// Auto-redirect if already authenticated
+if (sessionStorage.getItem('atlas-auth') === '1') {
+  window.location.href = '/deck.html';
+}
+</script>
+</body>
+</html>
