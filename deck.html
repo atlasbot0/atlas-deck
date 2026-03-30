@@ -1,4 +1,4 @@
-<script>if(sessionStorage.getItem('atlas-auth')!=='1'){window.location.href='./'}</script>
+<script>if(sessionStorage.getItem('atlas-auth')\!=='1'){window.location.href='./'}</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -569,6 +569,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 </div>
 </div>
 
+<!-- ══ 09b SKILLS ══ -->
+<div class="slide" id="s9b">
+<div class="cr">
+  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
+    <div class="lbl">Installed Skills</div>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
+      <div class="h2" style="color:var(--ink)">23 Skills.</div>
+      <div class="cap">Tap to expand</div>
+    </div>
+  </div>
+  <div class="scroll e e2" style="padding:0 22px 20px" id="sklist"></div>
+</div>
+</div>
+
 <!-- ══ 10 SECURITY ══ -->
 <div class="slide" id="s10">
 <div class="cr">
@@ -945,7 +959,8 @@ function s11bToggleSaw() {
       <span class="chip">LightRAG</span>
       <span class="chip">10 Personas</span>
       <span class="chip">21 Jobs</span>
-      <span class="chip">20 Integrations</span>
+      <span class="chip">25 Integrations</span>
+      <span class="chip">23 Skills</span>
       <span class="chip chip-s">Governance 68</span>
     </div>
     <div class="mono" style="margin-top:14px;color:var(--grey)">VINCE LEBON / FOUNDER / ROLLIE NATION</div>
@@ -1066,6 +1081,36 @@ const INTEGRATIONS = [
   {cat:'Infrastructure', k:'radio',    name:'Tailscale',       tag:'3-device mesh network',   desc:'Encrypted mesh VPN across Mac mini, iPhone, and dev devices. Mission Control accessible anywhere at 100.71.55.1:3000. Funnel enables iOS SSH via port 443.'},
   {cat:'Infrastructure', k:'refresh',  name:'Syncthing',       tag:'File synchronisation',    desc:'Peer-to-peer file sync without a cloud intermediary. Keeps configs, working files, and knowledge bases in sync across devices.'},
   {cat:'Infrastructure', k:'user',     name:'Clerk',           tag:'Auth · User management',  desc:'Authentication and user management for Mission Control. Handles sessions, sign-in flows, and identity. Hobby plan · app: discrete-bluegill-49.'},
+  {cat:'Dev & Code',     k:'git',      name:'GitHub',          tag:'Code · CI/CD',            desc:'Source control and CI/CD for all Atlas and Mission Control code. GitHub Expert agent monitors PRs, CI run health, and repository integrity.'},
+  {cat:'Design',         k:'edit',     name:'Figma',           tag:'Design files',            desc:'Design file access for brand assets, UI mockups, and Rollie Nation visual collateral. Atlas can reference and retrieve design context on command.'},
+  {cat:'Productivity',   k:'layers',   name:'Google Drive',    tag:'Shared documents',        desc:'Access to shared documents, brand files, and collaborative assets. Complements Notion for external-facing or shared file storage.'},
+  {cat:'AI Models',      k:'nodes',    name:'Ollama',          tag:'Local LLM · On-device',   desc:'On-device LLM inference on the Mac mini. Powers VaultBot (secrets never leave the machine) and offline/private model tasks. Zero external API calls.'},
+];
+
+const SKILLS = [
+  {cat:'Claude Code',  type:'claude', k:'layers',  name:'braun-te-apple-design-system', tag:'UI/UX Design', desc:'Production-grade design system synthesising Braun/Dieter Rams minimalism, Teenage Engineering aesthetic, and Apple HIG clarity. Reference before building any interface.'},
+  {cat:'Claude Code',  type:'claude', k:'eye',      name:'looker-studio',               tag:'Dashboards',   desc:'Google Looker Studio specialist with full Shopify e-commerce blueprint. Covers creation, maintenance, calculated fields, and data blending.'},
+  {cat:'Claude Code',  type:'claude', k:'terminal', name:'retool-builder',              tag:'Internal Tools',desc:'Build, maintain, and optimise Retool internal tools and admin dashboards. Covers queries, workflows, custom CSS, and performance.'},
+  {cat:'Claude Code',  type:'claude', k:'shield',   name:'apple-liquid-glass-design-system', tag:'UI/UX Design', desc:'Apple-style Liquid Glass UI guidance and glassmorphism design. Generates design systems, component specs, and implementation guidance.'},
+  {cat:'Claude Code',  type:'claude', k:'zap',      name:'skill-creator',               tag:'Meta',         desc:'Create, modify, and benchmark Claude Code skills with eval testing and variance analysis. Optimises skill descriptions for better triggering.'},
+  {cat:'Claude Code',  type:'claude', k:'edit',     name:'theme-factory',               tag:'Styling',      desc:'Style artifacts with 10 pre-set themes or generate custom themes on-the-fly. Works on slides, docs, reports, and HTML pages.'},
+  {cat:'Claude Code',  type:'claude', k:'nodes',    name:'mcp-builder',                 tag:'MCP Servers',  desc:'Guide for creating high-quality MCP servers to connect LLMs with external services. Covers FastMCP (Python) and MCP SDK (Node/TypeScript).'},
+  {cat:'Claude Code',  type:'claude', k:'signal',   name:'canvas-design',               tag:'Visual Art',   desc:'Create visual art and designs in PNG/PDF using design philosophy. Original posters, artwork, and static visual pieces.'},
+  {cat:'Claude Code',  type:'claude', k:'radio',    name:'brand-guidelines',            tag:'Brand',        desc:"Apply Anthropic's official brand colors and typography to any artifact needing Anthropic's look-and-feel."},
+  {cat:'Claude Code',  type:'claude', k:'refresh',  name:'algorithmic-art',             tag:'Generative Art',desc:'Generative art using p5.js with seeded randomness and interactive parameters. Flow fields, particle systems, and original algorithmic pieces.'},
+  {cat:'Claude Code',  type:'claude', k:'layers',   name:'xlsx',                        tag:'Spreadsheets', desc:'Excel spreadsheet creation, editing, and analysis — formulas, formatting, charts, pivot tables, and data cleaning.'},
+  {cat:'Claude Code',  type:'claude', k:'box',      name:'pdf',                         tag:'Documents',    desc:'PDF manipulation: extract text, merge, split, rotate, create, fill forms, OCR scanned documents. Full PDF pipeline.'},
+  {cat:'Claude Code',  type:'claude', k:'layers',   name:'pptx',                        tag:'Presentations',desc:'PowerPoint creation, editing, parsing, and template management. Covers decks, pitch slides, speaker notes, and layouts.'},
+  {cat:'Claude Code',  type:'claude', k:'edit',     name:'docx',                        tag:'Documents',    desc:'Word document creation and editing with TOC, headings, page numbers, and letterheads. Professional document formatting.'},
+  {cat:'Claude Code',  type:'claude', k:'clock',    name:'schedule',                    tag:'Automation',   desc:'Create scheduled tasks that run on demand or automatically on an interval. Integrates with the cron and task management systems.'},
+  {cat:'Claude Code',  type:'claude', k:'search',   name:'last30days',                  tag:'Research',     desc:'Research any topic across Reddit, X, YouTube, TikTok, Hacker News, and Polymarket from the past 30 days. Produces copy-paste-ready prompts.'},
+  {cat:'Claude Code',  type:'claude', k:'brain',    name:'AutoResearch',                tag:'Research · NEW',desc:'Autonomous overnight experiment loops for self-improving AI prompts. Runs iterative research cycles without supervision.'},
+  {cat:'OpenClaw',     type:'openclaw',k:'target',  name:'productivity:start',          tag:'Productivity', desc:'Initialise the productivity system dashboard — surfaces tasks, goals, and context at the start of a work session.'},
+  {cat:'OpenClaw',     type:'openclaw',k:'refresh', name:'productivity:update',         tag:'Productivity', desc:'Sync tasks and refresh memory — pulls latest state from TASKS.md and updates working context.'},
+  {cat:'OpenClaw',     type:'openclaw',k:'terminal',name:'productivity:task-management',tag:'Productivity', desc:'Task tracking via shared TASKS.md. Manages creation, updates, and completion across the OpenClaw workspace.'},
+  {cat:'OpenClaw',     type:'openclaw',k:'box',     name:'productivity:memory-management',tag:'Productivity',desc:'Two-tier memory system for workplace context. Manages short-term session memory and long-term persistent knowledge.'},
+  {cat:'Plugin',       type:'plugin', k:'nodes',   name:'cowork-plugin-management:create-cowork-plugin',   tag:'Plugins', desc:'Create new Cowork plugins from scratch — scaffolding, configuration, and integration with the OpenClaw plugin system.'},
+  {cat:'Plugin',       type:'plugin', k:'edit',    name:'cowork-plugin-management:cowork-plugin-customizer',tag:'Plugins', desc:'Customise existing Cowork plugins for specific workflows — adjust behaviours, prompts, and integration points.'},
 ];
 
 /* ═══ BUILD LISTS ═══ */
@@ -1101,6 +1146,38 @@ function toggleX(el) {
   if (!o) el.classList.add('open');
 }
 
+/* ═══ SKILL LIST ═══ */
+function buildSkillsList(elId) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const BADGE = {
+    claude:   {bg:'#E8500A',  color:'#F2EDE4', label:'Claude Code'},
+    openclaw: {bg:'#3D3A37',  color:'#F2EDE4', label:'OpenClaw'},
+    plugin:   {bg:'#2A2C38',  color:'rgba(242,237,228,0.7)', label:'Plugin'},
+  };
+  let html = '', lastCat = null;
+  SKILLS.forEach(sk => {
+    if (sk.cat !== lastCat) {
+      lastCat = sk.cat;
+      html += `<div class="lbl" style="padding-top:13px;padding-bottom:5px;display:block">${sk.cat}</div>`;
+    }
+    const b = BADGE[sk.type] || BADGE.plugin;
+    const badge = `<span style="display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.04em;background:${b.bg};color:${b.color};flex-shrink:0">${b.label}</span>`;
+    html += `<div class="xr" onclick="toggleX(this)">
+      <div class="xr-hd">
+        <div class="xr-l">
+          <div class="xr-ico">${ico(sk.k||'box',16,'rgba(26,23,20,0.5)')}</div>
+          <div><div class="xr-name">${sk.name}</div><div class="xr-meta">${sk.tag||''}</div></div>
+        </div>
+        <div class="xr-r">${badge}<span class="xr-arr" style="margin-left:6px">▾</span></div>
+      </div>
+      <div class="xr-bd"><div class="xr-desc">${sk.desc}</div></div>
+    </div>`;
+  });
+  html += `<div style="height:1px;background:var(--rule)"></div>`;
+  el.innerHTML = html;
+}
+
 /* ═══ AGENT PANEL ═══ */
 function pickA(id, node) {
   const a = AGENTS.find(x => x.id === id);
@@ -1134,7 +1211,7 @@ function tick() {
 setInterval(tick, 1000); tick();
 
 /* ═══ NAV ═══ */
-const TOTAL = 15;
+const TOTAL = 16;
 let cur = 0, sx = 0, sy = 0;
 const SL = document.querySelectorAll('.slide');
 const DT = document.getElementById('dots');
@@ -1180,6 +1257,7 @@ document.addEventListener('mouseup', e=>{if(!md)return;md=false;const dx=e.clien
 buildList('alist', AGENTS, false);
 buildList('clist', CRONS, true);
 buildList('ilist', INTEGRATIONS, false);
+buildSkillsList('sklist');
 update();
 </script>
 </body>
