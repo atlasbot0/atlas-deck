@@ -1,3 +1,4 @@
+<script>if(sessionStorage.getItem('atlas-auth')!=='1'){window.location.href='./'}</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -483,16 +484,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   </div>
   <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:20px 24px 24px" class="e e2">
     <div>
-      <div style="font-size:clamp(72px,20vw,158px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--cr)">Jonny</div>
-      <div style="font-size:clamp(13px,2.5vw,17px);font-weight:400;color:rgba(242,237,228,.48);margin-top:16px;max-width:340px;line-height:1.5">Rollie Nation's voice agent. Jonny. A custom-trained voice that speaks in the brand's tone — comfort-first, distinctly Rollie.</div>
+      <div style="font-size:clamp(72px,20vw,158px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--cr)">Roo</div>
+      <div style="font-size:clamp(13px,2.5vw,17px);font-weight:400;color:rgba(242,237,228,.48);margin-top:16px;max-width:340px;line-height:1.5">Rollie Nation's voice agent. Jonny aka Roo. A custom-trained voice that speaks in the brand's tone — comfort-first, distinctly Rollie.</div>
     </div>
     <div>
       <div class="hri" style="margin-bottom:18px"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div><div class="lbl-i" style="margin-bottom:4px">Voice</div><div style="font-size:14px;font-weight:700;color:var(--cr)">ElevenLabs</div></div>
         <div><div class="lbl-i" style="margin-bottom:4px">Phone</div><div style="font-size:14px;font-weight:700;color:var(--sig)">Twilio</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">LLM</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Gemini 3.1 Flash Live</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny · AU</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">LLM</div><div style="font-size:14px;font-weight:700;color:var(--cr)">GPT-4o-mini</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny / Roo · AU</div></div>
         <div><div class="lbl-i" style="margin-bottom:4px">Products</div><div style="font-size:14px;font-weight:700;color:var(--sig)">509 queryable live</div></div>
         <div><div class="lbl-i" style="margin-bottom:4px">KB docs</div><div style="font-size:14px;font-weight:700;color:var(--cr)">5 · 4 tools</div></div>
       </div>
@@ -875,7 +876,7 @@ function s11bToggleSaw() {
     <div class="moat-row">
       <div class="moat-before">No voice layer</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">Jonny.</strong> A brand asset. Custom-trained ElevenLabs voice that sounds like Rollie — not a generic TTS voice.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Roo.</strong> A brand asset. Custom-trained ElevenLabs voice that sounds like Rollie — not a generic TTS voice.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">Third-party CRM</div>
@@ -940,7 +941,7 @@ function s11bToggleSaw() {
       <span class="chip chip-s">Atlas Claude</span>
       <span class="chip">Operator</span>
       <span class="chip">Ollama</span>
-      <span class="chip chip-s">Jonny</span>
+      <span class="chip chip-s">Roo</span>
       <span class="chip">LightRAG</span>
       <span class="chip">10 Personas</span>
       <span class="chip">21 Jobs</span>
@@ -1056,7 +1057,7 @@ const INTEGRATIONS = [
   {cat:'Brand & CRM',    k:'signal',   name:'X / Twitter',     tag:'@vincelebon',             desc:'Atlas posts, replies, quotes, searches, reads @vincelebon\'s timeline. Brand content drafted from LightRAG context and posted on command.'},
   {cat:'Automation',     k:'refresh',  name:'N8N',             tag:'Local + Cloud',           desc:'Workflow automation layer. Connects Atlas to systems without a direct API — Shopify, Klaviyo, webhooks. Local (Mac mini) and N8N Cloud both running.'},
   {cat:'Automation',     k:'eye',      name:'Apify',           tag:'Web scraping',            desc:'Structured data at scale — competitor pricing, product listings, social scraping. Atlas triggers actors and processes results.'},
-  {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Jonny + Atlas TTS',       desc:'Two uses: Jonny (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
+  {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Roo + Atlas TTS',         desc:'Two uses: Roo (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
   {cat:'Infrastructure', k:'eye',      name:'Langfuse',        tag:'LLM observability',       desc:'Traces every LLM call — latency, token usage, model, cost per request. Audits which agents are expensive, where performance can improve.'},
   {cat:'Infrastructure', k:'key',      name:'VaultBot',        tag:'Local secret management', desc:'@VaultMacMini_Bot on Telegram. 100% on local Ollama — secrets never leave the Mac mini. Store, retrieve, rotate API keys safely.'},
   {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history, session approval indicator. /security page: interactive governance explainer. Accessible via Tailscale on any device.'},
