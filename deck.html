@@ -1,4 +1,3 @@
-<script>if(sessionStorage.getItem('atlas-auth')!=='1'){window.location.href='./'}</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -561,7 +560,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Integration Map</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
-      <div class="h2" style="color:var(--ink)">21 live integrations.</div>
+      <div class="h2" style="color:var(--ink)">25 live integrations.</div>
       <div class="cap">Tap to expand</div>
     </div>
   </div>
@@ -886,7 +885,7 @@ function s11bToggleSaw() {
     <div class="moat-row">
       <div class="moat-before">Disconnected tools</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">21 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook + Tailscale — connected and coordinated.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">25 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook + GitHub + Tailscale — connected and coordinated.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">No safety layer</div>
@@ -945,7 +944,7 @@ function s11bToggleSaw() {
       <span class="chip">LightRAG</span>
       <span class="chip">10 Personas</span>
       <span class="chip">21 Jobs</span>
-      <span class="chip">20 Integrations</span>
+      <span class="chip">25 Integrations</span>
       <span class="chip chip-s">Governance 68</span>
     </div>
     <div class="mono" style="margin-top:14px;color:var(--grey)">VINCE LEBON / FOUNDER / ROLLIE NATION</div>
@@ -1036,7 +1035,7 @@ const CRONS = [
   {t:'Sun 8am',f:'Weekly',  k:'lock',     name:'Security Audit',       desc:'Weekly sweep. Checks .env permissions (600), credentials dir (700), open ports, API key hygiene. Reports anomalies immediately.'},
   {t:'Sun 9am',f:'Weekly',  k:'cpu',      name:'API Optimiser',        desc:'Reviews model routing and costs. Identifies cheaper OpenRouter models, checks billing, optimises fallback chains. Keeps the stack lean.'},
   {t:'Sun 10am',f:'Weekly', k:'clock',    name:'Crons Manager',        desc:'Audits all 21 scheduled jobs. Checks run status, timing conflicts, error rates, payload health. Flags anything before the week starts.'},
-  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 21 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
+  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 25 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
   {t:'Sun 8pm', f:'Weekly', k:'brain',    name:'Memory & Knowledge',   desc:'Sunday knowledge consolidation. Extracts decisions, lessons, patterns, wins from the week. Writes Weekly Capture before Monday resets.'},
   {t:'Sun 9pm', f:'Weekly', k:'refresh',  name:'Weekly Reflection',    desc:'Self-improvement review. Surfaces corrections, updates LEARNINGS.md, identifies recurring patterns. Keeps the system honest.'},
   {t:'Sun 10pm',f:'Weekly', k:'eye',      name:'Memory Prune',         desc:'Cleans stale or redundant memory files. Keeps the knowledge base lean. Archives rather than deletes.'},
@@ -1049,20 +1048,24 @@ const INTEGRATIONS = [
   {cat:'Productivity',   k:'target',   name:'Asana',           tag:'Task management',         desc:'Source of truth for all tasks. 19 CEO priority projects in the Focus portfolio. Atlas reads due tasks for SOD brief, flags overdue, creates tasks on command.'},
   {cat:'Productivity',   k:'layers',   name:'Obsidian',        tag:'Personal second brain',   desc:'Vince\'s private note vault. Atlas can add ideas, capture thoughts, link notes — "log this idea" and it\'s in Obsidian instantly.'},
   {cat:'Productivity',   k:'edit',     name:'NotePlan',        tag:'Daily notes',             desc:'Daily note layer. SOD brief reads today\'s NotePlan file and surfaces tasks or highlights alongside Outlook and Asana.'},
-  {cat:'Communications', k:'radio',    name:'Telegram',        tag:'Primary I/O channel',     desc:'How Vince talks to Atlas. All briefs, alerts, research, and responses delivered via @AtlasOperator_Bot. Always-on — works globally.'},
+  {cat:'Productivity',   k:'box',      name:'Google Drive',    tag:'Cloud storage · Docs',    desc:'Cloud file storage and shared documents. Atlas can access Drive files, reference shared docs, and coordinate file-based workflows across the stack.'},
+  {cat:'Communications', k:'radio',    name:'Telegram',        tag:'3 bots · Primary I/O',    desc:'How Vince talks to Atlas. Three bots: @AtlasOperator_Bot (primary I/O, all briefs + alerts), @AtlasClaudeChannel_Bot (Claude Code sessions), @AtlasOllama (local model bridge). Always-on — works globally.'},
   {cat:'Communications', k:'mail',     name:'Missive',         tag:'Email · 3 accounts',      desc:'Atlas reads, drafts, sends from Vince\'s personal, Rollie, and Atlas accounts. Vince flags in Telegram → Atlas drafts → one-tap approval.'},
   {cat:'Communications', k:'clock',    name:'Outlook Calendar',tag:'vince@rollienation.com',  desc:'Live calendar pull via Microsoft Graph API. SOD brief shows today\'s meetings in time order. EOD brief previews tomorrow.'},
   {cat:'Brand & CRM',    k:'link',     name:'Beings CRM',      tag:'73 contacts · Own platform',desc:'Custom CRM Vince built. Full access — log interactions, manage contacts, track follow-ups, flag stale relationships. Every meeting Vince mentions gets logged.'},
   {cat:'Brand & CRM',    k:'brain',    name:'LightRAG',        tag:'Rollie + Personal',       desc:'Two knowledge bases: Rollie (9 brand docs) and Personal (frameworks, decisions). Every brand output grounded here — not AI guesswork.'},
   {cat:'Brand & CRM',    k:'signal',   name:'X / Twitter',     tag:'@vincelebon',             desc:'Atlas posts, replies, quotes, searches, reads @vincelebon\'s timeline. Brand content drafted from LightRAG context and posted on command.'},
+  {cat:'Brand & CRM',    k:'layers',   name:'Figma',           tag:'Design · Brand assets',   desc:'Design source for brand identity, UI mockups, and visual assets. Atlas references Figma files for brand-consistent output and design handoff.'},
   {cat:'Automation',     k:'refresh',  name:'N8N',             tag:'Local + Cloud',           desc:'Workflow automation layer. Connects Atlas to systems without a direct API — Shopify, Klaviyo, webhooks. Local (Mac mini) and N8N Cloud both running.'},
   {cat:'Automation',     k:'eye',      name:'Apify',           tag:'Web scraping',            desc:'Structured data at scale — competitor pricing, product listings, social scraping. Atlas triggers actors and processes results.'},
   {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Roo + Atlas TTS',         desc:'Two uses: Roo (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
   {cat:'Infrastructure', k:'eye',      name:'Langfuse',        tag:'LLM observability',       desc:'Traces every LLM call — latency, token usage, model, cost per request. Audits which agents are expensive, where performance can improve.'},
   {cat:'Infrastructure', k:'key',      name:'VaultBot',        tag:'Local secret management', desc:'@VaultMacMini_Bot on Telegram. 100% on local Ollama — secrets never leave the Mac mini. Store, retrieve, rotate API keys safely.'},
   {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history, session approval indicator. /security page: interactive governance explainer. Accessible via Tailscale on any device.'},
+  {cat:'Infrastructure', k:'git',      name:'GitHub',          tag:'gh CLI · Repos · CI/CD',  desc:'gh CLI authenticated. Code repositories, PR management, CI/CD monitoring. GitHub Expert agent runs daily release checks and weekly repo health audits. Mission Control deployed to Vercel from GitHub.'},
   {cat:'AI Models',      k:'nodes',    name:'Anthropic / Claude',tag:'Default + escalation', desc:'Two tiers: Haiku 4.5 (default, most tasks) and Sonnet 4.6 (escalation, complex reasoning). Only escalates when the task genuinely warrants it.'},
   {cat:'AI Models',      k:'layers',   name:'OpenRouter',      tag:'100+ models · crons',     desc:'openrouter/auto for most cron and sub-agent tasks. Automatically routes to best available model. Cost-optimised fallback chains.'},
+  {cat:'AI Models',      k:'cpu',      name:'Ollama',          tag:'Local inference · Mac mini', desc:'Local AI model runner on the Mac mini. Powers VaultBot (fully local, secrets never leave the machine) and local inference tasks. Zero data egress — 100% on-device.'},
   {cat:'Infrastructure', k:'radio',    name:'Tailscale',       tag:'3-device mesh network',   desc:'Encrypted mesh VPN across Mac mini, iPhone, and dev devices. Mission Control accessible anywhere at 100.71.55.1:3000. Funnel enables iOS SSH via port 443.'},
   {cat:'Infrastructure', k:'refresh',  name:'Syncthing',       tag:'File synchronisation',    desc:'Peer-to-peer file sync without a cloud intermediary. Keeps configs, working files, and knowledge bases in sync across devices.'},
   {cat:'Infrastructure', k:'user',     name:'Clerk',           tag:'Auth · User management',  desc:'Authentication and user management for Mission Control. Handles sessions, sign-in flows, and identity. Hobby plan · app: discrete-bluegill-49.'},
