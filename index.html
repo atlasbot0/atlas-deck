@@ -82,7 +82,7 @@ function checkAccess() {
   }
   if (hash === 310127076 || hash === -925408679) {
     sessionStorage.setItem('atlas-auth', '1');
-    window.location.href = '/deck.html';
+    window.location.href = 'deck.html';
     return false;
   }
   document.getElementById('err').style.display = 'block';
@@ -90,7 +90,7 @@ function checkAccess() {
 }
 // Auto-redirect if already authenticated
 if (sessionStorage.getItem('atlas-auth') === '1') {
-  window.location.href = '/deck.html';
+  window.location.href = 'deck.html';
 }
 </script>
 </body>
