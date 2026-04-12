@@ -1,4 +1,3 @@
-<script>if(sessionStorage.getItem('atlas-auth')\!=='1'){window.location.href='./'}</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,7 +97,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .col {flex:1;display:flex;flex-direction:column;min-width:0}
 
 /* ═══ TYPE ═══ */
-.lbl {font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.lbl {font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 .lbl-i{color:var(--di)}
 .lbl-s{color:var(--sig)}
 .disp{font-size:clamp(60px,15vw,116px);font-weight:900;letter-spacing:-.048em;line-height:.88;color:var(--ink)}
@@ -106,10 +105,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .h1  {font-size:clamp(26px,6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
 .h1-i{color:var(--cr)}
 .h2  {font-size:clamp(18px,4vw,30px);font-weight:800;letter-spacing:-.025em;line-height:1.05}
-.body{font-size:14px;font-weight:400;line-height:1.65;color:var(--dim);letter-spacing:.005em}
+.body{font-size:13px;font-weight:400;line-height:1.65;color:var(--dim);letter-spacing:.005em}
 .body-i{color:var(--di)}
-.cap {font-size:12px;font-weight:400;line-height:1.55;color:var(--grey);letter-spacing:.02em}
-.cap-i{color:rgba(242,237,228,.52)}
+.cap {font-size:11px;font-weight:400;line-height:1.55;color:var(--grey);letter-spacing:.02em}
+.cap-i{color:rgba(242,237,228,.4)}
 .mono{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--grey)}
 .mono-s{color:var(--sig)}
 
@@ -127,8 +126,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .sr-i .sk{color:var(--cr)}
 
 /* Chip */
-.chip{display:inline-block;padding:4px 9px;border:1px solid var(--rule);
-  font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+.chip{display:inline-block;padding:3px 8px;border:1px solid var(--rule);
+  font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
   color:var(--grey);font-family:var(--fm)}
 .chip-s{border-color:var(--sig);color:var(--sig)}
 .chip-i{border-color:rgba(242,237,228,.2);color:rgba(242,237,228,.45)}
@@ -144,14 +143,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .xr-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:10px}
 .xr-l{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
 .xr-ico{width:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.xr-name{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
-.xr-meta{font-size:11px;color:var(--grey);margin-top:1px;letter-spacing:.02em}
+.xr-name{font-size:13px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.xr-meta{font-size:10px;color:var(--grey);margin-top:1px;letter-spacing:.02em}
 .xr-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .xr-arr{font-size:10px;color:var(--grey);transition:transform 240ms var(--e)}
 .xr.open .xr-arr{transform:rotate(180deg)}
 .xr-bd{max-height:0;overflow:hidden;transition:max-height 320ms var(--e),padding 240ms;padding-bottom:0}
 .xr.open .xr-bd{max-height:120px;padding-bottom:14px}
-.xr-desc{font-size:13px;line-height:1.65;color:var(--dim);padding-left:32px}
+.xr-desc{font-size:12px;line-height:1.65;color:var(--dim);padding-left:32px}
 
 /* Dark xr */
 .xr-dk{border-bottom-color:var(--ri)}
@@ -188,7 +187,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 /* S3 infra */
 .ir{display:flex;align-items:stretch;flex:1;border-bottom:1px solid var(--ri)}
 .in{width:40px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;
-  padding-top:14px;font-family:var(--fm);font-size:13px;color:rgba(242,237,228,.55);
+  padding-top:14px;font-family:var(--fm);font-size:9px;color:rgba(242,237,228,.2);
   letter-spacing:.1em;border-right:1px solid var(--ri)}
 .ic{flex:1;padding:13px 16px}
 .ib{flex-shrink:0;padding:14px 12px;display:flex;align-items:flex-start}
@@ -196,13 +195,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 /* S4 models — warm tinted darks */
 .mc{flex:1;display:flex;flex-direction:column;padding:20px 16px;min-width:0}
 .mc+.mc{border-left:1px solid var(--ri)}
-.mc.m1{background:#261F18}
-.mc.m2{background:#1E1C17}
-.mc.m3{background:#1A1916}
-.mt{font-family:var(--fm);font-size:10px;letter-spacing:.14em;color:rgba(242,237,228,.45);margin-bottom:12px}
-.mn{font-size:clamp(22px,5vw,36px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--cr)}
-.ms{font-family:var(--fm);font-size:11px;color:var(--sig);letter-spacing:.06em;margin-top:8px}
-.md{font-size:13px;line-height:1.6;color:rgba(242,237,228,.55);margin-top:10px}
+.mc.m1{background:#1C1927}
+.mc.m2{background:#17201A}
+.mc.m3{background:#201D17}
+.mt{font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:rgba(242,237,228,.3);margin-bottom:12px}
+.mn{font-size:clamp(18px,4vw,28px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--cr)}
+.ms{font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.06em;margin-top:8px}
+.md{font-size:11px;line-height:1.6;color:rgba(242,237,228,.42);margin-top:10px}
 
 /* S7 agents */
 .nstrip{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:12px 22px 10px}
@@ -223,8 +222,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 
 /* S11 MOAT */
 .moat-row{display:flex;padding:10px 0;border-bottom:1px solid var(--ri);align-items:baseline;gap:16px}
-.moat-before{flex:1;font-size:12px;color:rgba(242,237,228,.38);letter-spacing:.01em}
-.moat-after {flex:1;font-size:12px;color:var(--cr);letter-spacing:.01em}
+.moat-before{flex:1;font-size:11px;color:rgba(242,237,228,.28);letter-spacing:.01em}
+.moat-after {flex:1;font-size:11px;color:var(--cr);letter-spacing:.01em}
 .moat-arr{color:var(--sig);font-size:10px;flex-shrink:0}
 
 /* S12 day — timeline */
@@ -248,19 +247,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   font-size:clamp(100px,28vw,210px);font-weight:900;
   letter-spacing:-.06em;color:rgba(26,23,20,.04);pointer-events:none}
 .clm{font-size:clamp(34px,9vw,60px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--ink)}
-
-
-@media(max-width:639px){
-  .lbl{font-size:9px}
-  .body{font-size:13px}
-  .cap{font-size:11px}
-  .chip{font-size:10px;padding:3px 8px}
-  .xr-name{font-size:13px}
-  .xr-desc{font-size:12px}
-  .mn{font-size:20px}
-  .mt{font-size:9px}
-  .in{font-size:11px}
-}
 
 @media(max-width:480px){
   .mc{padding:14px 12px}
@@ -286,7 +272,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 </head>
 <body>
 <div id="prog"></div>
-<div id="ctr">01 / 15</div>
+<div id="ctr">01 / 13</div>
 <div id="deck">
 
 <!-- ══ 01 IDENTITY ══ -->
@@ -370,39 +356,31 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="ir e e3">
       <div class="in">02</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">13 LaunchAgent Daemons</div>
-        <div class="cap-i" style="margin-top:3px">Auto-start on boot · FD limits 32,768/65,536 · pmset sleep 0 · plist-managed</div>
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">LaunchAgent plist</div>
+        <div class="cap-i" style="margin-top:3px">Auto-start on boot · FD limits 32,768 soft / 65,536 hard · pmset sleep 0</div>
       </div>
       <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">BOOT</span></div>
     </div>
     <div class="ir e e4">
       <div class="in">03</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">HealthGuard Monitor</div>
-        <div class="cap-i" style="margin-top:3px">Every 5 min · Gateway + sessions + FDs + Ollama · Auto-recovery · Telegram alerts (15 min cooldown)</div>
+        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Gateway Watchdog</div>
+        <div class="cap-i" style="margin-top:3px">Every 5 min · brew upgrade → doctor --fix → restart · Self-healing</div>
       </div>
       <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">5 MIN</span></div>
     </div>
     <div class="ir e e5">
       <div class="in">04</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Emergency Kill Switch</div>
-        <div class="cap-i" style="margin-top:3px">3-layer safety: SSH kill · Siri Shortcut · HTTP endpoint :18700 · LaunchAgent service</div>
-      </div>
-      <div class="ib"><span class="chip chip-s" style="font-size:8px;padding:2px 6px">SAFE</span></div>
-    </div>
-    <div class="ir e e6">
-      <div class="in">05</div>
-      <div class="ic">
         <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Telegram Bridge</div>
-        <div class="cap-i" style="margin-top:3px">@AtlasOperator_Bot · Primary I/O · Global reach · Allowlist access control</div>
+        <div class="cap-i" style="margin-top:3px">@AtlasOperator_Bot · Primary I/O · Global reach</div>
       </div>
       <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">LINK</span></div>
     </div>
     <div style="flex:1"></div>
   </div>
-  <div class="hri e e7"></div>
-  <div class="p2 e e8"><div class="cap-i">7 core services · 13 LaunchAgent daemons · Mac mini · Melbourne · Recovery &lt;5 min</div></div>
+  <div class="hri e e6"></div>
+  <div class="p2 e e7"><div class="cap-i">Mac mini · Melbourne · Recovery &lt;5 min · Auto-upgrade Sun 3am</div></div>
 </div>
 </div>
 
@@ -415,27 +393,27 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   </div>
   <div class="cols e e2" style="flex:1;min-height:0">
     <div class="mc m1">
-      <div class="mt">TIER 01 / DEFAULT</div>
-      <div class="mn">Atlas<br>Haiku</div>
-      <div class="ms">claude-haiku-4-5</div>
+      <div class="mt">TIER 01 / PREMIUM</div>
+      <div class="mn">Atlas<br>Claude</div>
+      <div class="ms">claude-sonnet-4-6</div>
       <div style="flex:1"></div>
-      <div class="md">Most tasks. Fast, cost-effective. Briefs, crons, daily ops. Default for all OpenClaw routing.</div>
+      <div class="md">Strategy. Complex reasoning. Builds. Coaching. Runs when it genuinely counts.</div>
     </div>
     <div class="vri"></div>
     <div class="mc m2">
-      <div class="mt">TIER 02 / ESCALATION</div>
-      <div class="mn">Atlas<br>Sonnet</div>
-      <div class="ms">claude-sonnet-4-6</div>
+      <div class="mt">TIER 02 / SMART</div>
+      <div class="mn">Atlas<br>Operator</div>
+      <div class="ms">openrouter / auto</div>
       <div style="flex:1"></div>
-      <div class="md">Complex reasoning. Strategy. Builds. Coaching. Escalated when the task genuinely warrants it.</div>
+      <div class="md">Briefs. Research. Sub-agents. 100+ models. Optimises cost automatically.</div>
     </div>
     <div class="vri"></div>
     <div class="mc m3">
-      <div class="mt">TIER 03 / LOCAL</div>
+      <div class="mt">TIER 03 / PRIVATE</div>
       <div class="mn">Atlas<br>Ollama</div>
-      <div class="ms">qwen2.5:7b · local</div>
+      <div class="ms">local / mac mini</div>
       <div style="flex:1"></div>
-      <div class="md">Monitoring. Keep-warm. Local inference. VaultBot. Zero cloud — ever. openrouter/auto for most crons.</div>
+      <div class="md">VaultBot. Private tasks. Fully offline. Zero data to cloud — ever.</div>
     </div>
   </div>
 </div>
@@ -446,30 +424,30 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 <div class="cr">
   <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Knowledge Layer</div>
-    <div class="h2" style="margin-top:5px;color:var(--ink)">Two knowledge graphs.<br>Always grounded in source truth.</div>
+    <div class="h2" style="margin-top:5px;color:var(--ink)">Self-compiling wikis.<br>RAG + structured knowledge.</div>
   </div>
   <div class="cols e e2" style="flex:1;min-height:0">
     <div class="col" style="padding:18px 18px">
-      <div class="lbl-s" style="margin-bottom:10px">ROLLIE</div>
-      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">9</div>
-      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Brand Documents</div>
+      <div class="lbl-s" style="margin-bottom:10px">ROLLIE WIKI</div>
+      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">30</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + 9 RAG Sources</div>
       <div class="hr" style="margin:14px 0"></div>
-      <div class="cap" style="margin-bottom:12px">Brand Bible · TOV · Brand Constitution · FY26 Strategy · Annual Brand Plan · Product/Ops Strategy · Company One Page + 2 more</div>
+      <div class="cap" style="margin-bottom:12px">Karpathy-pattern self-compiling wiki. Entity pages, concepts, summaries. Ingest via Telegram, Web Clipper, or Cowork. Weekly lint cron.</div>
       <div style="display:flex;flex-direction:column;gap:5px">
-        <span class="chip chip-s" style="align-self:flex-start">Cohere Rerank</span>
-        <span class="chip" style="align-self:flex-start">text-embedding-3-small</span>
+        <span class="chip chip-s" style="align-self:flex-start">obsidian-rollie-wiki skill</span>
+        <span class="chip" style="align-self:flex-start">LightRAG fallback :3101</span>
       </div>
     </div>
     <div class="vr"></div>
     <div class="col" style="padding:18px 18px">
-      <div class="lbl" style="margin-bottom:10px">PERSONAL</div>
-      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">∞</div>
-      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Growing</div>
+      <div class="lbl" style="margin-bottom:10px">PERSONAL WIKI</div>
+      <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">6</div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + Growing</div>
       <div class="hr" style="margin:14px 0"></div>
-      <div class="cap" style="margin-bottom:12px">Vince's frameworks, decisions, philosophy, institutional memory. Every output grounded here — not AI guesswork.</div>
+      <div class="cap" style="margin-bottom:12px">EO coaching, frameworks, personal philosophy. Strict privacy separation. Every output grounded in source truth — not AI guesswork.</div>
       <div style="display:flex;flex-direction:column;gap:5px">
-        <span class="chip" style="align-self:flex-start">Render hosted</span>
-        <span class="chip" style="align-self:flex-start">Always indexed</span>
+        <span class="chip" style="align-self:flex-start">LightRAG fallback :3100</span>
+        <span class="chip" style="align-self:flex-start">iCloud + Syncthing</span>
       </div>
     </div>
   </div>
@@ -484,18 +462,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   </div>
   <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:20px 24px 24px" class="e e2">
     <div>
-      <div style="font-size:clamp(72px,20vw,158px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--cr)">Jonny</div>
-      <div style="font-size:clamp(13px,2.5vw,17px);font-weight:400;color:rgba(242,237,228,.48);margin-top:16px;max-width:340px;line-height:1.5">Rollie Nation's voice agent. Jonny. A custom-trained voice that speaks in the brand's tone — comfort-first, distinctly Rollie.</div>
+      <div style="font-size:clamp(72px,20vw,158px);font-weight:900;letter-spacing:-.06em;line-height:.84;color:var(--cr)">Roo</div>
+      <div style="font-size:clamp(13px,2.5vw,17px);font-weight:400;color:rgba(242,237,228,.48);margin-top:16px;max-width:340px;line-height:1.5">Rollie Nation's voice agent. Jonny aka Roo. A custom-trained voice that speaks in the brand's tone — comfort-first, distinctly Rollie.</div>
     </div>
     <div>
       <div class="hri" style="margin-bottom:18px"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div><div class="lbl-i" style="margin-bottom:4px">Voice</div><div style="font-size:14px;font-weight:700;color:var(--cr)">ElevenLabs</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Phone</div><div style="font-size:14px;font-weight:700;color:var(--sig)">Twilio</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">LLM</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Gemini 3.1 Flash Live</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny · AU</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Products</div><div style="font-size:14px;font-weight:700;color:var(--sig)">509 queryable live</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">KB docs</div><div style="font-size:14px;font-weight:700;color:var(--cr)">5 · 4 tools</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Platform</div><div style="font-size:14px;font-weight:700;color:var(--cr)">ElevenLabs</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Voice model</div><div style="font-size:14px;font-weight:700;color:var(--sig)">Custom trained</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny / Roo</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Brand</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Rollie Nation</div></div>
       </div>
     </div>
   </div>
@@ -508,7 +484,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Agent Architecture</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
-      <div class="h2" style="color:var(--ink)">16 specialist agents · 1 Orchestrator</div>
+      <div class="h2" style="color:var(--ink)">19 Agents · 1 Orchestrator</div>
       <div class="cap">Tap to explore</div>
     </div>
   </div>
@@ -546,10 +522,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
     <div class="lbl-i">Automation Layer</div>
     <div style="display:flex;align-items:baseline;gap:10px;margin-top:6px">
-      <div style="font-size:clamp(52px,13vw,84px);font-weight:900;letter-spacing:-.05em;color:var(--cr);line-height:1" class="cnum" data-t="20">0</div>
-      <div style="font-size:clamp(18px,4vw,28px);font-weight:700;color:var(--cr);letter-spacing:-.025em;line-height:1.1">scheduled<br>jobs.</div>
+      <div style="font-size:clamp(52px,13vw,84px);font-weight:900;letter-spacing:-.05em;color:var(--cr);line-height:1" class="cnum" data-t="18">0</div>
+      <div style="font-size:clamp(18px,4vw,28px);font-weight:700;color:var(--cr);letter-spacing:-.025em;line-height:1.1">automations<br>running.</div>
     </div>
-    <div class="cap-i" style="margin-top:6px">Zero input · Timezone-aware · Auto-recover · +37 automation scripts · Tap to expand</div>
+    <div class="cap-i" style="margin-top:6px">Zero input · Timezone-aware · Auto-recover · Tap to expand</div>
   </div>
   <div class="scroll" style="padding:0 22px 20px" id="clist"></div>
 </div>
@@ -561,25 +537,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Integration Map</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
-      <div class="h2" style="color:var(--ink)">25 live integrations.</div>
+      <div class="h2" style="color:var(--ink)">18 live integrations.</div>
       <div class="cap">Tap to expand</div>
     </div>
   </div>
   <div class="scroll e e2" style="padding:0 22px 20px" id="ilist"></div>
-</div>
-</div>
-
-<!-- ══ 09b SKILLS ══ -->
-<div class="slide" id="s9b">
-<div class="cr">
-  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
-    <div class="lbl">Installed Skills</div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
-      <div class="h2" style="color:var(--ink)">23 Skills.</div>
-      <div class="cap">Tap to expand</div>
-    </div>
-  </div>
-  <div class="scroll e e2" style="padding:0 22px 20px" id="sklist"></div>
 </div>
 </div>
 
@@ -588,278 +550,39 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 <div class="cr">
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Reliability & Security</div>
-    <div class="h2" style="margin-top:4px;color:var(--ink)">Security first.</div>
+    <div class="h2" style="margin-top:4px;color:var(--ink)">Self-healing. Security first.</div>
   </div>
   <div class="sq e e2" style="flex:1">
     <div class="sc">
-      <div class="sn" style="font-size:22px;letter-spacing:-.02em">KILL</div>
+      <div class="sn">01</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Emergency Kill Switch</div>
-      <div class="cap">3-layer safety: SSH kill · Siri Shortcut · HTTP endpoint :18700. Stops all agents instantly. LaunchAgent service.</div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Self-Healing Watchdog</div>
+      <div class="cap">444-line resource monitor. Telegram config integrity, zombie process cleanup, Ollama FD leak + overflow reset. Auto-corrects without human intervention.</div>
     </div>
     <div class="sc">
-      <div class="sn" style="font-size:22px;letter-spacing:-.02em">HLTH</div>
+      <div class="sn">02</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">HealthGuard Auto-Recovery</div>
-      <div class="cap">5-min monitoring: gateway, stuck sessions, FD counts, Ollama. Auto-recover on detection. Telegram alert (15 min cooldown).</div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Gateway Watchdog</div>
+      <div class="cap">Every 5 min. Full recovery: brew update, upgrade, doctor --fix, restart. Handles binary-level failures.</div>
     </div>
     <div class="sc">
-      <div class="sn">65</div>
+      <div class="sn">03</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Governance Policies</div>
-      <div class="cap">13 categories. 41 locked + 24 toggleable. Session approval windows. 3-layer enforcement. Langfuse audit trail. See next slide →</div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">VaultBot</div>
+      <div class="cap">Secrets managed locally via Ollama. @VaultMacMini_Bot. API keys never sent to cloud. chmod 600 on .env.</div>
     </div>
     <div class="sc">
-      <div class="sn">A</div>
+      <div class="sn">04</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">System Score</div>
-      <div class="cap">Security audit v2.5 passed. 12/12 attack vectors covered. 3-layer enforcement + session approval windows — security maintained, friction reduced. VaultBot: secrets never leave the Mac mini. chmod 600 enforced.</div>
+      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Sync Safety</div>
+      <div class="cap">Obsidian wikis dual-synced (iCloud + Syncthing). Atomic writes with lockfile pattern. Conflict detection in weekly lint.</div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- ══ 11 GOVERNANCE ══ -->
+<!-- ══ 11 THE MOAT ══ -->
 <div class="slide" id="s11">
-<div class="dk">
-  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
-    <div class="lbl-s">Governance System · v2.5</div>
-    <div class="h1-i" style="margin-top:5px;font-size:clamp(22px,5vw,38px)">65 policies.<br>3-layer enforcement.</div>
-    <div class="cap-i" style="margin-top:4px">The safety architecture that makes autonomous AI operation trustworthy — tuned for operator efficiency.</div>
-  </div>
-  <div class="cols e e2" style="flex:1;min-height:0">
-    <div style="flex:1.4;display:flex;flex-direction:column;padding:18px 20px;gap:10px">
-      <div class="lbl-i" style="margin-bottom:4px">Enforcement Stack</div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--ri)">
-        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L1</div>
-        <div><div style="font-size:12px;font-weight:700;color:var(--cr)">Settings Deny Rules</div><div class="cap-i" style="margin-top:2px">Hardcoded at OS level. Cannot be overridden by any instruction.</div></div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid var(--ri)">
-        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L2</div>
-        <div><div style="font-size:12px;font-weight:700;color:var(--cr)">CLAUDE.md Policies</div><div class="cap-i" style="margin-top:2px">Behavioural guardrails + operational rules injected at every session start.</div></div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border:1px solid rgba(255,71,19,.3)">
-        <div style="font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.1em;flex-shrink:0;padding-top:1px">L3</div>
-        <div><div style="font-size:12px;font-weight:700;color:var(--sig)">FastMCP Policy Gateway</div><div class="cap-i" style="margin-top:2px">Runtime enforcement. Every tool call validated before execution.</div></div>
-      </div>
-      <div style="margin-top:4px">
-        <div class="cap-i">Langfuse audit trail on every LLM call · Full trace, cost, latency per request</div>
-      </div>
-      <div class="hri" style="margin-top:8px"></div>
-      <div class="lbl-i" style="margin-bottom:6px;margin-top:4px">Why Atlas governance is different</div>
-      <div style="display:grid;gap:5px">
-        <div style="padding:6px 9px;background:rgba(242,237,228,.04);border:1px solid var(--ri)">
-          <div style="font-size:10px;font-weight:700;color:rgba(242,237,228,.4);letter-spacing:.05em">STOCK CLAUDE</div>
-          <div class="cap-i" style="margin-top:2px">Single trust boundary · No audit trail · No policy enforcement</div>
-        </div>
-        <div style="padding:6px 9px;background:rgba(242,237,228,.04);border:1px solid var(--ri)">
-          <div style="font-size:10px;font-weight:700;color:rgba(242,237,228,.4);letter-spacing:.05em">STANDARD OPENCLAW</div>
-          <div class="cap-i" style="margin-top:2px">Basic deny rules · Informal CLAUDE.md · No real-time evaluation</div>
-        </div>
-        <div style="padding:6px 9px;background:rgba(255,71,19,.07);border:1px solid rgba(255,71,19,.35)">
-          <div style="font-size:10px;font-weight:700;color:var(--sig);letter-spacing:.05em">ATLAS v2.5</div>
-          <div class="cap-i" style="margin-top:2px;color:var(--cr)">3 independent enforcement layers · 65 formal policies · Real-time FastMCP gateway · Langfuse audit · Session approval windows · Mission Control UI</div>
-        </div>
-      </div>
-    </div>
-    <div class="vri"></div>
-    <div style="flex:1;display:flex;flex-direction:column;padding:18px 16px;gap:14px">
-      <div class="lbl-i" style="margin-bottom:4px">Policy Stats</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--cr);line-height:1">65</div><div class="cap-i" style="margin-top:3px">total policies</div></div>
-        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--cr);line-height:1">13</div><div class="cap-i" style="margin-top:3px">categories</div></div>
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:var(--sig);line-height:1">41</div><div class="cap-i" style="margin-top:3px">locked (immutable)</div></div>
-        <div style="flex:1;min-width:80px"><div style="font-size:clamp(28px,7vw,46px);font-weight:900;letter-spacing:-.04em;color:rgba(242,237,228,.6);line-height:1">24</div><div class="cap-i" style="margin-top:3px">toggleable</div></div>
-      </div>
-      <div class="hri"></div>
-      <div style="padding:8px 10px;border:1px solid rgba(255,71,19,.3)">
-        <div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:var(--sig)">AUDIT PASSED v2.5</div>
-        <div style="font-size:11px;color:var(--cr);margin-top:3px;font-weight:600">12/12 attack vectors covered</div>
-      </div>
-      <div class="hri"></div>
-      <div class="lbl-i" style="margin-bottom:6px">v2.5 — Session Approval Windows</div>
-      <div class="cap-i" style="line-height:1.6">
-        · Operator confirms plan → 10-min auto-approval window<br>
-        · Covers: file reads/writes, local API calls, Telegram, Asana/Notion/NotePlan reads, web searches<br>
-        · Always blocked: destructive ops, credentials, elevated commands<br>
-        · Every auto-approved action audit-logged to Langfuse<br>
-        · Extend: "keep going" · Revoke: "stop" or "pause"
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ══ 11b DEFENCE IN DEPTH ══ -->
-<style>
-.s11b-col-details {
-  max-height:0;overflow:hidden;
-  transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .3s ease;
-  opacity:0;
-}
-.s11b-col-details.open {
-  max-height:220px;opacity:1;
-}
-.s11b-toggle {
-  display:inline-flex;align-items:center;gap:4px;
-  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(242,237,228,.38);cursor:pointer;border:none;background:none;
-  padding:4px 0 2px;margin-top:6px;
-  transition:color .2s;
-}
-.s11b-toggle:hover{color:rgba(242,237,228,.7);}
-.s11b-toggle .arr{transition:transform .3s ease;display:inline-block;}
-.s11b-toggle.open .arr{transform:rotate(180deg);}
-.s11b-toggle-sig{color:rgba(255,71,19,.55);}
-.s11b-toggle-sig:hover{color:var(--sig);}
-.s11b-saw-details {
-  max-height:0;overflow:hidden;
-  transition:max-height .35s cubic-bezier(.4,0,.2,1),opacity .3s ease;
-  opacity:0;
-}
-.s11b-saw-details.open{max-height:80px;opacity:1;}
-.s11b-saw-toggle {
-  display:inline-flex;align-items:center;gap:4px;
-  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
-  color:rgba(255,71,19,.55);cursor:pointer;border:none;background:none;
-  padding:2px 0 0;margin-top:3px;
-  transition:color .2s;
-}
-.s11b-saw-toggle:hover{color:var(--sig);}
-.s11b-saw-toggle .arr{transition:transform .3s ease;display:inline-block;}
-.s11b-saw-toggle.open .arr{transform:rotate(180deg);}
-</style>
-<div class="slide" id="s11b">
-<div class="dk">
-  <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--ri)">
-    <div class="lbl-s">Governance v2.5 · Defence in Depth</div>
-    <div class="h1-i" style="margin-top:4px;font-size:clamp(18px,4vw,30px)">Three independent layers.<br>Each catches what others miss.</div>
-  </div>
-  <!-- 3-col comparison — headers always visible, details collapsible -->
-  <div class="cols e e2" style="flex-shrink:0;border-bottom:1px solid var(--ri)">
-    <!-- Col 1: Stock Claude -->
-    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0">
-      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:rgba(242,237,228,.28);text-transform:uppercase">Stock Claude</div>
-      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:rgba(242,237,228,.5)">LLM decides safety. No enforcement layer, no audit.</div>
-      <div id="s11b-col1-details" class="s11b-col-details">
-        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Single trust boundary</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">LLM decides safety from system prompt</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No audit trail</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No policy enforcement layer</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No deny rules</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Hallucinated "safe" → nothing catches it</div>
-          <div class="cap-i" style="padding:3px 0">No operator visibility</div>
-        </div>
-      </div>
-      <button class="s11b-toggle" id="s11b-btn1" onclick="s11bToggle('col1','btn1')">View details <span class="arr">▾</span></button>
-    </div>
-    <div class="vri"></div>
-    <!-- Col 2: Standard OpenClaw -->
-    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0">
-      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:rgba(242,237,228,.28);text-transform:uppercase">Standard OpenClaw</div>
-      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:rgba(242,237,228,.5)">Config + basic deny rules. Informal policies only.</div>
-      <div id="s11b-col2-details" class="s11b-col-details">
-        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Config layer + basic deny rules</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">Policies are informal (CLAUDE.md text only)</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No real-time policy evaluation</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No toggleable policies</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(242,237,228,.05)">No audit trail beyond chat logs</div>
-          <div class="cap-i" style="padding:3px 0">Binary: trust fully or block entirely</div>
-        </div>
-      </div>
-      <button class="s11b-toggle" id="s11b-btn2" onclick="s11bToggle('col2','btn2')">View details <span class="arr">▾</span></button>
-    </div>
-    <div class="vri"></div>
-    <!-- Col 3: Atlas v2.5 -->
-    <div style="flex:1;display:flex;flex-direction:column;padding:10px 14px;min-width:0;background:rgba(255,71,19,.06)">
-      <div style="font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--sig);text-transform:uppercase">Atlas v2.5 ←</div>
-      <div class="cap-i" style="margin-top:4px;line-height:1.4;color:var(--cr)">3 enforcement layers · 65 formal policies · Langfuse audit.</div>
-      <div id="s11b-col3-details" class="s11b-col-details">
-        <div style="display:flex;flex-direction:column;gap:3px;padding-top:6px">
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">3 independent enforcement layers</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">65 formal policies across 13 categories</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">41 locked (hard enforcement)</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Real-time FastMCP policy gateway</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Langfuse audit trail — every tool call</div>
-          <div class="cap-i" style="padding:3px 0;border-bottom:1px solid rgba(255,71,19,.12);color:var(--cr)">Mission Control UI for policy management</div>
-          <div class="cap-i" style="padding:3px 0;color:var(--sig);font-weight:600">Session approval windows</div>
-        </div>
-      </div>
-      <button class="s11b-toggle s11b-toggle-sig" id="s11b-btn3" onclick="s11bToggle('col3','btn3')">View details <span class="arr">▾</span></button>
-    </div>
-  </div>
-  <!-- 3-layer horizontal flow — always visible, compact -->
-  <div class="cols e e3" style="flex-shrink:0;border-bottom:1px solid var(--ri)">
-    <div style="flex:1;padding:8px 14px">
-      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 1</div>
-      <div style="font-size:10px;font-weight:700;color:var(--cr);margin-top:2px">DENY RULES</div>
-      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">Hard blocks · 12 vectors · Cannot override</div>
-    </div>
-    <div style="display:flex;align-items:center;padding:0 2px;color:var(--sig);font-size:14px;flex-shrink:0">→</div>
-    <div style="flex:1;padding:8px 14px">
-      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 2</div>
-      <div style="font-size:10px;font-weight:700;color:var(--cr);margin-top:2px">CLAUDE.md</div>
-      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">Behavioural rules · Service mgmt · Data safety</div>
-    </div>
-    <div style="display:flex;align-items:center;padding:0 2px;color:var(--sig);font-size:14px;flex-shrink:0">→</div>
-    <div style="flex:1;padding:8px 14px;background:rgba(255,71,19,.05)">
-      <div style="font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--sig)">LAYER 3</div>
-      <div style="font-size:10px;font-weight:700;color:var(--sig);margin-top:2px">FASTMCP GATEWAY</div>
-      <div class="cap-i" style="margin-top:3px;line-height:1.4;font-size:9px">65 policies · Auth-protected · Langfuse audit</div>
-    </div>
-  </div>
-  <!-- Session approval window — collapsible -->
-  <div class="e e4" style="padding:8px 22px;border-bottom:1px solid var(--ri)">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
-      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:var(--sig)">v2.5 — SESSION APPROVAL WINDOWS</div>
-      <button class="s11b-saw-toggle" id="s11b-saw-btn" onclick="s11bToggleSaw()">Expand <span class="arr">▾</span></button>
-    </div>
-    <div class="cap-i" style="margin-top:3px;color:rgba(242,237,228,.55)">Operator confirms plan → 10-min auto-approval window for executive actions.</div>
-    <div id="s11b-saw-details" class="s11b-saw-details">
-      <div class="cap-i" style="margin-top:5px;line-height:1.55">Reads always flow. Writes auto-approve during window. Destructive actions NEVER auto-approved. All actions audit-logged to Langfuse with start/end timestamps.</div>
-    </div>
-  </div>
-  <!-- Stats bar — always visible -->
-  <div class="e e5" style="padding:8px 22px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">65 policies</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">41 locked</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">13 categories</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">18 pre-approved domains</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.35);letter-spacing:.06em">Permission bridge</div>
-    <div style="font-family:var(--fm);font-size:10px;color:rgba(242,237,228,.18)">·</div>
-    <div style="font-family:var(--fm);font-size:10px;color:var(--sig);letter-spacing:.06em">Langfuse audit</div>
-  </div>
-</div>
-</div>
-<script>
-function s11bToggle(colId, btnId) {
-  var det = document.getElementById('s11b-' + colId + '-details');
-  var btn = document.getElementById('s11b-' + btnId);
-  var isOpen = det.classList.contains('open');
-  det.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  btn.childNodes[0].textContent = isOpen ? 'View details ' : 'Collapse ';
-}
-function s11bToggleSaw() {
-  var det = document.getElementById('s11b-saw-details');
-  var btn = document.getElementById('s11b-saw-btn');
-  var isOpen = det.classList.contains('open');
-  det.classList.toggle('open', !isOpen);
-  btn.classList.toggle('open', !isOpen);
-  btn.childNodes[0].textContent = isOpen ? 'Expand ' : 'Collapse ';
-}
-</script>
-
-<!-- ══ 12 THE MOAT ══ -->
-<div class="slide" id="s12m">
 <div class="dk">
   <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
     <div class="lbl-s">Competitive Advantage</div>
@@ -875,22 +598,22 @@ function s11bToggleSaw() {
     <div class="moat-row">
       <div class="moat-before">Generic AI knowledge</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">Brand-grounded.</strong> Two LightRAG knowledge bases. 9 Rollie brand docs + 350+ personal notes — every output grounded in real documents, not AI inference.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Brand-grounded.</strong> 9 Rollie documents in LightRAG. Every brand output checked against the actual Brand Bible — not AI inference.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">Manual prompting only</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">21 scheduled jobs + 37 automation scripts.</strong> Research brief before you wake. Wellness before gym. SOD brief pulls your live calendar. Zero prompting.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">18 automations running 24/7.</strong> Research brief before you wake. Wellness before gym. SOD brief pulls your live calendar. Zero prompting.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">One generic assistant</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">16 specialist agents.</strong> Security runs its own audit. Research has its own intelligence filter. Each domain has deep, calibrated expertise.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">19 specialist agents.</strong> Security runs its own audit. Research has its own intelligence filter. Each domain has expertise.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">No voice layer</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">Jonny.</strong> A brand asset. Custom-trained ElevenLabs voice that sounds like Rollie — not a generic TTS voice.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Roo.</strong> A brand asset. Custom-trained ElevenLabs voice that sounds like Rollie — not a generic TTS voice.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">Third-party CRM</div>
@@ -900,22 +623,12 @@ function s11bToggleSaw() {
     <div class="moat-row">
       <div class="moat-before">Disconnected tools</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">25 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook + Tailscale — connected and coordinated.</div>
-    </div>
-    <div class="moat-row">
-      <div class="moat-before">No safety layer</div>
-      <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">67-policy governance v2.5.</strong> 3 independent enforcement layers + session approval windows + Langfuse audit. Kill switch. HealthGuard. 12/12 attack vectors covered. Stock Claude: no audit trail. Standard OpenClaw: basic deny rules only. Atlas: real-time FastMCP gateway, formal policies, Mission Control UI.</div>
-    </div>
-    <div class="moat-row">
-      <div class="moat-before">Session-only memory</div>
-      <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">5-layer memory architecture.</strong> MEMORY.md + SOUL.md + AGENTS.md + .learnings/ + LightRAG knowledge graph. Weekly prune + monthly Notion export.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">18 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook — connected and coordinated.</div>
     </div>
     <div class="moat-row" style="border-bottom:none">
       <div class="moat-before">Static capability</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">Self-improving.</strong> Reflection Loop v2: weekly self-analysis (Sun), self-improvement review (Wed). LEARNINGS.md. Every session sharper.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Self-improving.</strong> Weekly reflection cron. LEARNINGS.md. System corrects itself. Every session sharper than the last.</div>
     </div>
   </div>
 </div>
@@ -931,8 +644,7 @@ function s11bToggleSaw() {
   <div class="tl e e2">
     <div class="tlr"><div class="tlt">06:00</div><div class="tlc"><div class="tln">Research Brief</div><div class="tls">DTC news, competitor intel, AI trends — before you wake.</div></div></div>
     <div class="tlr"><div class="tlt">07:30</div><div class="tlc"><div class="tln">Wellness Check-in</div><div class="tls">Training, recovery, nutrition — aligned to your program.</div></div></div>
-    <div class="tlr"><div class="tlt">07:50</div><div class="tlc"><div class="tln">SOD Pre-fetch</div><div class="tls">Python prefetches Outlook, Asana, NotePlan — cached and ready.</div></div></div>
-    <div class="tlr"><div class="tlt">08:00</div><div class="tlc"><div class="tln">Start of Day Brief</div><div class="tls">MCP dispatch: live brief generated from cache. OpenClaw fallback at 8:15 if needed. <em>Mondays: delivers Command Brief — compiled at 6:30am from Weekly Task Review (Sun 7pm) pipeline.</em></div></div></div>
+    <div class="tlr"><div class="tlt">08:15</div><div class="tlc"><div class="tln">Start of Day Brief</div><div class="tls">Live Outlook calendar · Asana tasks due · Clear plan.</div></div></div>
     <div class="tlr hl"><div class="tlt">ALL<br>DAY</div><div class="tlc"><div class="tln">On demand</div><div class="tls">Draft emails · Research · Log CRM · Post to X · Build.</div></div></div>
     <div class="tlr"><div class="tlt">18:15</div><div class="tlc"><div class="tln">End of Day Brief</div><div class="tls">What happened · What carries forward · What's tomorrow.</div></div></div>
   </div>
@@ -955,13 +667,11 @@ function s11bToggleSaw() {
       <span class="chip chip-s">Atlas Claude</span>
       <span class="chip">Operator</span>
       <span class="chip">Ollama</span>
-      <span class="chip chip-s">Jonny</span>
+      <span class="chip chip-s">Roo</span>
       <span class="chip">LightRAG</span>
-      <span class="chip">10 Personas</span>
-      <span class="chip">21 Jobs</span>
-      <span class="chip">25 Integrations</span>
-      <span class="chip">23 Skills</span>
-      <span class="chip chip-s">Governance 67</span>
+      <span class="chip">19 Agents</span>
+      <span class="chip">18 Crons</span>
+      <span class="chip">18 Integrations</span>
     </div>
     <div class="mono" style="margin-top:14px;color:var(--grey)">VINCE LEBON / FOUNDER / ROLLIE NATION</div>
   </div>
@@ -1016,7 +726,7 @@ function ico(k,sz=16,c='currentColor'){
 const AGENTS = [
   {id:'atlas',  k:'globe',   name:'Atlas',              role:'Orchestrator',           desc:'The master agent. Routes every task, holds all context, runs 24/7. The only agent Vince talks to — everything else delegated without friction.'},
   {id:'pa',     k:'person',  name:'Personal Assistant', role:'PA · Daily Ops',         desc:'Generates SOD and EOD briefs. Pulls Outlook calendar live, fetches Asana tasks due today, reads NotePlan. The daily rhythm of the system.'},
-  {id:'ea',     k:'brief',   name:'Executive Assistant',role:'EA · Business Ops',      desc:'Compiles the Monday Command Brief — consolidated weekly intelligence from Weekly Task Review (Sun 7pm) pipeline. Tech radar, full-week calendar, Asana goal pulse, business coaching, and One Big Thing focus. Exception alerts any day urgency is detected. Scheduler and coordinator — not an executor.'},
+  {id:'ea',     k:'brief',   name:'Executive Assistant',role:'EA · Business Ops',      desc:'Weekly strategic briefs every Monday. Exception alerts any day urgency is detected. Scheduler and coordinator — not an executor. Never blocks output.'},
   {id:'wellness',k:'heart',  name:'Wellness Agent',     role:'Health · 7:30am Daily',  desc:'Daily check-in at 7:30am. Training guidance, recovery tracking, nutrition prompts. Aligned to the hypertrophy program. Adjusts for rest vs training days.'},
   {id:'wealth', k:'dollar',  name:'Wealth Agent',       role:'Finance',                desc:'Financial pulse tracking, spending reviews, portfolio monitoring. Keeps the numbers honest.'},
   {id:'focus',  k:'target',  name:'Focus Agent',        role:'Goals · Accountability', desc:'Tracks top 5 strategic goals. Flags drift, prompts course-correction. Adapts the framework if completion rate drops below 70%.'},
@@ -1027,7 +737,7 @@ const AGENTS = [
   {id:'security',k:'lock',   name:'Security Agent',     role:'Audit · Sun 8am',        desc:'Weekly security audit. Checks .env permissions, open ports, API key hygiene, unexpected processes. Keeps the system hardened.'},
   {id:'api',    k:'cpu',     name:'API Optimiser',      role:'Cost · Sun 9am',         desc:'Reviews model routing, API costs, usage efficiency. Identifies cheaper OpenRouter models, checks billing anomalies. Keeps the stack lean.'},
   {id:'network',k:'radio',   name:'Network Monitor',    role:'Uptime · Silent',        desc:'Silent infrastructure agent. Monitors gateway health and connectivity. Only surfaces in reports when something is wrong.'},
-  {id:'crons',  k:'clock',   name:'Crons Manager',      role:'Audit · Sun 10am',       desc:'Weekly audit of all 20 scheduled jobs. Checks schedules, error rates, timing conflicts, payload health. Joint guardian with API Optimiser.'},
+  {id:'crons',  k:'clock',   name:'Crons Manager',      role:'Audit · Sun 10am',       desc:'Weekly audit of all 18 cron jobs. Checks schedules, error rates, timing conflicts. Joint guardian with API Optimiser.'},
   {id:'content',k:'edit',    name:'Content & Marketing',role:'Growth · Brand',         desc:'Content strategy, caption writing, campaign ideation. Uses LightRAG Rollie context so every output is brand-accurate.'},
   {id:'outreach',k:'mail',   name:'Outreach & Comms',   role:'Growth · Relationships', desc:'Manages outreach cadences from Beings CRM. Flags stale contacts, drafts personalised follow-ups via Missive, logs all interactions.'},
   {id:'build',  k:'layers',  name:'Build & Systems',    role:'Domain — not an agent',  desc:'Organisational domain (not an individual agent). Coordinates Code Developer, GitHub Expert, Security, API Optimiser, Network Monitor, Crons Manager. Question: "Is the system fast, safe, reliable, and sane?"'},
@@ -1037,21 +747,18 @@ const AGENTS = [
 
 const CRONS = [
   {t:'7:30am', f:'Daily',   k:'heart',    name:'Wellness Check-in',    desc:'Personalised wellness brief. Training guidance, recovery notes, nutrition prompts. Adjusts for rest vs training days.'},
-  {t:'8:15am', f:'Daily',   k:'person',   name:'Start of Day Brief',   desc:'Pulls today\'s Outlook calendar via Microsoft Graph API, fetches Asana tasks due today, reads NotePlan daily note. Generates a prioritised plan. On Mondays, automatically detects and delivers the Monday Command Brief instead of a standard daily brief.'},
+  {t:'8:15am', f:'Daily',   k:'person',   name:'Start of Day Brief',   desc:'Pulls today\'s Outlook calendar via Microsoft Graph API, fetches Asana tasks due today, reads NotePlan daily note. Generates a prioritised plan.'},
   {t:'6:15pm', f:'Daily',   k:'clock',    name:'End of Day Brief',     desc:'Wraps the day — completed, carries forward, tomorrow. Saves continuity across sessions so nothing is lost overnight.'},
   {t:'9:00am', f:'Daily',   k:'zap',      name:'Release Monitor',      desc:'Checks GitHub for new OpenClaw releases. Alerts on new versions. Checks known-bad blocklist before flagging an upgrade.'},
   {t:'30 min', f:'Always',  k:'radio',    name:'Metrics Collection',   desc:'Continuous telemetry every 30 min. Gateway health, FD counts, token usage, session activity. Powers Mission Control dashboard live.'},
-  {t:'5 min',  f:'Always',  k:'shield',   name:'HealthGuard Monitor',  desc:'Monitors gateway health, stuck sessions, file descriptor counts, and Ollama service status. Auto-recovery on failure detection. Telegram alerts with 15-min cooldown to prevent notification spam.'},
   {t:'Sat 6am',f:'Weekly',  k:'search',   name:'Research & Briefing',  desc:'Weekly intelligence brief. Web search: DTC Australia, founder strategy, AI productivity. Filter: what a top 1% operator cares about.'},
   {t:'Fri 8am',f:'Weekly',  k:'brief',    name:'EOW Brief',            desc:'End of Week strategic brief. Last week / week ahead. Format locked — clean, strategic, honest. Draws from MEMORY.md, session history, Asana.'},
-  {t:'Sun 7pm', f:'Weekly', k:'target',   name:'Weekly Task Review',   desc:'Sunday evening task pipeline — reviews open Asana tasks, surfaces unclosed loops, primes the Monday Command Brief compiler with this week\'s patterns.'},
-  {t:'Mon 6:30am',f:'Weekly',k:'brief',  name:'Monday Command Brief', desc:'Consolidated weekly intelligence briefing. Compiles tech radar insights, full-week calendar view, Asana goal pulse, business coaching from the previous week\'s patterns, and a single One Big Thing focus recommendation. Delivered at 8am Monday SOD — replaces the standard daily brief with one unified Monday deliverable.'},
   {t:'Mon 7am',f:'Weekly',  k:'trending', name:'Data & Analytics',     desc:'Monday intelligence: task velocity, completion rates, team performance, blocked trends. Where is the system accelerating or stalling?'},
   {t:'Mon 9am',f:'Weekly',  k:'chart',    name:'Business Coach',       desc:'Weekly strategy session. OKRs, frameworks, accountability against top 5 goals. Grounded in LightRAG brand context.'},
   {t:'Sun 8am',f:'Weekly',  k:'lock',     name:'Security Audit',       desc:'Weekly sweep. Checks .env permissions (600), credentials dir (700), open ports, API key hygiene. Reports anomalies immediately.'},
   {t:'Sun 9am',f:'Weekly',  k:'cpu',      name:'API Optimiser',        desc:'Reviews model routing and costs. Identifies cheaper OpenRouter models, checks billing, optimises fallback chains. Keeps the stack lean.'},
-  {t:'Sun 10am',f:'Weekly', k:'clock',    name:'Crons Manager',        desc:'Audits all 21 scheduled jobs. Checks run status, timing conflicts, error rates, payload health. Flags anything before the week starts.'},
-  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 25 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
+  {t:'Sun 10am',f:'Weekly', k:'clock',    name:'Crons Manager',        desc:'Audits all 18 cron jobs. Checks run status, timing conflicts, error rates, payload health. Flags anything before the week starts.'},
+  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 18 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
   {t:'Sun 8pm', f:'Weekly', k:'brain',    name:'Memory & Knowledge',   desc:'Sunday knowledge consolidation. Extracts decisions, lessons, patterns, wins from the week. Writes Weekly Capture before Monday resets.'},
   {t:'Sun 9pm', f:'Weekly', k:'refresh',  name:'Weekly Reflection',    desc:'Self-improvement review. Surfaces corrections, updates LEARNINGS.md, identifies recurring patterns. Keeps the system honest.'},
   {t:'Sun 10pm',f:'Weekly', k:'eye',      name:'Memory Prune',         desc:'Cleans stale or redundant memory files. Keeps the knowledge base lean. Archives rather than deletes.'},
@@ -1072,45 +779,12 @@ const INTEGRATIONS = [
   {cat:'Brand & CRM',    k:'signal',   name:'X / Twitter',     tag:'@vincelebon',             desc:'Atlas posts, replies, quotes, searches, reads @vincelebon\'s timeline. Brand content drafted from LightRAG context and posted on command.'},
   {cat:'Automation',     k:'refresh',  name:'N8N',             tag:'Local + Cloud',           desc:'Workflow automation layer. Connects Atlas to systems without a direct API — Shopify, Klaviyo, webhooks. Local (Mac mini) and N8N Cloud both running.'},
   {cat:'Automation',     k:'eye',      name:'Apify',           tag:'Web scraping',            desc:'Structured data at scale — competitor pricing, product listings, social scraping. Atlas triggers actors and processes results.'},
-  {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Jonny + Atlas TTS',         desc:'Two uses: Jonny (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
+  {cat:'Voice',          k:'mic',      name:'ElevenLabs',      tag:'Roo + Atlas TTS',         desc:'Two uses: Roo (Rollie Nation\'s custom-trained voice agent) and Atlas TTS (voice notes to Telegram when the situation calls for it).'},
   {cat:'Infrastructure', k:'eye',      name:'Langfuse',        tag:'LLM observability',       desc:'Traces every LLM call — latency, token usage, model, cost per request. Audits which agents are expensive, where performance can improve.'},
   {cat:'Infrastructure', k:'key',      name:'VaultBot',        tag:'Local secret management', desc:'@VaultMacMini_Bot on Telegram. 100% on local Ollama — secrets never leave the Mac mini. Store, retrieve, rotate API keys safely.'},
-  {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history, session approval indicator. /security page: interactive governance explainer. Accessible via Tailscale on any device.'},
-  {cat:'AI Models',      k:'nodes',    name:'Anthropic / Claude',tag:'Default + escalation', desc:'Two tiers: Haiku 4.5 (default, most tasks) and Sonnet 4.6 (escalation, complex reasoning). Only escalates when the task genuinely warrants it.'},
-  {cat:'AI Models',      k:'layers',   name:'OpenRouter',      tag:'100+ models · crons',     desc:'openrouter/auto for most cron and sub-agent tasks. Automatically routes to best available model. Cost-optimised fallback chains.'},
-  {cat:'Infrastructure', k:'radio',    name:'Tailscale',       tag:'3-device mesh network',   desc:'Encrypted mesh VPN across Mac mini, iPhone, and dev devices. Mission Control accessible anywhere at 100.71.55.1:3000. Funnel enables iOS SSH via port 443.'},
-  {cat:'Infrastructure', k:'refresh',  name:'Syncthing',       tag:'File synchronisation',    desc:'Peer-to-peer file sync without a cloud intermediary. Keeps configs, working files, and knowledge bases in sync across devices.'},
-  {cat:'Infrastructure', k:'user',     name:'Clerk',           tag:'Auth · User management',  desc:'Authentication and user management for Mission Control. Handles sessions, sign-in flows, and identity. Hobby plan · app: discrete-bluegill-49.'},
-  {cat:'Dev & Code',     k:'git',      name:'GitHub',          tag:'Code · CI/CD',            desc:'Source control and CI/CD for all Atlas and Mission Control code. GitHub Expert agent monitors PRs, CI run health, and repository integrity.'},
-  {cat:'Design',         k:'edit',     name:'Figma',           tag:'Design files',            desc:'Design file access for brand assets, UI mockups, and Rollie Nation visual collateral. Atlas can reference and retrieve design context on command.'},
-  {cat:'Productivity',   k:'layers',   name:'Google Drive',    tag:'Shared documents',        desc:'Access to shared documents, brand files, and collaborative assets. Complements Notion for external-facing or shared file storage.'},
-  {cat:'AI Models',      k:'nodes',    name:'Ollama',          tag:'Local LLM · On-device',   desc:'On-device LLM inference on the Mac mini. Powers VaultBot (secrets never leave the machine) and offline/private model tasks. Zero external API calls.'},
-];
-
-const SKILLS = [
-  {cat:'Claude Code',  type:'claude', k:'layers',  name:'braun-te-apple-design-system', tag:'UI/UX Design', desc:'Production-grade design system synthesising Braun/Dieter Rams minimalism, Teenage Engineering aesthetic, and Apple HIG clarity. Reference before building any interface.'},
-  {cat:'Claude Code',  type:'claude', k:'eye',      name:'looker-studio',               tag:'Dashboards',   desc:'Google Looker Studio specialist with full Shopify e-commerce blueprint. Covers creation, maintenance, calculated fields, and data blending.'},
-  {cat:'Claude Code',  type:'claude', k:'terminal', name:'retool-builder',              tag:'Internal Tools',desc:'Build, maintain, and optimise Retool internal tools and admin dashboards. Covers queries, workflows, custom CSS, and performance.'},
-  {cat:'Claude Code',  type:'claude', k:'shield',   name:'apple-liquid-glass-design-system', tag:'UI/UX Design', desc:'Apple-style Liquid Glass UI guidance and glassmorphism design. Generates design systems, component specs, and implementation guidance.'},
-  {cat:'Claude Code',  type:'claude', k:'zap',      name:'skill-creator',               tag:'Meta',         desc:'Create, modify, and benchmark Claude Code skills with eval testing and variance analysis. Optimises skill descriptions for better triggering.'},
-  {cat:'Claude Code',  type:'claude', k:'edit',     name:'theme-factory',               tag:'Styling',      desc:'Style artifacts with 10 pre-set themes or generate custom themes on-the-fly. Works on slides, docs, reports, and HTML pages.'},
-  {cat:'Claude Code',  type:'claude', k:'nodes',    name:'mcp-builder',                 tag:'MCP Servers',  desc:'Guide for creating high-quality MCP servers to connect LLMs with external services. Covers FastMCP (Python) and MCP SDK (Node/TypeScript).'},
-  {cat:'Claude Code',  type:'claude', k:'signal',   name:'canvas-design',               tag:'Visual Art',   desc:'Create visual art and designs in PNG/PDF using design philosophy. Original posters, artwork, and static visual pieces.'},
-  {cat:'Claude Code',  type:'claude', k:'radio',    name:'brand-guidelines',            tag:'Brand',        desc:"Apply Anthropic's official brand colors and typography to any artifact needing Anthropic's look-and-feel."},
-  {cat:'Claude Code',  type:'claude', k:'refresh',  name:'algorithmic-art',             tag:'Generative Art',desc:'Generative art using p5.js with seeded randomness and interactive parameters. Flow fields, particle systems, and original algorithmic pieces.'},
-  {cat:'Claude Code',  type:'claude', k:'layers',   name:'xlsx',                        tag:'Spreadsheets', desc:'Excel spreadsheet creation, editing, and analysis — formulas, formatting, charts, pivot tables, and data cleaning.'},
-  {cat:'Claude Code',  type:'claude', k:'box',      name:'pdf',                         tag:'Documents',    desc:'PDF manipulation: extract text, merge, split, rotate, create, fill forms, OCR scanned documents. Full PDF pipeline.'},
-  {cat:'Claude Code',  type:'claude', k:'layers',   name:'pptx',                        tag:'Presentations',desc:'PowerPoint creation, editing, parsing, and template management. Covers decks, pitch slides, speaker notes, and layouts.'},
-  {cat:'Claude Code',  type:'claude', k:'edit',     name:'docx',                        tag:'Documents',    desc:'Word document creation and editing with TOC, headings, page numbers, and letterheads. Professional document formatting.'},
-  {cat:'Claude Code',  type:'claude', k:'clock',    name:'schedule',                    tag:'Automation',   desc:'Create scheduled tasks that run on demand or automatically on an interval. Integrates with the cron and task management systems.'},
-  {cat:'Claude Code',  type:'claude', k:'search',   name:'last30days',                  tag:'Research',     desc:'Research any topic across Reddit, X, YouTube, TikTok, Hacker News, and Polymarket from the past 30 days. Produces copy-paste-ready prompts.'},
-  {cat:'Claude Code',  type:'claude', k:'brain',    name:'AutoResearch',                tag:'Research · NEW',desc:'Autonomous overnight experiment loops for self-improving AI prompts. Runs iterative research cycles without supervision.'},
-  {cat:'OpenClaw',     type:'openclaw',k:'target',  name:'productivity:start',          tag:'Productivity', desc:'Initialise the productivity system dashboard — surfaces tasks, goals, and context at the start of a work session.'},
-  {cat:'OpenClaw',     type:'openclaw',k:'refresh', name:'productivity:update',         tag:'Productivity', desc:'Sync tasks and refresh memory — pulls latest state from TASKS.md and updates working context.'},
-  {cat:'OpenClaw',     type:'openclaw',k:'terminal',name:'productivity:task-management',tag:'Productivity', desc:'Task tracking via shared TASKS.md. Manages creation, updates, and completion across the OpenClaw workspace.'},
-  {cat:'OpenClaw',     type:'openclaw',k:'box',     name:'productivity:memory-management',tag:'Productivity',desc:'Two-tier memory system for workplace context. Manages short-term session memory and long-term persistent knowledge.'},
-  {cat:'Plugin',       type:'plugin', k:'nodes',   name:'cowork-plugin-management:create-cowork-plugin',   tag:'Plugins', desc:'Create new Cowork plugins from scratch — scaffolding, configuration, and integration with the OpenClaw plugin system.'},
-  {cat:'Plugin',       type:'plugin', k:'edit',    name:'cowork-plugin-management:cowork-plugin-customizer',tag:'Plugins', desc:'Customise existing Cowork plugins for specific workflows — adjust behaviours, prompts, and integration points.'},
+  {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history. Accessible via Tailscale on any device.'},
+  {cat:'AI Models',      k:'nodes',    name:'Anthropic / Claude',tag:'Premium tier',          desc:'Powers Atlas Claude — highest-capability tier. Used for strategy, complex reasoning, builds, coaching. Only used when it genuinely counts.'},
+  {cat:'AI Models',      k:'layers',   name:'OpenRouter',      tag:'100+ models',             desc:'Access to 100+ AI models for sub-agents and fallback chains. Automatically routes to best available model for each task.'},
 ];
 
 /* ═══ BUILD LISTS ═══ */
@@ -1146,38 +820,6 @@ function toggleX(el) {
   if (!o) el.classList.add('open');
 }
 
-/* ═══ SKILL LIST ═══ */
-function buildSkillsList(elId) {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  const BADGE = {
-    claude:   {bg:'#E8500A',  color:'#F2EDE4', label:'Claude Code'},
-    openclaw: {bg:'#3D3A37',  color:'#F2EDE4', label:'OpenClaw'},
-    plugin:   {bg:'#2A2C38',  color:'rgba(242,237,228,0.7)', label:'Plugin'},
-  };
-  let html = '', lastCat = null;
-  SKILLS.forEach(sk => {
-    if (sk.cat !== lastCat) {
-      lastCat = sk.cat;
-      html += `<div class="lbl" style="padding-top:13px;padding-bottom:5px;display:block">${sk.cat}</div>`;
-    }
-    const b = BADGE[sk.type] || BADGE.plugin;
-    const badge = `<span style="display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:.04em;background:${b.bg};color:${b.color};flex-shrink:0">${b.label}</span>`;
-    html += `<div class="xr" onclick="toggleX(this)">
-      <div class="xr-hd">
-        <div class="xr-l">
-          <div class="xr-ico">${ico(sk.k||'box',16,'rgba(26,23,20,0.5)')}</div>
-          <div><div class="xr-name">${sk.name}</div><div class="xr-meta">${sk.tag||''}</div></div>
-        </div>
-        <div class="xr-r">${badge}<span class="xr-arr" style="margin-left:6px">▾</span></div>
-      </div>
-      <div class="xr-bd"><div class="xr-desc">${sk.desc}</div></div>
-    </div>`;
-  });
-  html += `<div style="height:1px;background:var(--rule)"></div>`;
-  el.innerHTML = html;
-}
-
 /* ═══ AGENT PANEL ═══ */
 function pickA(id, node) {
   const a = AGENTS.find(x => x.id === id);
@@ -1211,7 +853,7 @@ function tick() {
 setInterval(tick, 1000); tick();
 
 /* ═══ NAV ═══ */
-const TOTAL = 16;
+const TOTAL = 13;
 let cur = 0, sx = 0, sy = 0;
 const SL = document.querySelectorAll('.slide');
 const DT = document.getElementById('dots');
@@ -1257,7 +899,6 @@ document.addEventListener('mouseup', e=>{if(!md)return;md=false;const dx=e.clien
 buildList('alist', AGENTS, false);
 buildList('clist', CRONS, true);
 buildList('ilist', INTEGRATIONS, false);
-buildSkillsList('sklist');
 update();
 </script>
 </body>
