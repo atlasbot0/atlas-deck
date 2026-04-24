@@ -639,8 +639,54 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 </div>
 </div>
 
-<!-- ══ 12 THE DAY ══ -->
+<!-- ══ 12 THE PORTABILITY MOAT ══ -->
 <div class="slide" id="s12">
+<div class="dk">
+  <div class="p e e1" style="padding-bottom:13px;border-bottom:1px solid var(--ri)">
+    <div class="lbl-s">Portable Agent System</div>
+    <div class="h1-i" style="margin-top:5px;font-size:clamp(22px,5vw,38px)">The Portability Moat.</div>
+    <div class="cap-i" style="margin-top:4px">One Git repo. Every runtime reads from it. The AI tool is replaceable. The system is not.</div>
+  </div>
+  <div class="scroll e e2" style="padding:0 22px 20px">
+    <div class="moat-row" style="padding-top:14px">
+      <div class="moat-before">Locked to one tool</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Zero migration cost.</strong> New AI tool arrives? Point it at the repo. One symlink. Full context, full history, zero re-teaching.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Knowledge trapped in sessions</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Compound knowledge.</strong> Every correction, rule, and skill is in plain markdown with Git history. Intelligence compounds across tools, not within one.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">One runtime only</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Multi-runtime now.</strong> OpenClaw + Claude Code + Cowork — all reading the same skills, rules, and context. Edit once, visible everywhere.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">Manual agent setup</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Self-assembling agents.</strong> <span style="font-family:var(--fm);font-size:10px">loader.sh cmo</span> compiles 19KB of context from parts. Paste into any AI tool. The agent works immediately.</div>
+    </div>
+    <div class="moat-row">
+      <div class="moat-before">No version control</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Git-versioned everything.</strong> Branch to test. Roll back a bad change. See exactly what evolved and when. No other AI setup has this.</div>
+    </div>
+    <div class="moat-row" style="border-bottom:none">
+      <div class="moat-before">Static system</div>
+      <div class="moat-arr">→</div>
+      <div class="moat-after"><strong style="color:var(--sig)">Self-evolving.</strong> The self-healing agent proposes improvements as commits. The governance agent audits. The weekly review feeds learnings back. The repo literally evolves itself.</div>
+    </div>
+    <div style="margin-top:20px;padding-top:14px;border-top:1px solid var(--ri)">
+      <div class="cap-i" style="font-style:italic">Most people using AI are tenants — they rent capability from one tool and lose it when they switch. This repo makes you an owner.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ 13 THE DAY ══ -->
+<div class="slide" id="s13">
 <div class="cr">
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Daily Operating Rhythm</div>
@@ -656,8 +702,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 </div>
 </div>
 
-<!-- ══ 13 CLOSE ══ -->
-<div class="slide" id="s13">
+<!-- ══ 14 CLOSE ══ -->
+<div class="slide" id="s14">
 <div class="cr">
 <div class="clb">
   <div class="clg">ATLAS</div>
@@ -861,7 +907,7 @@ function tick() {
 setInterval(tick, 1000); tick();
 
 /* ═══ NAV ═══ */
-const TOTAL = 13;
+const TOTAL = 14;
 let cur = 0, sx = 0, sy = 0;
 const SL = document.querySelectorAll('.slide');
 const DT = document.getElementById('dots');
