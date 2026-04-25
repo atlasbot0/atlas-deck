@@ -42,7 +42,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 #prog{position:fixed;top:0;left:0;z-index:500;height:1px;width:0;
   background:var(--sig);transition:width 380ms var(--e)}
 #ctr{position:fixed;top:18px;right:20px;z-index:500;
-  font-family:var(--fm);font-size:9px;letter-spacing:.12em;color:rgba(242,237,228,.22)}
+  font-family:var(--fm);font-size:clamp(10px, 1.8vw, 11px);letter-spacing:.12em;color:rgba(242,237,228,.35)}
 
 /* ── DECK / SLIDES ── */
 #deck{position:fixed;inset:0;overflow:hidden}
@@ -69,13 +69,12 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 /* ── DOTS ── */
 #dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
   z-index:500;display:flex;gap:5px;align-items:center}
-.dot{width:4px;height:4px;border-radius:50%;background:rgba(242,237,228,.18);
-  transition:width 280ms var(--e),background 280ms;cursor:pointer;border:none;padding:0}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(242,237,228,.18);transition:width 280ms var(--e),background 280ms;cursor:pointer;border:none;padding:19px 10px;background-clip:content-box}
 .dot.active{width:16px;border-radius:2px;background:var(--sig)}
 
 /* ── NAV ── */
 .nb{position:fixed;top:50%;z-index:500;transform:translateY(-50%);
-  width:32px;height:32px;background:transparent;
+  width: 44px;height:32px;background:transparent;
   border:1px solid rgba(242,237,228,.08);color:rgba(242,237,228,.22);
   font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;
   transition:border-color 140ms,color 140ms}
@@ -85,9 +84,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 /* ═══ PRIMITIVES ═══ */
 .cr {background:var(--cr);flex:1;display:flex;flex-direction:column;overflow:hidden}
 .dk {background:var(--wdark);flex:1;display:flex;flex-direction:column;overflow:hidden}
-.p  {padding:24px 22px 18px}
-.p2 {padding:14px 22px}
-@media(min-width:640px){.p{padding:36px 36px 26px}.p2{padding:16px 36px}}
+.p  {padding:clamp(20px, 4vw, 40px) clamp(20px, 4vw, 40px) clamp(16px, 3vw, 28px)} .p2 {padding:clamp(12px, 2.5vw, 18px) clamp(20px, 4vw, 40px)}
 
 .hr {height:1px;background:var(--rule);flex-shrink:0}
 .hri{height:1px;background:var(--ri);flex-shrink:0}
@@ -97,7 +94,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .col {flex:1;display:flex;flex-direction:column;min-width:0}
 
 /* ═══ TYPE ═══ */
-.lbl {font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.lbl {font-size:clamp(10px, 1.8vw, 11px);font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 .lbl-i{color:var(--di)}
 .lbl-s{color:var(--sig)}
 .disp{font-size:clamp(60px,15vw,116px);font-weight:900;letter-spacing:-.048em;line-height:.88;color:var(--ink)}
@@ -105,11 +102,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .h1  {font-size:clamp(26px,6vw,48px);font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--ink)}
 .h1-i{color:var(--cr)}
 .h2  {font-size:clamp(18px,4vw,30px);font-weight:800;letter-spacing:-.025em;line-height:1.05}
-.body{font-size:13px;font-weight:400;line-height:1.65;color:var(--dim);letter-spacing:.005em}
+.body{font-size:clamp(14px, 2.8vw, 16px);font-weight:400;line-height:1.65;color:var(--dim);letter-spacing:.005em}
 .body-i{color:var(--di)}
-.cap {font-size:11px;font-weight:400;line-height:1.55;color:var(--grey);letter-spacing:.02em}
-.cap-i{color:rgba(242,237,228,.4)}
-.mono{font-family:var(--fm);font-size:10px;letter-spacing:.06em;color:var(--grey)}
+.cap {font-size:clamp(12px, 2.2vw, 14px);font-weight:400;line-height:1.55;color:var(--grey);letter-spacing:.02em}
+.cap-i{color:rgba(242,237,228,.45)}
+.mono{font-family:var(--fm);font-size:clamp(11px, 2vw, 13px);letter-spacing:.06em;color:var(--grey)}
 .mono-s{color:var(--sig)}
 
 /* ═══ COMPONENTS ═══ */
@@ -118,8 +115,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .sr{display:flex;align-items:baseline;justify-content:space-between;
   padding:9px 0;border-bottom:1px solid var(--rule);gap:12px}
 .sr:first-child{border-top:1px solid var(--rule)}
-.sk{font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.01em}
-.sv{font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.08em;text-align:right}
+.sk{font-size:clamp(12px, 2.2vw, 14px);font-weight:600;color:var(--ink);letter-spacing:.01em}
+.sv{font-family:var(--fm);font-size:clamp(11px, 2vw, 12px);color:var(--grey);letter-spacing:.08em;text-align:right}
 
 .sr-i{border-bottom-color:var(--ri)}
 .sr-i:first-child{border-top-color:var(--ri)}
@@ -127,13 +124,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 
 /* Chip */
 .chip{display:inline-block;padding:3px 8px;border:1px solid var(--rule);
-  font-size:10px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  font-size:clamp(11px, 2vw, 12px);font-weight:500;letter-spacing:.06em;text-transform:uppercase;
   color:var(--grey);font-family:var(--fm)}
 .chip-s{border-color:var(--sig);color:var(--sig)}
 .chip-i{border-color:rgba(242,237,228,.2);color:rgba(242,237,228,.45)}
 
 /* Time badge */
-.tbadge{font-family:var(--fm);font-size:9px;letter-spacing:.08em;color:var(--sig);
+.tbadge{font-family:var(--fm);font-size:clamp(10px, 1.8vw, 11px);letter-spacing:.08em;color:var(--sig);
   padding:2px 7px;border:1px solid rgba(255,71,19,.3)}
 
 /* Expandable row */
@@ -150,7 +147,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .xr.open .xr-arr{transform:rotate(180deg)}
 .xr-bd{max-height:0;overflow:hidden;transition:max-height 320ms var(--e),padding 240ms;padding-bottom:0}
 .xr.open .xr-bd{max-height:120px;padding-bottom:14px}
-.xr-desc{font-size:12px;line-height:1.65;color:var(--dim);padding-left:32px}
+.xr-desc{font-size:clamp(13px, 2.5vw, 14px);line-height:1.65;color:var(--dim);padding-left:32px}
 
 /* Dark xr */
 .xr-dk{border-bottom-color:var(--ri)}
@@ -165,7 +162,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .scroll::-webkit-scrollbar-thumb{background:var(--rule)}
 
 /* Node (agent selector) */
-.node{font-size:11px;font-weight:700;padding:5px 11px;border:1px solid var(--rule);
+.node{font-size:clamp(12px, 2.2vw, 14px);font-weight:700;padding:5px 11px;border:1px solid var(--rule);
   color:var(--ink);letter-spacing:.01em;cursor:pointer;
   transition:background 120ms,border-color 120ms;
   display:inline-flex;align-items:center;gap:6px}
@@ -187,7 +184,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 /* S3 infra */
 .ir{display:flex;align-items:stretch;flex:1;border-bottom:1px solid var(--ri)}
 .in{width:40px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;
-  padding-top:14px;font-family:var(--fm);font-size:9px;color:rgba(242,237,228,.2);
+  padding-top:14px;font-family:var(--fm);font-size:clamp(10px, 1.8vw, 11px);color:rgba(242,237,228,.2);
   letter-spacing:.1em;border-right:1px solid var(--ri)}
 .ic{flex:1;padding:13px 16px}
 .ib{flex-shrink:0;padding:14px 12px;display:flex;align-items:flex-start}
@@ -198,9 +195,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .mc.m1{background:#1C1927}
 .mc.m2{background:#17201A}
 .mc.m3{background:#201D17}
-.mt{font-family:var(--fm);font-size:8px;letter-spacing:.14em;color:rgba(242,237,228,.3);margin-bottom:12px}
+.mt{font-family:var(--fm);font-size:clamp(10px, 1.8vw, 11px);letter-spacing:.14em;color:rgba(242,237,228,.3);margin-bottom:12px}
 .mn{font-size:clamp(18px,4vw,28px);font-weight:900;letter-spacing:-.03em;line-height:1;color:var(--cr)}
-.ms{font-family:var(--fm);font-size:9px;color:var(--sig);letter-spacing:.06em;margin-top:8px}
+.ms{font-family:var(--fm);font-size:clamp(10px, 1.8vw, 12px);color:var(--sig);letter-spacing:.06em;margin-top:8px}
 .md{font-size:11px;line-height:1.6;color:rgba(242,237,228,.42);margin-top:10px}
 
 /* S7 agents */
@@ -222,8 +219,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 
 /* S11 MOAT */
 .moat-row{display:flex;padding:10px 0;border-bottom:1px solid var(--ri);align-items:baseline;gap:16px}
-.moat-before{flex:1;font-size:11px;color:rgba(242,237,228,.28);letter-spacing:.01em}
-.moat-after {flex:1;font-size:11px;color:var(--cr);letter-spacing:.01em}
+.moat-before{flex:1;font-size:clamp(13px, 2.5vw, 15px);color:rgba(242,237,228,.45);letter-spacing:.01em}
+.moat-after {flex:1;font-size:clamp(13px, 2.5vw, 15px);color:var(--cr);letter-spacing:.01em}
 .moat-arr{color:var(--sig);font-size:10px;flex-shrink:0}
 
 /* S12 day — timeline */
@@ -249,7 +246,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
 .clm{font-size:clamp(34px,9vw,60px);font-weight:900;letter-spacing:-.04em;line-height:.95;color:var(--ink)}
 
 @media(max-width:480px){
-  .mc{padding:14px 12px}
+  .mc{padding:14px 12px
+  .moat-row{flex-direction:column;gap:6px}
+  .moat-arr{transform:rotate(90deg);align-self:center}
+  .moat-before, .moat-after{flex:none}
+  }
   .mn{font-size:20px}
   .sq{grid-template-columns:1fr 1fr}
   .s1b{padding:24px 20px 20px}
@@ -267,6 +268,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   .s2c{padding:28px 28px}
   .mc{padding:28px 24px}
   .sc{padding:22px 20px}
+}
+
+@media (max-width: 480px) {
+  .moat-row { flex-direction: column; gap: clamp(8px, 2vw, 16px); }
 }
 </style>
 </head>
@@ -293,9 +298,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="e e4">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;">
       <div><div class="lbl" style="margin-bottom:3px">Product</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.02em">Atlas OS — Rev. 2026.04</div></div>
+        <div style="font-size: clamp(12px, 2.2vw, 14px);font-weight:600;color:var(--ink);letter-spacing:.02em">Atlas OS — Rev. 2026.04</div></div>
       <div style="text-align:right"><div class="lbl" style="margin-bottom:3px">Origin</div>
-        <div style="font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.02em">Melbourne, AU</div></div>
+        <div style="font-size: clamp(12px, 2.2vw, 14px);font-weight:600;color:var(--ink);letter-spacing:.02em">Melbourne, AU</div></div>
     </div>
     <div class="hr" style="margin-top:12px"></div>
     <div style="display:flex;justify-content:space-between;margin-top:10px">
@@ -348,34 +353,34 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="ir e e2">
       <div class="in">01</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">OpenClaw Gateway</div>
+        <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--cr);letter-spacing:-.01em">OpenClaw Gateway</div>
         <div class="cap-i" style="margin-top:3px">Port 18789 · Token auth · Telegram bridge · Heartbeat 60s</div>
       </div>
-      <div class="ib"><span class="chip chip-s" style="font-size:8px;padding:2px 6px">LIVE</span></div>
+      <div class="ib"><span class="chip chip-s" style="font-size: clamp(9px, 1.8vw, 11px);padding:2px 6px">LIVE</span></div>
     </div>
     <div class="ir e e3">
       <div class="in">02</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">LaunchAgent plist</div>
+        <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--cr);letter-spacing:-.01em">LaunchAgent plist</div>
         <div class="cap-i" style="margin-top:3px">Auto-start on boot · FD limits 32,768 soft / 65,536 hard · pmset sleep 0</div>
       </div>
-      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">BOOT</span></div>
+      <div class="ib"><span class="chip chip-i" style="font-size: clamp(9px, 1.8vw, 11px);padding:2px 6px">BOOT</span></div>
     </div>
     <div class="ir e e4">
       <div class="in">03</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Gateway Watchdog</div>
+        <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--cr);letter-spacing:-.01em">Gateway Watchdog</div>
         <div class="cap-i" style="margin-top:3px">Every 5 min · brew upgrade → doctor --fix → restart · Self-healing</div>
       </div>
-      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">5 MIN</span></div>
+      <div class="ib"><span class="chip chip-i" style="font-size: clamp(9px, 1.8vw, 11px);padding:2px 6px">5 MIN</span></div>
     </div>
     <div class="ir e e5">
       <div class="in">04</div>
       <div class="ic">
-        <div style="font-size:13px;font-weight:700;color:var(--cr);letter-spacing:-.01em">Telegram Bridge</div>
+        <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--cr);letter-spacing:-.01em">Telegram Bridge</div>
         <div class="cap-i" style="margin-top:3px">@AtlasOperator_Bot · Primary I/O · Global reach</div>
       </div>
-      <div class="ib"><span class="chip chip-i" style="font-size:8px;padding:2px 6px">LINK</span></div>
+      <div class="ib"><span class="chip chip-i" style="font-size: clamp(9px, 1.8vw, 11px);padding:2px 6px">LINK</span></div>
     </div>
     <div style="flex:1"></div>
   </div>
@@ -430,7 +435,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="col" style="padding:18px 18px">
       <div class="lbl-s" style="margin-bottom:10px">ROLLIE WIKI</div>
       <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">30</div>
-      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + 9 RAG Sources</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + 9 RAG Sources</div>
       <div class="hr" style="margin:14px 0"></div>
       <div class="cap" style="margin-bottom:12px">Karpathy-pattern self-compiling wiki. Entity pages, concepts, summaries. Ingest via Telegram, Web Clipper, or Cowork. Weekly lint cron.</div>
       <div style="display:flex;flex-direction:column;gap:5px">
@@ -442,7 +447,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="col" style="padding:18px 18px">
       <div class="lbl" style="margin-bottom:10px">PERSONAL WIKI</div>
       <div style="font-size:clamp(54px,14vw,100px);font-weight:900;letter-spacing:-.055em;line-height:.84;color:var(--ink)">6</div>
-      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + Growing</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--ink);margin-top:6px">Wiki Pages + Growing</div>
       <div class="hr" style="margin:14px 0"></div>
       <div class="cap" style="margin-bottom:12px">EO coaching, frameworks, personal philosophy. Strict privacy separation. Every output grounded in source truth — not AI guesswork.</div>
       <div style="display:flex;flex-direction:column;gap:5px">
@@ -468,10 +473,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div>
       <div class="hri" style="margin-bottom:18px"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div><div class="lbl-i" style="margin-bottom:4px">Platform</div><div style="font-size:14px;font-weight:700;color:var(--cr)">ElevenLabs</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Voice model</div><div style="font-size:14px;font-weight:700;color:var(--sig)">Custom trained</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Jonny / Roo</div></div>
-        <div><div class="lbl-i" style="margin-bottom:4px">Brand</div><div style="font-size:14px;font-weight:700;color:var(--cr)">Rollie Nation</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Platform</div><div style="font-size: clamp(15px, 3vw, 17px);font-weight:700;color:var(--cr)">ElevenLabs</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Voice model</div><div style="font-size: clamp(15px, 3vw, 17px);font-weight:700;color:var(--sig)">Custom trained</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Identity</div><div style="font-size: clamp(15px, 3vw, 17px);font-weight:700;color:var(--cr)">Jonny / Roo</div></div>
+        <div><div class="lbl-i" style="margin-bottom:4px">Brand</div><div style="font-size: clamp(15px, 3vw, 17px);font-weight:700;color:var(--cr)">Rollie Nation</div></div>
       </div>
     </div>
   </div>
@@ -556,25 +561,25 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="sc">
       <div class="sn">01</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Self-Healing Watchdog</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:800;color:var(--ink);margin-bottom:5px">Self-Healing Watchdog</div>
       <div class="cap">444-line resource monitor. Telegram config integrity, zombie process cleanup, Ollama FD leak + overflow reset. Auto-corrects without human intervention.</div>
     </div>
     <div class="sc">
       <div class="sn">02</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Gateway Watchdog</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:800;color:var(--ink);margin-bottom:5px">Gateway Watchdog</div>
       <div class="cap">Every 5 min. Full recovery: brew update, upgrade, doctor --fix, restart. Handles binary-level failures.</div>
     </div>
     <div class="sc">
       <div class="sn">03</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">VaultBot</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:800;color:var(--ink);margin-bottom:5px">VaultBot</div>
       <div class="cap">Secrets managed locally via Ollama. @VaultMacMini_Bot. API keys never sent to cloud. chmod 600 on .env.</div>
     </div>
     <div class="sc">
       <div class="sn">04</div>
       <div style="flex:1"></div>
-      <div style="font-size:13px;font-weight:800;color:var(--ink);margin-bottom:5px">Sync Safety</div>
+      <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:800;color:var(--ink);margin-bottom:5px">Sync Safety</div>
       <div class="cap">Obsidian wikis dual-synced (iCloud + Syncthing). Atomic writes with lockfile pattern. Conflict detection in weekly lint.</div>
     </div>
   </div>
@@ -735,15 +740,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div style="margin-top:8px;padding-top:12px;border-top:1px solid var(--ri);display:flex;gap:20px">
       <div style="flex:1">
         <div style="font-family:var(--fm);font-size:8px;letter-spacing:.1em;color:var(--sig);margin-bottom:3px">RESEARCHED</div>
-        <div style="font-size:10px;color:rgba(242,237,228,.4);line-height:1.4">Decision frameworks, principles, influences per advisor</div>
+        <div style="font-size: clamp(11px, 2vw, 13px);color:rgba(242,237,228,.4);line-height:1.4">Decision frameworks, principles, influences per advisor</div>
       </div>
       <div style="flex:1">
         <div style="font-family:var(--fm);font-size:8px;letter-spacing:.1em;color:var(--sig);margin-bottom:3px">AUTO-UPDATING</div>
-        <div style="font-size:10px;color:rgba(242,237,228,.4);line-height:1.4">Fortnightly intelligence scan for new material</div>
+        <div style="font-size: clamp(11px, 2vw, 13px);color:rgba(242,237,228,.4);line-height:1.4">Fortnightly intelligence scan for new material</div>
       </div>
       <div style="flex:1">
         <div style="font-family:var(--fm);font-size:8px;letter-spacing:.1em;color:var(--sig);margin-bottom:3px">SELF-EVOLVING</div>
-        <div style="font-size:10px;color:rgba(242,237,228,.4);line-height:1.4">New candidates proposed quarterly</div>
+        <div style="font-size: clamp(11px, 2vw, 13px);color:rgba(242,237,228,.4);line-height:1.4">New candidates proposed quarterly</div>
       </div>
     </div>
   </div>
@@ -996,8 +1001,8 @@ function pickA(id, node) {
     `<div style="display:flex;align-items:flex-start;gap:10px">
       <div style="flex-shrink:0;margin-top:2px">${ico(a.k,18,'rgba(26,23,20,0.6)')}</div>
       <div>
-        <div style="font-size:13px;font-weight:700;color:var(--ink)">${a.name} <span style="font-weight:400;color:var(--grey);font-size:10px;margin-left:4px">${a.role}</span></div>
-        <div style="font-size:12px;line-height:1.6;color:var(--dim);margin-top:4px">${a.desc}</div>
+        <div style="font-size: clamp(14px, 2.8vw, 16px);font-weight:700;color:var(--ink)">${a.name} <span style="font-weight:400;color:var(--grey);font-size:10px;margin-left:4px">${a.role}</span></div>
+        <div style="font-size: clamp(13px, 2.5vw, 15px);line-height:1.6;color:var(--dim);margin-top:4px">${a.desc}</div>
       </div>
     </div>`;
 }
