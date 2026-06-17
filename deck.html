@@ -408,9 +408,9 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="mc m2">
       <div class="mt">TIER 02 / SMART</div>
       <div class="mn">Atlas<br>Operator</div>
-      <div class="ms">openrouter / auto</div>
+      <div class="ms">anthropic / claude</div>
       <div style="flex:1"></div>
-      <div class="md">Briefs. Research. Sub-agents. 100+ models. Optimises cost automatically.</div>
+      <div class="md">Scheduled intelligence — runs through Anthropic Claude (Sonnet for routine, Opus for synthesis). Powers SOD/EOD brief, Monday Command Brief, weekly intel scan, monthly architecture review, weekly docs sync.</div>
     </div>
     <div class="vri"></div>
     <div class="mc m3">
@@ -542,7 +542,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   <div class="p e e1" style="padding-bottom:11px;border-bottom:1px solid var(--rule)">
     <div class="lbl">Integration Map</div>
     <div style="display:flex;align-items:baseline;justify-content:space-between;margin-top:4px">
-      <div class="h2" style="color:var(--ink)">20 live integrations.</div>
+      <div class="h2" style="color:var(--ink)">17 live integrations.</div>
       <div class="cap">Tap to expand</div>
     </div>
   </div>
@@ -628,7 +628,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
     <div class="moat-row">
       <div class="moat-before">Disconnected tools</div>
       <div class="moat-arr">→</div>
-      <div class="moat-after"><strong style="color:var(--sig)">20 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook — connected and coordinated.</div>
+      <div class="moat-after"><strong style="color:var(--sig)">17 integrations as one system.</strong> Notion + Asana + Missive + Beings + LightRAG + Outlook — connected and coordinated.</div>
     </div>
     <div class="moat-row">
       <div class="moat-before">Static capability</div>
@@ -919,7 +919,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
       <span class="chip">LightRAG</span>
       <span class="chip">36 Agents</span>
       <span class="chip">23 Crons</span>
-      <span class="chip">20 Integrations</span>
+      <span class="chip">17 Integrations</span>
       <span class="chip chip-s">52 Skills</span>
       <span class="chip">32 Rules</span>
       <span class="chip">36 Playbooks</span>
@@ -987,7 +987,7 @@ const AGENTS = [
   {id:'code',   k:'terminal',name:'Code Developer',     role:'Engineering',            desc:'Technical builds, system changes, CI/CD. Delegates to Claude Code for complex tasks. Owns Mission Control codebase.'},
   {id:'github', k:'git',     name:'GitHub Expert',      role:'Repo Health · CI/CD',    desc:'PR reviews, CI run monitoring, repository health. Reports to Code Developer. Ensures code quality and deployment integrity.'},
   {id:'security',k:'lock',   name:'Security Agent',     role:'Audit · Sun 8am',        desc:'Weekly security audit. Checks .env permissions, open ports, API key hygiene, unexpected processes. Keeps the system hardened.'},
-  {id:'api',    k:'cpu',     name:'API Optimiser',      role:'Cost · Sun 9am',         desc:'Reviews model routing, API costs, usage efficiency. Identifies cheaper OpenRouter models, checks billing anomalies. Keeps the stack lean.'},
+  {id:'api',    k:'cpu',     name:'API Optimiser',      role:'Cost · Sun 9am',         desc:'Reviews model routing, API costs, usage efficiency. Right-sizes Anthropic tier (Haiku → Sonnet → Opus), checks billing anomalies. Keeps the stack lean.'},
   {id:'network',k:'radio',   name:'Network Monitor',    role:'Uptime · Silent',        desc:'Silent infrastructure agent. Monitors gateway health and connectivity. Only surfaces in reports when something is wrong.'},
   {id:'crons',  k:'clock',   name:'Crons Manager',      role:'Audit · Sun 10am',       desc:'Weekly audit of all 23 cron jobs. Checks schedules, error rates, timing conflicts. Joint guardian with API Optimiser.'},
   {id:'content',k:'edit',    name:'Content & Marketing',role:'Growth · Brand',         desc:'Content strategy, caption writing, campaign ideation. Uses LightRAG Rollie context so every output is brand-accurate.'},
@@ -1008,9 +1008,9 @@ const CRONS = [
   {t:'Mon 7am',f:'Weekly',  k:'trending', name:'Data & Analytics',     desc:'Monday intelligence: task velocity, completion rates, team performance, blocked trends. Where is the system accelerating or stalling?'},
   {t:'Mon 9am',f:'Weekly',  k:'chart',    name:'Business Coach',       desc:'Weekly strategy session. OKRs, frameworks, accountability against top 5 goals. Grounded in LightRAG brand context.'},
   {t:'Sun 8am',f:'Weekly',  k:'lock',     name:'Security Audit',       desc:'Weekly sweep. Checks .env permissions (600), credentials dir (700), open ports, API key hygiene. Reports anomalies immediately.'},
-  {t:'Sun 9am',f:'Weekly',  k:'cpu',      name:'API Optimiser',        desc:'Reviews model routing and costs. Identifies cheaper OpenRouter models, checks billing, optimises fallback chains. Keeps the stack lean.'},
+  {t:'Sun 9am',f:'Weekly',  k:'cpu',      name:'API Optimiser',        desc:'Reviews model routing and costs. Right-sizes Anthropic tier (Haiku → Sonnet → Opus), checks billing, optimises fallback chains. Keeps the stack lean.'},
   {t:'Sun 10am',f:'Weekly', k:'clock',    name:'Crons Manager',        desc:'Audits all 23 cron jobs. Checks run status, timing conflicts, error rates, payload health. Flags anything before the week starts.'},
-  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings all 20 live integrations. Reports degraded or down services immediately. Full Sunday health picture.'},
+  {t:'Sun 10am',f:'Weekly', k:'link',     name:'Integration Health',   desc:'Pings 10 actively health-checked integrations. Reports degraded or down services immediately. Last check: 10 checked, 3 failing (2026-06-14).'},
   {t:'Sun 8pm', f:'Weekly', k:'brain',    name:'Memory & Knowledge',   desc:'Sunday knowledge consolidation. Extracts decisions, lessons, patterns, wins from the week. Writes Weekly Capture before Monday resets.'},
   {t:'Sun 9pm', f:'Weekly', k:'refresh',  name:'Weekly Reflection',    desc:'Self-improvement review. Surfaces corrections, updates LEARNINGS.md, identifies recurring patterns. Keeps the system honest.'},
   {t:'Sun 10pm',f:'Weekly', k:'eye',      name:'Memory Prune',         desc:'Cleans stale or redundant memory files. Keeps the knowledge base lean. Archives rather than deletes.'},
@@ -1036,7 +1036,6 @@ const INTEGRATIONS = [
   {cat:'Infrastructure', k:'key',      name:'VaultBot',        tag:'Local secret management', desc:'@VaultMacMini_Bot on Telegram. 100% on local Ollama — secrets never leave the Mac mini. Store, retrieve, rotate API keys safely.'},
   {cat:'Infrastructure', k:'shield',   name:'Mission Control', tag:'Command dashboard',       desc:'The Atlas command centre. Live gateway status, cron health, spend tracking, agent org chart, brief history. Accessible via Tailscale on any device.'},
   {cat:'AI Models',      k:'nodes',    name:'Anthropic / Claude',tag:'Premium tier',          desc:'Powers Atlas Claude — highest-capability tier. Used for strategy, complex reasoning, builds, coaching. Only used when it genuinely counts.'},
-  {cat:'AI Models',      k:'layers',   name:'OpenRouter',      tag:'100+ models',             desc:'Access to 100+ AI models for sub-agents and fallback chains. Automatically routes to best available model for each task.'},
 ];
 
 /* ═══ BUILD LISTS ═══ */
