@@ -181,6 +181,97 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   .lane{padding:28px 24px}
   .m3c{padding:26px 24px}
 }
+
+/* ═══════════════════════════════════════════════════════
+   MOBILE — comprehensive fix (2026-08-01)
+   iPhone 17 Pro Max = ~430pt portrait. Stack everything.
+   ═══════════════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* Every slide's content must be able to scroll internally */
+  .slide{overflow-y:auto;-webkit-overflow-scrolling:touch;flex-direction:column}
+  .cr, .dk{overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+  /* Stack every side-by-side layout vertically */
+  .cols{flex-direction:column}
+  .vr{width:100%;height:1px;background:var(--rule);align-self:stretch}
+  .vri{width:100%;height:1px;background:var(--ri)}
+  .col{flex:none;width:100%}
+
+  /* Tighter padding on mobile */
+  .p{padding:16px 16px 12px}
+  .p2{padding:10px 16px}
+  .s2c{padding:16px}
+  .lane{padding:16px 16px;flex:none}
+  .m3c{padding:16px 16px;flex:none}
+  .m3c+.m3c{border-left:none;border-top:1px solid var(--rule)}
+  .lane+.lane{border-left:none;border-top:1px solid var(--ri)}
+
+  /* Column dividers → row dividers on mobile */
+  .mc+.mc{border-left:none;border-top:1px solid var(--ri)}
+
+  /* Slide 3 REBUILDS — the reported bug. Stack year below content, allow rb-s to wrap fully */
+  .rb{flex-direction:column;padding:0;border-bottom:1px solid var(--ri)}
+  .rb-n{width:100%;padding:12px 16px 4px;border-right:none;font-size:24px}
+  .rb-c{padding:0 16px 8px;min-width:0}
+  .rb-t{font-size:14px;line-height:1.3}
+  .rb-s{font-size:12px;line-height:1.55;margin-top:6px}
+  .rb-y{width:100%;padding:0 16px 12px;justify-content:flex-start;border-left:none;font-size:10px;color:rgba(242,237,228,.4)}
+
+  /* Slide 4 ARCHITECTURE — collapse rails to single row above/below layers */
+  .arch{flex-direction:column}
+  .rail{width:100%;flex-direction:row;height:auto}
+  .rail-l{border-right:none;border-bottom:1px solid var(--rule)}
+  .rail-r{border-left:none;border-top:1px solid var(--rule)}
+  .rail-lbl{writing-mode:horizontal-tb;transform:none;padding:6px 10px;border-bottom:none;border-right:1px solid var(--rule);font-size:9px}
+  .rail-l .rail-lbl:last-child, .rail-r .rail-lbl:last-child{border-right:none}
+  .layers{width:100%}
+  .ly{padding:8px 14px}
+  .ly-c{font-size:9px;text-align:right;max-width:50%}
+
+  /* Slide 6 SECOND BRAIN — folder tree needs smaller mono font */
+  .tree{font-size:10px;line-height:1.7;overflow-x:auto}
+
+  /* Slide 7 ADVISORY — 2-column hats grid (already covered above but re-affirm) */
+  .hats{grid-template-columns:repeat(2,1fr)}
+  .hat{padding:10px 12px}
+  .hat-n{font-size:14px}
+  .hat-p{font-size:9px;line-height:1.4}
+
+  /* Timeline (daily rhythm) — narrower time column */
+  .tlt{width:56px;padding:8px 6px 8px 12px;font-size:9px}
+  .tlc{padding:8px 12px}
+  .tln{font-size:12px}
+  .tls{font-size:10px}
+
+  /* Big numbers scale down on mobile */
+  .wm{font-size:80px}
+  .big{font-size:80px}
+  .disp{font-size:64px}
+
+  /* Pair rows (moat + reliability slides) — stack on very narrow */
+  .pair{flex-direction:column;gap:4px;padding:8px 0}
+  .pair-a{transform:rotate(90deg);align-self:flex-start}
+  .pair-l, .pair-r{flex:none}
+
+  /* Sr (spec rows) - font sizing */
+  .sr, .sr-i{padding:7px 0;gap:8px}
+
+  /* Chips — smaller on mobile so they wrap tighter */
+  .chip{padding:2px 6px;font-size:10px}
+
+  /* Reduce H1/H2 aggressive scaling to keep readable */
+  .h1{font-size:24px}
+  .h1-i{font-size:24px}
+  .h2{font-size:18px}
+}
+
+/* Very small — iPhone SE / older */
+@media(max-width:420px){
+  .hats{grid-template-columns:1fr}
+  .hats .hat{border-right:none}
+  .ly-c{font-size:8px;max-width:45%}
+  .rail-lbl{font-size:8px;padding:4px 6px}
+}
 </style>
 </head>
 <body>
@@ -822,7 +913,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   </div>
   <div class="e e3">
     <div class="hr" style="margin-bottom:12px"></div>
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-bottom:14px">
       <span class="chip">Obsidian second brain</span>
       <span class="chip">Advisory · 6 hats</span>
       <span class="chip">Taste + destination gates</span>
@@ -830,6 +921,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
       <span class="chip">Atlas + Axis</span>
       <span class="chip chip-s">One founder</span>
     </div>
+    <a href="overview.html" style="display:inline-block;padding:8px 14px;background:var(--ink);color:var(--cr);text-decoration:none;font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700">One-page overview →</a>
     <div class="mono" style="margin-top:16px">VINCE LEBON · FOUNDER · ROLLIE NATION</div>
   </div>
 </div>
