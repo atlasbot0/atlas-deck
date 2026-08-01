@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Atlas · Architecture Flow</title>
+<style>
+:root {
+  --cr:  #F2EDE4;
+  --ink: #1A1714;
+  --wdark: #1E1C17;
+  --sig: #FF4713;
+  --grey:#8C8782;
+  --rule:#D4CEC7;
+  --ri: rgba(242,237,228,0.10);
+  --dim: rgba(26,23,20,0.44);
+  --f: "Helvetica Neue","Arial",system-ui,sans-serif;
+  --fm: "SF Mono","Fira Mono","Courier New",monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100vh;overflow:hidden;background:var(--cr);
+  font-family:var(--f);-webkit-font-smoothing:antialiased;color:var(--ink);user-select:none}
+
+#back{position:fixed;top:14px;left:20px;z-index:200;font-family:var(--fm);font-size:10px;
+  letter-spacing:.08em;color:var(--dim);text-decoration:none;text-transform:uppercase;
+  padding:3px 0;border-bottom:1px solid transparent;transition:color 120ms}
+#back:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+#head{position:fixed;top:0;left:0;right:0;z-index:150;padding:14px 20px 12px;
+  background:var(--cr);border-bottom:1px solid var(--rule);display:flex;
+  align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-left:120px}
+#head .lbl{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+#head h1{font-size:clamp(15px, 2.5vw, 20px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+#head h1 span{color:var(--sig)}
+#head .meta{font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.06em}
+
+#play-btn{background:var(--ink);color:var(--cr);border:none;padding:5px 12px;
+  font-family:var(--fm);font-size:10px;letter-spacing:.12em;cursor:pointer;text-transform:uppercase}
+#play-btn:hover{background:var(--sig)}
+
+/* ── STAGE ── */
+#stage{position:fixed;top:52px;bottom:40px;left:0;right:0;display:flex;overflow:hidden}
+
+/* Rails */
+.rail{width:44px;flex-shrink:0;display:flex;flex-direction:column;background:rgba(26,23,20,.02)}
+.rail-l{border-right:1px solid var(--rule)}
+.rail-r{border-left:1px solid var(--rule)}
+.rail-cell{flex:1;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid var(--rule);position:relative}
+.rail-cell:last-child{border-bottom:none}
+.rail-cell .r-check{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--rule);
+  transition:border-color 260ms,background 260ms}
+.rail-cell.active .r-check{border-color:var(--sig);background:var(--sig)}
+.rail-lbl{position:absolute;font-family:var(--fm);font-size:8px;letter-spacing:.14em;
+  color:rgba(140,135,130,.65);top:6px;left:50%;transform:rotate(-90deg) translate(-50%, -8px);
+  transform-origin:top left;white-space:nowrap;pointer-events:none}
+.rail-r .rail-lbl{left:auto;right:50%;transform:rotate(-90deg) translate(50%, 12px);transform-origin:top right}
+
+/* Layers */
+#layers{flex:1;display:flex;flex-direction:column;position:relative}
+.ly{flex:1;display:flex;align-items:center;padding:0 22px;border-bottom:1px solid var(--rule);
+  min-height:0;cursor:pointer;transition:background 260ms,padding 200ms;position:relative;overflow:hidden}
+.ly:last-child{border-bottom:none}
+.ly-n{font-family:var(--fm);font-size:10px;color:var(--grey);width:22px;flex-shrink:0;letter-spacing:.06em}
+.ly-t{font-size:clamp(13px, 2.5vw, 15px);font-weight:700;color:var(--ink);letter-spacing:-.01em;flex:0 0 190px;padding-left:8px}
+.ly-t small{font-weight:400;color:var(--grey);font-size:11px;letter-spacing:0}
+.ly-c{font-size:11px;color:var(--dim);flex:1;padding-left:12px;font-family:var(--fm);letter-spacing:.02em}
+.ly.added{background:rgba(255,71,19,.04)}
+.ly.added .ly-n{color:var(--sig)}
+.ly.hot{background:var(--ink)}
+.ly.hot .ly-n{color:rgba(242,237,228,.5)}
+.ly.hot .ly-t{color:var(--cr)}
+.ly.hot .ly-t small{color:rgba(242,237,228,.5)}
+.ly.hot .ly-c{color:rgba(242,237,228,.65)}
+.ly.hot.added{background:var(--sig)}
+.ly.hot.added .ly-t{color:var(--ink)}
+.ly.hot.added .ly-c{color:var(--ink)}
+.ly.hot.added .ly-n{color:var(--ink)}
+.ly.selected{background:rgba(26,23,20,.06)}
+
+/* Task dot animation — moves top to bottom */
+.task-dot{position:absolute;left:50%;width:14px;height:14px;background:var(--sig);border-radius:50%;
+  transform:translate(-50%, -50%);box-shadow:0 0 12px rgba(255,71,19,.5);pointer-events:none;z-index:5;
+  transition:top 700ms cubic-bezier(0.77,0,0.175,1)}
+
+/* Context progress bar */
+.ctx-bar{position:absolute;right:14px;top:10px;height:2px;width:220px;background:var(--rule);z-index:6}
+.ctx-fill{height:100%;background:var(--sig);width:0%;transition:width 500ms cubic-bezier(0.16,1,0.3,1)}
+.ctx-lbl{position:absolute;right:14px;top:16px;font-family:var(--fm);font-size:9px;color:var(--dim);letter-spacing:.1em;z-index:6}
+
+/* Right-side caption panel */
+#capnl{position:absolute;top:50%;right:56px;transform:translateY(-50%);
+  width:min(320px, 32vw);background:var(--wdark);color:var(--cr);
+  padding:16px 18px;z-index:15;opacity:0;transition:opacity 240ms;pointer-events:none;
+  border:1px solid rgba(0,0,0,.4);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+#capnl.on{opacity:1;pointer-events:auto}
+#capnl .kind{font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--sig);
+  text-transform:uppercase;margin-bottom:8px}
+#capnl h3{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.15;color:var(--cr)}
+#capnl .body{margin-top:10px;font-size:12px;line-height:1.6;color:rgba(242,237,228,.7)}
+#capnl .close{position:absolute;top:8px;right:10px;background:transparent;border:0;
+  color:rgba(242,237,228,.4);cursor:pointer;font-size:16px}
+#capnl .close:hover{color:var(--cr)}
+
+#foot{position:fixed;bottom:0;left:0;right:0;padding:10px 20px;
+  background:var(--cr);border-top:1px solid var(--rule);
+  font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.05em;
+  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+@media(max-width:640px){
+  #capnl{position:fixed;top:auto;bottom:60px;right:10px;left:10px;width:auto;transform:none;max-height:40%}
+  .ly-t{flex:0 0 130px;font-size:12px}
+  .ly-c{font-size:10px}
+  .ctx-bar{width:120px}
+}
+</style>
+</head>
+<body>
+
+<a href="deck.html" id="back">← Atlas deck</a>
+
+<div id="head">
+  <div>
+    <div class="lbl">Atlas · Interactive</div>
+    <h1>Architecture Flow <span>—</span> one task, top to bottom, ten layers</h1>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center">
+    <span class="meta" id="task-info">Task: [klaviyo] check the last sync ran clean</span>
+    <button id="play-btn" onclick="togglePlay()">PAUSE</button>
+  </div>
+</div>
+
+<div id="stage">
+  <div class="rail rail-l">
+    <div class="rail-lbl">GUARDRAILS</div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+  </div>
+
+  <div id="layers">
+    <div class="ctx-bar"><div class="ctx-fill" id="ctxfill"></div></div>
+    <div class="ctx-lbl" id="ctxlbl">CTX 0%</div>
+
+    <div class="ly" data-i="0"><div class="ly-n">01</div><div class="ly-t">Surface</div><div class="ly-c">Dispatch mobile · Cowork · CLI · launchd · Obsidian</div></div>
+    <div class="ly" data-i="1"><div class="ly-n">02</div><div class="ly-t">Intent</div><div class="ly-c">[project] prefix detected · task-router classify</div></div>
+    <div class="ly" data-i="2"><div class="ly-n">03</div><div class="ly-t">Context <small>(descriptive)</small></div><div class="ly-c">Obsidian README → canonical outputs → live external</div></div>
+    <div class="ly" data-i="3"><div class="ly-n">04</div><div class="ly-t">Orchestration</div><div class="ly-c">Cowork loop · plan · write · check · merge</div></div>
+    <div class="ly" data-i="4"><div class="ly-n">05</div><div class="ly-t">Model</div><div class="ly-c">Route → Sonnet · Opus · Haiku · Kimi K3 · local</div></div>
+    <div class="ly" data-i="5"><div class="ly-n">06</div><div class="ly-t">Tools</div><div class="ly-c">~30 MCPs · aspirational per-project scoping</div></div>
+    <div class="ly" data-i="6"><div class="ly-n">07</div><div class="ly-t">Runtime</div><div class="ly-c">Bash sandbox · Docker · SSH to Axis</div></div>
+    <div class="ly added" data-i="7"><div class="ly-n">08</div><div class="ly-t">Taste gate <small>(evaluative)</small></div><div class="ly-c">taste-gate · destination-gate · brand refs</div></div>
+    <div class="ly added" data-i="8"><div class="ly-n">09</div><div class="ly-t">Voice gate <small>(1st-person only)</small></div><div class="ly-c">writing + thinking doctrine loaded</div></div>
+    <div class="ly added" data-i="9"><div class="ly-n">10</div><div class="ly-t">Memory / provenance</div><div class="ly-c">README update · canonical emit · dispatch-activity log</div></div>
+
+    <div class="task-dot" id="dot"></div>
+  </div>
+
+  <div class="rail rail-r">
+    <div class="rail-lbl">OBSERVABILITY</div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+    <div class="rail-cell"><div class="r-check"></div></div>
+  </div>
+</div>
+
+<div id="capnl">
+  <button class="close" onclick="hideCap()">×</button>
+  <div class="kind" id="cap-kind"></div>
+  <h3 id="cap-title"></h3>
+  <div class="body" id="cap-body"></div>
+</div>
+
+<div id="foot">
+  <span>10 layers · 4 rails · one task at a time · click any layer to freeze</span>
+  <span>Task flowing top-to-bottom every ~12s · guardrails + observability activate at each layer</span>
+</div>
+
+<script>
+const LAYERS = [
+  {name: 'Surface', kind: 'ENTRY', body: 'The task arrives via Dispatch (mobile), Cowork (desktop), Claude Code CLI, launchd (scheduled), or Obsidian (direct edit). Every entry point emits a normalized task_object with metadata: source, timestamp, session_id. On this task: `[klaviyo] check the last sync ran clean` arrived via Dispatch mobile.'},
+  {name: 'Intent', kind: 'CLASSIFY', body: 'The [project] prefix is detected — "klaviyo" → routes to the klaviyo-sync project. task-router classifies as a status-check class (low compute, no writes). Project prefix triggers the mandatory hard-rule: load state before acting.'},
+  {name: 'Context — descriptive', kind: 'LOAD STATE', body: 'Step 0: read Obsidian://Projects/Active/klaviyo-sync/README.md. Step 1: pull last 3 canonical outputs from outputs/klaviyo-sync/. Step 2: inspect LIVE state — check ~/.openclaw/logs/klaviyo-rfm-sync.log for last run, check snapshot file. This is the layer that prevents the Klaviyo Path A failure from ever recurring.'},
+  {name: 'Orchestration', kind: 'PLAN + LOOP', body: 'Cowork loop takes over. For a simple check like this: single-shot. For heavy work: split into subtasks, potentially dispatch to tmux-orchestrator for background parallel execution. The agent plans → writes → checks → merges before returning.'},
+  {name: 'Model', kind: 'ROUTE', body: 'task-router picks the cheapest model that meets the bar. Status check like this → Haiku 4.5 (cheap, fast). Strategic decision → Sonnet 5 or Opus 5. Sensitive data → Kimi K3 (dark lane, no third-party). Local Ollama on Axis for anything that must stay offline.'},
+  {name: 'Tools', kind: 'SCHEMA', body: 'Only tools the agent can actually use for this class of work are loaded — aspirationally. Today all ~30 MCPs are loaded per session; the per-project scoping is on the roadmap. For klaviyo-sync: vince-agents-context, obsidian-vault, canonical-vector-search are the primary tools; klaviyo API is available if live-state inspection needs it.'},
+  {name: 'Runtime', kind: 'SANDBOX', body: 'Where the work actually executes. Bash sandbox for shell commands, Docker for containers, SSH to Axis for GPU work. Network scoped, filesystem scoped, financial actions read-only per hard-rule. For this check: bash runs `tail ~/.openclaw/logs/klaviyo-rfm-sync.log`.'},
+  {name: 'Taste gate — evaluative', kind: 'EVALUATE', body: 'Only fires for creative outputs — for a status check this passes through. If this were a visual/copy/campaign output: taste-gate loads brand references, identity anchors, Pinterest board analyses, and validates the output. destination-gate names the tier and delta from ceiling. Nothing ships that hasn\'t been checked.'},
+  {name: 'Voice gate — first-person only', kind: 'DOCTRINE', body: 'Only fires when the output is authored as Vince (essay, board update, IG caption, Q&A). Loads the Writing & Thinking Doctrine. Enforces: journey not conclusion, tension is the insight, discovery over persuasion, grounded emotional language. Skipped for tool-call outputs and status checks.'},
+  {name: 'Memory / provenance', kind: 'PERSIST', body: 'The task ends by writing back to Obsidian: README last_touched bumped, Recent activity gets a new line, dispatch-activity.md gets a one-line entry. If a canonical output was produced, it lands in outputs/<project>/ with full frontmatter (source_runtime, agent_role, decision_status, linked_files). Nothing important lives only in the session.'},
+];
+
+const CAPTIONS = {
+  0: '10 minutes ago, from your phone.',
+  1: 'Project detected in <200ms. State-load rule fires.',
+  2: 'README + canonical outputs + LIVE Klaviyo state loaded.',
+  3: 'Simple check — single-shot, no orchestration overhead.',
+  4: 'Haiku 4.5 picked. Cheap, fast, meets the bar for a status check.',
+  5: 'obsidian-vault + tail command are the tools needed here.',
+  6: 'Bash reads the log. 53,168 profiles synced 03:00 AEST, 0 failures.',
+  7: 'Not a creative output — passes through untouched.',
+  8: 'Not first-person Vince — passes through.',
+  9: 'README updated. Recent activity: "2026-08-01: status check confirmed sync healthy."',
+};
+
+let PLAYING = true;
+let CURRENT = -1;
+let TIMER = null;
+let SELECTED = null;
+const LAYER_MS = 1400;  // time on each layer
+const STEP = 1400;
+
+const lyEls = () => document.querySelectorAll('.ly');
+const railsL = () => document.querySelectorAll('.rail-l .rail-cell');
+const railsR = () => document.querySelectorAll('.rail-r .rail-cell');
+const dot = document.getElementById('dot');
+const ctxfill = document.getElementById('ctxfill');
+const ctxlbl = document.getElementById('ctxlbl');
+
+function positionDot(i) {
+  const l = lyEls()[i];
+  if (!l) return;
+  const r = l.getBoundingClientRect();
+  const stage = document.getElementById('layers').getBoundingClientRect();
+  dot.style.top = (r.top - stage.top + r.height / 2) + 'px';
+}
+
+function hotLayer(i) {
+  lyEls().forEach((el, idx) => el.classList.toggle('hot', idx === i));
+  railsL().forEach((el, idx) => el.classList.toggle('active', idx <= i));
+  railsR().forEach((el, idx) => el.classList.toggle('active', idx <= i));
+
+  // Context bar fills through the run — increment per layer
+  const pct = Math.round((i + 1) / 10 * 78);  // Cap at 78% (never full — leave headroom)
+  ctxfill.style.width = pct + '%';
+  ctxlbl.textContent = `CTX ${pct}%`;
+
+  positionDot(i);
+  showCap(i);
+}
+
+function showCap(i) {
+  if (SELECTED !== null) return;  // don't override manual selection
+  const l = LAYERS[i];
+  document.getElementById('cap-kind').textContent = l.kind;
+  document.getElementById('cap-title').textContent = l.name;
+  document.getElementById('cap-body').innerHTML = `<b style="color:var(--sig)">Now:</b> ${CAPTIONS[i]}<br><br>${l.body}`;
+  document.getElementById('capnl').classList.add('on');
+}
+
+function hideCap() {
+  document.getElementById('capnl').classList.remove('on');
+  lyEls().forEach(el => el.classList.remove('selected'));
+  SELECTED = null;
+  if (PLAYING) startLoop();
+}
+
+function tick() {
+  CURRENT = (CURRENT + 1) % 10;
+  hotLayer(CURRENT);
+}
+
+function startLoop() {
+  clearInterval(TIMER);
+  TIMER = setInterval(tick, STEP);
+  tick();
+}
+
+function stopLoop() {
+  clearInterval(TIMER);
+  TIMER = null;
+}
+
+function togglePlay() {
+  PLAYING = !PLAYING;
+  document.getElementById('play-btn').textContent = PLAYING ? 'PAUSE' : 'PLAY';
+  if (PLAYING) startLoop();
+  else stopLoop();
+}
+
+// Click a layer to freeze on it
+lyEls().forEach((el, i) => {
+  el.onclick = () => {
+    stopLoop();
+    PLAYING = false;
+    document.getElementById('play-btn').textContent = 'PLAY';
+    lyEls().forEach(e => e.classList.remove('selected'));
+    el.classList.add('selected');
+    SELECTED = i;
+    CURRENT = i;
+    hotLayer(i);
+    // manually populate caption without CURRENT flow tag
+    const l = LAYERS[i];
+    document.getElementById('cap-kind').textContent = l.kind + ' · CLICKED';
+    document.getElementById('cap-title').textContent = l.name;
+    document.getElementById('cap-body').innerHTML = l.body;
+    document.getElementById('capnl').classList.add('on');
+  };
+});
+
+// Recompute dot on resize
+window.addEventListener('resize', () => { if (CURRENT >= 0) positionDot(CURRENT); });
+
+// Start
+setTimeout(startLoop, 400);
+
+document.addEventListener('keydown', e => { if (e.key === ' ') { e.preventDefault(); togglePlay(); } });
+</script>
+</body>
+</html>

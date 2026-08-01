@@ -1,0 +1,1445 @@
+{
+ "stats": {
+  "generated_at": "2026-08-01T13:05:32",
+  "nodes": 79,
+  "links": 79,
+  "projects_active": 32,
+  "projects_completed": 0,
+  "projects_archived": 7,
+  "doctrine_files": 12,
+  "canonical_outputs": 25
+ },
+ "nodes": [
+  {
+   "id": "root",
+   "type": "root",
+   "label": "Second Brain",
+   "summary": "Obsidian is the source of truth. Everything else is disposable. Two vaults, ~40 active projects, doctrine at each root, canonical outputs linked from every README."
+  },
+  {
+   "id": "vault:rollie",
+   "type": "vault",
+   "label": "Rollie",
+   "vault": "rollie",
+   "summary": "The Rollie vault \u2014 business projects, Rollie recon, Klaviyo, brand work."
+  },
+  {
+   "id": "vault:personal",
+   "type": "vault",
+   "label": "Personal",
+   "vault": "personal",
+   "summary": "The Personal vault \u2014 personal, atlas-os, Vince Studio creative, AI workflows, coaching, life admin."
+  },
+  {
+   "id": "doctrine:rollie:How to work on projects",
+   "type": "doctrine",
+   "label": "How to work on projects",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/Projects/How to work on projects.md"
+  },
+  {
+   "id": "doctrine:rollie:Twelve Outcomes Framework",
+   "type": "doctrine",
+   "label": "Twelve Outcomes Framework",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Twelve Outcomes Framework.md"
+  },
+  {
+   "id": "doctrine:rollie:Tone of Voice",
+   "type": "doctrine",
+   "label": "Tone of Voice",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Tone of Voice.md"
+  },
+  {
+   "id": "doctrine:rollie:Deconstruction to Agent Framework",
+   "type": "doctrine",
+   "label": "Deconstruction to Agent Framework",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Deconstruction to Agent Framework.md"
+  },
+  {
+   "id": "doctrine:rollie:Impact Player Framework",
+   "type": "doctrine",
+   "label": "Impact Player Framework",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Impact Player Framework.md"
+  },
+  {
+   "id": "doctrine:rollie:BCC 1.3 - Introduction to Tone of Voice",
+   "type": "doctrine",
+   "label": "BCC 1.3 - Introduction to Tone of Voice",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/BCC 1.3 - Introduction to Tone of Voice.md"
+  },
+  {
+   "id": "doctrine:rollie:Vince \u2014 Tone of Voice (canonical)",
+   "type": "doctrine",
+   "label": "Vince \u2014 Tone of Voice (canonical)",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Vince \u2014 Tone of Voice (canonical).md"
+  },
+  {
+   "id": "doctrine:rollie:Collaboration Framework",
+   "type": "doctrine",
+   "label": "Collaboration Framework",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Collaboration Framework.md"
+  },
+  {
+   "id": "doctrine:rollie:Crisis Voice",
+   "type": "doctrine",
+   "label": "Crisis Voice",
+   "vault": "rollie",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Rollie/5 Wiki/Concepts/Crisis Voice.md"
+  },
+  {
+   "id": "doctrine:personal:How to work on projects",
+   "type": "doctrine",
+   "label": "How to work on projects",
+   "vault": "personal",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/How to work on projects.md"
+  },
+  {
+   "id": "doctrine:personal:Hope-to-Intention Decision Framework",
+   "type": "doctrine",
+   "label": "Hope-to-Intention Decision Framework",
+   "vault": "personal",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/5 Wiki/Concepts/Hope-to-Intention Decision Framework.md"
+  },
+  {
+   "id": "doctrine:personal:Vince writing and thinking doctrine",
+   "type": "doctrine",
+   "label": "Vince writing and thinking doctrine",
+   "vault": "personal",
+   "summary": "Vault doctrine \u2014 rules that fire in every session",
+   "path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/5 Wiki/Concepts/Vince writing and thinking doctrine.md"
+  },
+  {
+   "id": "rollie:klaviyo-sync",
+   "type": "project",
+   "slug": "klaviyo-sync",
+   "label": "klaviyo-sync",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "Daily 03:00 AEST launchd job pushes 14-property RFM schema (`rollie_rfm_*`) from BigQuery `dim_customer_rfm` v2.0 to matching Klaviyo profiles via bulk-import-jobs. 53,168 active-24m customers pushed nightly. Path A schema locked 2026-07-28 (14 canonical `rollie_rfm_*` properties",
+   "last_touched": "2026-07-31",
+   "canonical_path": "~/Code/vince-agents/outputs/klaviyo-sync/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/klaviyo-sync/README.md",
+   "tags": [
+    "klaviyo",
+    "rfm",
+    "sync",
+    "marketing"
+   ]
+  },
+  {
+   "id": "rollie:rollie-recon-2026-06-30",
+   "type": "project",
+   "slug": "rollie-recon-2026-06-30",
+   "label": "rollie-recon-2026-06-30",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-recon-2026-06-30/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-recon-2026-06-30/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:rollie-jesse-complexcon",
+   "type": "project",
+   "slug": "rollie-jesse-complexcon",
+   "label": "rollie-jesse-complexcon",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "War-game of the Jesse Boykins III US launch \u2014 live data, drop economics, board red-team, dated go/kill criteria, and the three decisions only Vince can make. The production-commit window closes ~Jul 10.",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-jesse-complexcon/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-jesse-complexcon/README.md",
+   "tags": [
+    "jesse-boykins",
+    "complexcon",
+    "fy27",
+    "war-game",
+    "us-launch",
+    "decision-memo"
+   ]
+  },
+  {
+   "id": "rollie:airtable-interfaces-research",
+   "type": "project",
+   "slug": "airtable-interfaces-research",
+   "label": "airtable-interfaces-research",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "Airtable Interfaces cannot be created programmatically in July 2026 \u2014 data yes, Interface layouts no. Best path is Airtable MCP + native Interfaces for basic, Noloco layer if advanced viz needed.",
+   "last_touched": "2026-07-18",
+   "canonical_path": "~/Code/vince-agents/outputs/airtable-interfaces-research/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/airtable-interfaces-research/README.md",
+   "tags": [
+    "airtable",
+    "mcp",
+    "dashboards",
+    "department-views",
+    "decision-pending",
+    "research-synthesis"
+   ]
+  },
+  {
+   "id": "rollie:rollie-recon",
+   "type": "project",
+   "slug": "rollie-recon",
+   "label": "rollie-recon",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "Nightly Klaviyo RFM sync \u2014 pushes 6 canonical rollie_rfm_* + rollie_ltv_* properties from BigQuery dim_customer_rfm v2.0 to matching Klaviyo profiles via bulk_import_profiles_job. Delta-only (local JSON snapshot), runs daily 03:00 AEST after the 02:30 BQ refresh, fail-loud with T",
+   "last_touched": "2026-07-29",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-recon/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-recon/README.md",
+   "tags": [
+    "ai-os",
+    "klaviyo",
+    "rfm",
+    "rollie",
+    "scheduled",
+    "launchd",
+    "delta-sync",
+    "big-query"
+   ]
+  },
+  {
+   "id": "rollie:rollie-team-fork",
+   "type": "project",
+   "slug": "rollie-team-fork",
+   "label": "rollie-team-fork",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "One-page decision-ready plan for the Rollie team fork \u2014 pilot person, wave-1 skills, plugin delivery, boundary enforcement, date + kill signals.",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-team-fork/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-team-fork/README.md",
+   "tags": [
+    "rollie-team-fork",
+    "plugin",
+    "team",
+    "scaling"
+   ]
+  },
+  {
+   "id": "rollie:voice-of-customer",
+   "type": "project",
+   "slug": "voice-of-customer",
+   "label": "voice-of-customer",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "First voice-of-customer synthesis from Klaviyo reviews \u2014 themes, verbatim gold, language gap, ALD-shift signals, product friction.",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/voice-of-customer/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/voice-of-customer/README.md",
+   "tags": [
+    "voice-of-customer",
+    "klaviyo",
+    "reviews",
+    "brand",
+    "rollie"
+   ]
+  },
+  {
+   "id": "rollie:rollie-pds",
+   "type": "project",
+   "slug": "rollie-pds",
+   "label": "rollie-pds",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-07",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-pds/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-pds/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:rollie-kumo-magazine-style",
+   "type": "project",
+   "slug": "rollie-kumo-magazine-style",
+   "label": "rollie-kumo-magazine-style",
+   "vault": "rollie",
+   "status": "Active",
+   "subgroup": null,
+   "summary": "Recreate the mlyancr magazine aesthetic as a codified Higgsfield house style; apply it to Rollie's Kumo Fire/Earth/Aether launch \u2014 three 15s vertical shorts featuring the three real campaign talent (Narit, Aoife, Chris) each wearing their matched Kumo colourway. Style key locked;",
+   "last_touched": "2026-07-23",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie-kumo-magazine-style/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Active/rollie-kumo-magazine-style/README.md",
+   "tags": [
+    "rollie",
+    "kumo",
+    "magazine-style",
+    "mlyancr",
+    "editorial-magazine",
+    "house-style-build",
+    "campaign"
+   ]
+  },
+  {
+   "id": "rollie:claude-design-2026-06-19",
+   "type": "project",
+   "slug": "claude-design-2026-06-19",
+   "label": "claude-design-2026-06-19",
+   "vault": "rollie",
+   "status": "Archived",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-06-20",
+   "canonical_path": "~/Code/vince-agents/outputs/claude-design-2026-06-19/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Archived/claude-design-2026-06-19/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:shopify-admin-inspection-2026-06-19",
+   "type": "project",
+   "slug": "shopify-admin-inspection-2026-06-19",
+   "label": "shopify-admin-inspection-2026-06-19",
+   "vault": "rollie",
+   "status": "Archived",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-06-20",
+   "canonical_path": "~/Code/vince-agents/outputs/shopify-admin-inspection-2026-06-19/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Archived/shopify-admin-inspection-2026-06-19/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:globale-portal-2026-06-21",
+   "type": "project",
+   "slug": "globale-portal-2026-06-21",
+   "label": "globale-portal-2026-06-21",
+   "vault": "rollie",
+   "status": "Archived",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-06-21",
+   "canonical_path": "~/Code/vince-agents/outputs/globale-portal-2026-06-21/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Archived/globale-portal-2026-06-21/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:iconic-audit-2026-06-19",
+   "type": "project",
+   "slug": "iconic-audit-2026-06-19",
+   "label": "iconic-audit-2026-06-19",
+   "vault": "rollie",
+   "status": "Archived",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-06-20",
+   "canonical_path": "~/Code/vince-agents/outputs/iconic-audit-2026-06-19/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Archived/iconic-audit-2026-06-19/README.md",
+   "tags": []
+  },
+  {
+   "id": "rollie:rollie",
+   "type": "project",
+   "slug": "rollie",
+   "label": "rollie",
+   "vault": "rollie",
+   "status": "Archived",
+   "subgroup": null,
+   "summary": "(no summary yet)",
+   "last_touched": "2026-04-29",
+   "canonical_path": "~/Code/vince-agents/outputs/rollie/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Rollie/Projects/Archived/rollie/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:one-thing",
+   "type": "project",
+   "slug": "one-thing",
+   "label": "one-thing",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "rollie-adjacent",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-06",
+   "canonical_path": "~/Code/vince-agents/outputs/one-thing/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/rollie-adjacent/one-thing/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:board-intel",
+   "type": "project",
+   "slug": "board-intel",
+   "label": "board-intel",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "rollie-adjacent",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-15",
+   "canonical_path": "~/Code/vince-agents/outputs/board-intel/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/rollie-adjacent/board-intel/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:storytelling",
+   "type": "project",
+   "slug": "storytelling",
+   "label": "storytelling",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "rollie-adjacent",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-04",
+   "canonical_path": "~/Code/vince-agents/outputs/storytelling/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/rollie-adjacent/storytelling/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:liquidity-engine",
+   "type": "project",
+   "slug": "liquidity-engine",
+   "label": "liquidity-engine",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "rollie-adjacent",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-04",
+   "canonical_path": "~/Code/vince-agents/outputs/liquidity-engine/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/rollie-adjacent/liquidity-engine/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:atlas-brain",
+   "type": "project",
+   "slug": "atlas-brain",
+   "label": "atlas-brain",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "atlas-os",
+   "summary": "Full install + wire-up plan for LibreChat as Vince's solo-use agent workspace on Atlas. LibreChat is the disposable UI; Obsidian vaults + canonical outputs are the persistent knowledge base. Every meaningful conversation writes back to Obsidian so the whole LibreChat stack can be",
+   "last_touched": "2026-07-29",
+   "canonical_path": "~/Code/vince-agents/outputs/atlas-brain/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/atlas-os/atlas-brain/README.md",
+   "tags": [
+    "librechat",
+    "install",
+    "plan",
+    "mcp",
+    "projects",
+    "dispatch",
+    "cowork",
+    "atlas",
+    "second-brain",
+    "mobile-first"
+   ]
+  },
+  {
+   "id": "personal:atlas-architecture",
+   "type": "project",
+   "slug": "atlas-architecture",
+   "label": "atlas-architecture",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "atlas-os",
+   "summary": "Canonical hardware spec sheet for Axis (Vince's Windows workstation). Dell Pro Max Tower T2, Intel Core Ultra 9 285K (24C/24T, 5.7GHz), NVIDIA RTX PRO 6000 Blackwell 96GB VRAM, 128GB DDR5, 2TB PCIe Gen4 SSD, 1500W Platinum PSU, Windows 11 Pro. Quoted 2025-09-18 by Zarbtech for $1",
+   "last_touched": "2026-07-28",
+   "canonical_path": "~/Code/vince-agents/outputs/atlas-architecture/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/atlas-os/atlas-architecture/README.md",
+   "tags": [
+    "ai-os",
+    "axis",
+    "hardware",
+    "workstation",
+    "gpu",
+    "local-llm",
+    "blender",
+    "tailscale"
+   ]
+  },
+  {
+   "id": "personal:atlas-os",
+   "type": "project",
+   "slug": "atlas-os",
+   "label": "atlas-os",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "atlas-os",
+   "summary": "Phase 1 ONE Thing question detector \u2014 signal collector + scorer + top-5 candidate questions from real-repo signal walk. AtlasOperator wiring is Phase 2.",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/atlas-os/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/atlas-os/atlas-os/README.md",
+   "tags": [
+    "atlas-os",
+    "ambient-ai",
+    "one-thing",
+    "question-detector",
+    "phase-1"
+   ]
+  },
+  {
+   "id": "personal:atlas-pwa",
+   "type": "project",
+   "slug": "atlas-pwa",
+   "label": "atlas-pwa",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "atlas-os",
+   "summary": "Product spec for Atlas \u2014 the PWA that becomes the complete interface to Vince's second brain. Three pillars (Clarity / Action / Accountability), voice-first conversational surface, node knowledge graph, shadcn-style skin with cobalt accent.",
+   "last_touched": "2026-07-12",
+   "canonical_path": "~/Code/vince-agents/outputs/atlas-pwa/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/atlas-os/atlas-pwa/README.md",
+   "tags": [
+    "atlas",
+    "pwa",
+    "product-spec",
+    "second-brain"
+   ]
+  },
+  {
+   "id": "personal:vince-agents-meta",
+   "type": "project",
+   "slug": "vince-agents-meta",
+   "label": "vince-agents-meta",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "atlas-os",
+   "summary": "Kimi K3 weights are live on Hugging Face \u2014 auto-detected by scheduled/k3-weights-watch. Vince decides whether to self-host or wait for hosted providers to serve K3 cheaply.",
+   "last_touched": "2026-07-30",
+   "canonical_path": "~/Code/vince-agents/outputs/vince-agents-meta/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/atlas-os/vince-agents-meta/README.md",
+   "tags": [
+    "ai-os",
+    "kimi-k3",
+    "weights-drop",
+    "hugging-face",
+    "decision-pending"
+   ]
+  },
+  {
+   "id": "personal:turner",
+   "type": "project",
+   "slug": "turner",
+   "label": "turner",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "ai-workflows",
+   "summary": "Two SKILL.md patches for the Turner Learn step \u2014 Cowork sandbox blocked writes to skills/, so apply by hand",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/turner/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/ai-workflows/turner/README.md",
+   "tags": [
+    "turner",
+    "learn-step",
+    "skill-patch",
+    "apply-by-hand"
+   ]
+  },
+  {
+   "id": "personal:obsidian-claude",
+   "type": "project",
+   "slug": "obsidian-claude",
+   "label": "obsidian-claude",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "ai-workflows",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-10",
+   "canonical_path": "~/Code/vince-agents/outputs/obsidian-claude/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/ai-workflows/obsidian-claude/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:chatgpt-project-bundle",
+   "type": "project",
+   "slug": "chatgpt-project-bundle",
+   "label": "chatgpt-project-bundle",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "ai-workflows",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-03",
+   "canonical_path": "~/Code/vince-agents/outputs/chatgpt-project-bundle/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/ai-workflows/chatgpt-project-bundle/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:task-review",
+   "type": "project",
+   "slug": "task-review",
+   "label": "task-review",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "ai-workflows",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-26",
+   "canonical_path": "~/Code/vince-agents/outputs/task-review/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/ai-workflows/task-review/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:jelly-sandal-mockups",
+   "type": "project",
+   "slug": "jelly-sandal-mockups",
+   "label": "jelly-sandal-mockups",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-14",
+   "canonical_path": "~/Code/vince-agents/outputs/jelly-sandal-mockups/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/jelly-sandal-mockups/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:rob-miles",
+   "type": "project",
+   "slug": "rob-miles",
+   "label": "rob-miles",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-09",
+   "canonical_path": "~/Code/vince-agents/outputs/rob-miles/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/rob-miles/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:3d-capability-scans",
+   "type": "project",
+   "slug": "3d-capability-scans",
+   "label": "3d-capability-scans",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "Biweekly 3D-capability scan \u2014 GAP HOLDS; Blender 5.2 XPBD hair is procedural not image-in, Meshy 3D Agent is UI not model, no fibrous editorial-hero pipeline shipped this cycle",
+   "last_touched": "2026-07-29",
+   "canonical_path": "~/Code/vince-agents/outputs/3d-capability-scans/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/3d-capability-scans/README.md",
+   "tags": [
+    "3d-gap",
+    "capability-debt",
+    "biweekly-scan",
+    "forensic-hero-replication",
+    "image-to-3d"
+   ]
+  },
+  {
+   "id": "personal:rob-miles-redline-run-100",
+   "type": "project",
+   "slug": "rob-miles-redline-run-100",
+   "label": "rob-miles-redline-run-100",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-18",
+   "canonical_path": "~/Code/vince-agents/outputs/rob-miles-redline-run-100/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/rob-miles-redline-run-100/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:higgsfield-asics-novalis-study",
+   "type": "project",
+   "slug": "higgsfield-asics-novalis-study",
+   "label": "higgsfield-asics-novalis-study",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "Deconstruction of \"ASICS \u00d7 NOVALIS\" AI brand short \u2014 15s, 4 beats, single-character campaign styled as editorial magazine spread. Ready-to-run recreate brief for Vince Studio.",
+   "last_touched": "2026-07-21",
+   "canonical_path": "~/Code/vince-agents/outputs/higgsfield-asics-novalis-study/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/higgsfield-asics-novalis-study/README.md",
+   "tags": [
+    "higgsfield",
+    "deconstruction",
+    "campaign-study",
+    "asics",
+    "reference-analysis"
+   ]
+  },
+  {
+   "id": "personal:replications",
+   "type": "project",
+   "slug": "replications",
+   "label": "replications",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-11",
+   "canonical_path": "~/Code/vince-agents/outputs/replications/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/replications/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:rob-miles-launch-heist",
+   "type": "project",
+   "slug": "rob-miles-launch-heist",
+   "label": "rob-miles-launch-heist",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-07-25",
+   "canonical_path": "~/Code/vince-agents/outputs/rob-miles-launch-heist/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/rob-miles-launch-heist/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:vince-studio",
+   "type": "project",
+   "slug": "vince-studio",
+   "label": "vince-studio",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "Canonical routing table for /studio:model-router \u2014 shot type to primary model with fallback + duration + aspect + Named Elements support.",
+   "last_touched": "2026-07-20",
+   "canonical_path": "~/Code/vince-agents/outputs/vince-studio/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/vince-studio/README.md",
+   "tags": [
+    "higgsfield",
+    "routing",
+    "models",
+    "matrix",
+    "decision-table"
+   ]
+  },
+  {
+   "id": "personal:higgsfield-mastery",
+   "type": "project",
+   "slug": "higgsfield-mastery",
+   "label": "higgsfield-mastery",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "Higgsfield Seedance Unlimited add-on analysis \u2014 pricing tiers, what's included, Vince status (Ultra plan gets 30 days at no cost), recommendation, and the Sept 12 sales-close deadline.",
+   "last_touched": "2026-07-19",
+   "canonical_path": "~/Code/vince-agents/outputs/higgsfield-mastery/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/higgsfield-mastery/README.md",
+   "tags": [
+    "higgsfield",
+    "credits",
+    "unlimited",
+    "ultra-plan",
+    "decision",
+    "seedance"
+   ]
+  },
+  {
+   "id": "personal:deconstruction-analyses",
+   "type": "project",
+   "slug": "deconstruction-analyses",
+   "label": "deconstruction-analyses",
+   "vault": "personal",
+   "status": "Active",
+   "subgroup": "vince-studio",
+   "summary": "Deconstruction of a high-contrast B&W editorial portrait (round sunglasses + hoodie, void backdrop, single hard-key) with formulas + paste-ready prompts for Nano Banana / MJ / Seedance 2.5.",
+   "last_touched": "2026-07-19",
+   "canonical_path": "~/Code/vince-agents/outputs/deconstruction-analyses/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Active/vince-studio/deconstruction-analyses/README.md",
+   "tags": [
+    "deconstruction",
+    "portrait",
+    "monochrome",
+    "editorial",
+    "prompt-formula",
+    "hero-image",
+    "celebrity-portrait"
+   ]
+  },
+  {
+   "id": "personal:vince-system-explainer",
+   "type": "project",
+   "slug": "vince-system-explainer",
+   "label": "vince-system-explainer",
+   "vault": "personal",
+   "status": "Archived",
+   "subgroup": "atlas-os",
+   "summary": "Sibling index for the Vince System Explainer PDF + ZIP bundle (2026-06-24)",
+   "last_touched": "2026-06-29",
+   "canonical_path": "~/Code/vince-agents/outputs/vince-system-explainer/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Archived/atlas-os/vince-system-explainer/README.md",
+   "tags": []
+  },
+  {
+   "id": "personal:visual-pipeline",
+   "type": "project",
+   "slug": "visual-pipeline",
+   "label": "visual-pipeline",
+   "vault": "personal",
+   "status": "Archived",
+   "subgroup": "vince-studio",
+   "summary": "(no summary yet)",
+   "last_touched": "2026-05-03",
+   "canonical_path": "~/Code/vince-agents/outputs/visual-pipeline/",
+   "readme_path": "/Users/atlas/ObsidianVaults/Personal and Professional Development/Projects/Archived/vince-studio/visual-pipeline/README.md",
+   "tags": []
+  },
+  {
+   "id": "canon:rollie-jesse-complexcon:2026-07-03-jesse-us-launch-wargame:rollie:rollie-jesse-complexcon",
+   "type": "canonical",
+   "label": "2026-07-03-jesse-us-launch-wargame",
+   "project": "rollie-jesse-complexcon",
+   "summary": "War-game of the Jesse Boykins III US launch \u2014 live data, drop economics, board red-team, dated go/kill criteria, and the three decisions only Vince can make. The production-commit window closes ~Jul 10.",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/rollie-jesse-complexcon/2026-07-03-jesse-us-launch-wargame.md"
+  },
+  {
+   "id": "canon:airtable-interfaces-research:2026-07-18-airtable-interfaces-programmatic-creation-research:rollie:airtable-interfaces-research",
+   "type": "canonical",
+   "label": "2026-07-18-airtable-interfaces-programmatic-creation-researc",
+   "project": "airtable-interfaces-research",
+   "summary": "Airtable Interfaces cannot be created programmatically in July 2026 \u2014 data yes, Interface layouts no. Best path is Airtable MCP + native Interfaces for basic, Noloco layer if advanced viz needed.",
+   "date": "2026-07-18",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/airtable-interfaces-research/2026-07-18-airtable-interfaces-programmatic-creation-research.md"
+  },
+  {
+   "id": "canon:rollie-recon:2026-07-28-klaviyo-rfm-sync-design:rollie:rollie-recon",
+   "type": "canonical",
+   "label": "2026-07-28-klaviyo-rfm-sync-design",
+   "project": "rollie-recon",
+   "summary": "Nightly Klaviyo RFM sync \u2014 pushes 6 canonical rollie_rfm_* + rollie_ltv_* properties from BigQuery dim_customer_rfm v2.0 to matching Klaviyo profiles via bulk_import_profiles_job. Delta-only (local JSON snapshot), runs d",
+   "date": "2026-07-28",
+   "status": "shipped",
+   "path": "/Users/atlas/Code/vince-agents/outputs/rollie-recon/2026-07-28-klaviyo-rfm-sync-design.md"
+  },
+  {
+   "id": "canon:rollie-team-fork:2026-07-03-team-fork-plan:rollie:rollie-team-fork",
+   "type": "canonical",
+   "label": "2026-07-03-team-fork-plan",
+   "project": "rollie-team-fork",
+   "summary": "One-page decision-ready plan for the Rollie team fork \u2014 pilot person, wave-1 skills, plugin delivery, boundary enforcement, date + kill signals.",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/rollie-team-fork/2026-07-03-team-fork-plan.md"
+  },
+  {
+   "id": "canon:voice-of-customer:2026-07-03-voc-synthesis-01:rollie:voice-of-customer",
+   "type": "canonical",
+   "label": "2026-07-03-voc-synthesis-01",
+   "project": "voice-of-customer",
+   "summary": "First voice-of-customer synthesis from Klaviyo reviews \u2014 themes, verbatim gold, language gap, ALD-shift signals, product friction.",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/voice-of-customer/2026-07-03-voc-synthesis-01.md"
+  },
+  {
+   "id": "canon:rollie-kumo-magazine-style:brief:rollie:rollie-kumo-magazine-style",
+   "type": "canonical",
+   "label": "brief",
+   "project": "rollie-kumo-magazine-style",
+   "summary": "Recreate the mlyancr magazine aesthetic as a codified Higgsfield house style; apply it to Rollie's Kumo Fire/Earth/Aether launch \u2014 three 15s vertical shorts featuring the three real campaign talent (Narit, Aoife, Chris) ",
+   "date": "2026-07-22",
+   "status": "draft",
+   "path": "/Users/atlas/Code/vince-agents/outputs/rollie-kumo-magazine-style/brief.md"
+  },
+  {
+   "id": "canon:atlas-brain:2026-07-29-librechat-install-plan:personal:atlas-brain",
+   "type": "canonical",
+   "label": "2026-07-29-librechat-install-plan",
+   "project": "atlas-brain",
+   "summary": "Full install + wire-up plan for LibreChat as Vince's solo-use agent workspace on Atlas. LibreChat is the disposable UI; Obsidian vaults + canonical outputs are the persistent knowledge base. Every meaningful conversation",
+   "date": "2026-07-29",
+   "status": "shipped_then_decommissioned",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-brain/2026-07-29-librechat-install-plan.md"
+  },
+  {
+   "id": "canon:atlas-brain:2026-07-29-agent-workspace-research:personal:atlas-brain",
+   "type": "canonical",
+   "label": "2026-07-29-agent-workspace-research",
+   "project": "atlas-brain",
+   "summary": "LibreChat wins on shape+mobile today; Buzz is the visionary bet with a mobile blocker until Q4 2026",
+   "date": "2026-07-29",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-brain/2026-07-29-agent-workspace-research.md"
+  },
+  {
+   "id": "canon:atlas-brain:2026-07-10-phase0-deploy-report:personal:atlas-brain",
+   "type": "canonical",
+   "label": "2026-07-10-phase0-deploy-report",
+   "project": "atlas-brain",
+   "summary": "Atlas Brain Phase 0 shipped \u2014 HTTPS ingest at brain.lebon.com.au, 07:00 daily question loop live, 02:00 compile pass wired, end-to-end round-trip verified.",
+   "date": "2026-07-10",
+   "status": "shipped",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-brain/2026-07-10-phase0-deploy-report.md"
+  },
+  {
+   "id": "canon:atlas-architecture:2026-07-28-axis-workstation-specs:personal:atlas-architecture",
+   "type": "canonical",
+   "label": "2026-07-28-axis-workstation-specs",
+   "project": "atlas-architecture",
+   "summary": "Canonical hardware spec sheet for Axis (Vince's Windows workstation). Dell Pro Max Tower T2, Intel Core Ultra 9 285K (24C/24T, 5.7GHz), NVIDIA RTX PRO 6000 Blackwell 96GB VRAM, 128GB DDR5, 2TB PCIe Gen4 SSD, 1500W Platin",
+   "date": "2026-07-28",
+   "status": "shipped",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-architecture/2026-07-28-axis-workstation-specs.md"
+  },
+  {
+   "id": "canon:atlas-os:2026-07-03-one-thing-candidates:personal:atlas-os",
+   "type": "canonical",
+   "label": "2026-07-03-one-thing-candidates",
+   "project": "atlas-os",
+   "summary": "Phase 1 ONE Thing question detector \u2014 signal collector + scorer + top-5 candidate questions from real-repo signal walk. AtlasOperator wiring is Phase 2.",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-os/2026-07-03-one-thing-candidates.md"
+  },
+  {
+   "id": "canon:atlas-os:2026-07-03-barbell-model-audit:personal:atlas-os",
+   "type": "canonical",
+   "label": "2026-07-03-barbell-model-audit",
+   "project": "atlas-os",
+   "summary": "Barbell model audit \u2014 judgment vs execution nodes across all loops, current model pins, staged diffs to move judgment to Fable 5.",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-os/2026-07-03-barbell-model-audit.md"
+  },
+  {
+   "id": "canon:atlas-pwa:PRODUCT-SPEC:personal:atlas-pwa",
+   "type": "canonical",
+   "label": "PRODUCT-SPEC",
+   "project": "atlas-pwa",
+   "summary": "Product spec for Atlas \u2014 the PWA that becomes the complete interface to Vince's second brain. Three pillars (Clarity / Action / Accountability), voice-first conversational surface, node knowledge graph, shadcn-style skin",
+   "date": "2026-07-12",
+   "status": "awaiting_signoff",
+   "path": "/Users/atlas/Code/vince-agents/outputs/atlas-pwa/PRODUCT-SPEC.md"
+  },
+  {
+   "id": "canon:vince-agents-meta:2026-07-31-k3-weights-live:personal:vince-agents-meta",
+   "type": "canonical",
+   "label": "2026-07-31-k3-weights-live",
+   "project": "vince-agents-meta",
+   "summary": "Kimi K3 weights are live on Hugging Face \u2014 auto-detected by scheduled/k3-weights-watch. Vince decides whether to self-host or wait for hosted providers to serve K3 cheaply.",
+   "date": "2026-07-31",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-agents-meta/2026-07-31-k3-weights-live.md"
+  },
+  {
+   "id": "canon:vince-agents-meta:2026-07-31-vince-writing-and-thinking-doctrine:personal:vince-agents-meta",
+   "type": "canonical",
+   "label": "2026-07-31-vince-writing-and-thinking-doctrine",
+   "project": "vince-agents-meta",
+   "summary": "Vince's canonical writing + thinking doctrine (2026-07-31). The deepest layer of the voice stack \u2014 the \"how I think\" operating manual any AI writing on Vince's behalf must load. Core principle - communicate the journey, ",
+   "date": "2026-07-31",
+   "status": "shipped",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-agents-meta/2026-07-31-vince-writing-and-thinking-doctrine.md"
+  },
+  {
+   "id": "canon:vince-agents-meta:2026-07-30-k3-weights-live:personal:vince-agents-meta",
+   "type": "canonical",
+   "label": "2026-07-30-k3-weights-live",
+   "project": "vince-agents-meta",
+   "summary": "Kimi K3 weights are live on Hugging Face \u2014 auto-detected by scheduled/k3-weights-watch. Vince decides whether to self-host or wait for hosted providers to serve K3 cheaply.",
+   "date": "2026-07-30",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-agents-meta/2026-07-30-k3-weights-live.md"
+  },
+  {
+   "id": "canon:turner:2026-07-03-skill-md-patches:personal:turner",
+   "type": "canonical",
+   "label": "2026-07-03-skill-md-patches",
+   "project": "turner",
+   "summary": "Two SKILL.md patches for the Turner Learn step \u2014 Cowork sandbox blocked writes to skills/, so apply by hand",
+   "date": "2026-07-03",
+   "status": "deferred",
+   "path": "/Users/atlas/Code/vince-agents/outputs/turner/learn/2026-07-03-skill-md-patches.md"
+  },
+  {
+   "id": "canon:3d-capability-scans:2026-07-29-scan:personal:3d-capability-scans",
+   "type": "canonical",
+   "label": "2026-07-29-scan",
+   "project": "3d-capability-scans",
+   "summary": "Biweekly 3D-capability scan \u2014 GAP HOLDS; Blender 5.2 XPBD hair is procedural not image-in, Meshy 3D Agent is UI not model, no fibrous editorial-hero pipeline shipped this cycle",
+   "date": "2026-07-29",
+   "status": "done",
+   "path": "/Users/atlas/Code/vince-agents/outputs/3d-capability-scans/2026-07-29-scan.md"
+  },
+  {
+   "id": "canon:higgsfield-asics-novalis-study:study:personal:higgsfield-asics-novalis-study",
+   "type": "canonical",
+   "label": "study",
+   "project": "higgsfield-asics-novalis-study",
+   "summary": "Deconstruction of \"ASICS \u00d7 NOVALIS\" AI brand short \u2014 15s, 4 beats, single-character campaign styled as editorial magazine spread. Ready-to-run recreate brief for Vince Studio.",
+   "date": "2026-07-21",
+   "status": "draft",
+   "path": "/Users/atlas/Code/vince-agents/outputs/higgsfield-asics-novalis-study/study.md"
+  },
+  {
+   "id": "canon:vince-studio:model-router-matrix:personal:vince-studio",
+   "type": "canonical",
+   "label": "model-router-matrix",
+   "project": "vince-studio",
+   "summary": "Canonical routing table for /studio:model-router \u2014 shot type to primary model with fallback + duration + aspect + Named Elements support.",
+   "date": "2026-07-19",
+   "status": "draft",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-studio/model-router-matrix.md"
+  },
+  {
+   "id": "canon:vince-studio:2026-07-19-recreate-vince-cap-workflow:personal:vince-studio",
+   "type": "canonical",
+   "label": "2026-07-19-recreate-vince-cap-workflow",
+   "project": "vince-studio",
+   "summary": "The working call that locked \"near-identical spot-the-difference recreation\" for Vince editorial hero portraits \u2014 proved by swapping round metal sunglasses to black baseball cap on the v3 monochrome portrait. Template fo",
+   "date": "2026-07-19",
+   "status": "locked",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-studio/workflows/2026-07-19-recreate-vince-cap-workflow.md"
+  },
+  {
+   "id": "canon:higgsfield-mastery:2026-07-19-higgsfield-unlimited-addon-analysis:personal:higgsfield-mastery",
+   "type": "canonical",
+   "label": "2026-07-19-higgsfield-unlimited-addon-analysis",
+   "project": "higgsfield-mastery",
+   "summary": "Higgsfield Seedance Unlimited add-on analysis \u2014 pricing tiers, what's included, Vince status (Ultra plan gets 30 days at no cost), recommendation, and the Sept 12 sales-close deadline.",
+   "date": "2026-07-19",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/higgsfield-mastery/2026-07-19-higgsfield-unlimited-addon-analysis.md"
+  },
+  {
+   "id": "canon:higgsfield-mastery:2026-07-19-vince-studio-constitution-v0-1:personal:higgsfield-mastery",
+   "type": "canonical",
+   "label": "2026-07-19-vince-studio-constitution-v0-1",
+   "project": "higgsfield-mastery",
+   "summary": "Vince Studio Constitution v0.1 \u2014 synthesised operating model. World thesis, visual grammar, 10-skill scaffold, 8 quality gates, 4-MCP stack, 90-day build plan, weekly rhythm.",
+   "date": "2026-07-19",
+   "status": "surfaced",
+   "path": "/Users/atlas/Code/vince-agents/outputs/higgsfield-mastery/2026-07-19-vince-studio-constitution-v0-1.md"
+  },
+  {
+   "id": "canon:deconstruction-analyses:2026-07-18-monochrome-editorial-portrait-round-sunglasses-hoodie:personal:deconstruction-analyses",
+   "type": "canonical",
+   "label": "2026-07-18-monochrome-editorial-portrait-round-sunglasses-ho",
+   "project": "deconstruction-analyses",
+   "summary": "Deconstruction of a high-contrast B&W editorial portrait (round sunglasses + hoodie, void backdrop, single hard-key) with formulas + paste-ready prompts for Nano Banana / MJ / Seedance 2.5.",
+   "date": "2026-07-18",
+   "status": "done",
+   "path": "/Users/atlas/Code/vince-agents/outputs/deconstruction-analyses/2026-07-18-monochrome-editorial-portrait-round-sunglasses-hoodie.md"
+  },
+  {
+   "id": "canon:vince-system-explainer:Vince-System-Explainer-2026-06-24:personal:vince-system-explainer",
+   "type": "canonical",
+   "label": "Vince-System-Explainer-2026-06-24",
+   "project": "vince-system-explainer",
+   "summary": "Sibling index for the Vince System Explainer PDF + ZIP bundle (2026-06-24)",
+   "date": "2026-06-24",
+   "status": "done",
+   "path": "/Users/atlas/Code/vince-agents/outputs/vince-system-explainer/Vince-System-Explainer-2026-06-24.md"
+  }
+ ],
+ "links": [
+  {
+   "source": "root",
+   "target": "vault:rollie",
+   "kind": "vault"
+  },
+  {
+   "source": "root",
+   "target": "vault:personal",
+   "kind": "vault"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:How to work on projects",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Twelve Outcomes Framework",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Tone of Voice",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Deconstruction to Agent Framework",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Impact Player Framework",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:BCC 1.3 - Introduction to Tone of Voice",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Vince \u2014 Tone of Voice (canonical)",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Collaboration Framework",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "doctrine:rollie:Crisis Voice",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:personal",
+   "target": "doctrine:personal:How to work on projects",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:personal",
+   "target": "doctrine:personal:Hope-to-Intention Decision Framework",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:personal",
+   "target": "doctrine:personal:Vince writing and thinking doctrine",
+   "kind": "doctrine"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:klaviyo-sync",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-recon-2026-06-30",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-jesse-complexcon",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:airtable-interfaces-research",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-recon",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-team-fork",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:voice-of-customer",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-pds",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie-kumo-magazine-style",
+   "kind": "active"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:claude-design-2026-06-19",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:shopify-admin-inspection-2026-06-19",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:globale-portal-2026-06-21",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:iconic-audit-2026-06-19",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:rollie",
+   "target": "rollie:rollie",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:one-thing",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:board-intel",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:storytelling",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:liquidity-engine",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:atlas-brain",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:atlas-architecture",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:atlas-os",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:atlas-pwa",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:vince-agents-meta",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:turner",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:obsidian-claude",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:chatgpt-project-bundle",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:task-review",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:jelly-sandal-mockups",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:rob-miles",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:3d-capability-scans",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:rob-miles-redline-run-100",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:higgsfield-asics-novalis-study",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:replications",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:rob-miles-launch-heist",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:vince-studio",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:higgsfield-mastery",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:deconstruction-analyses",
+   "kind": "active"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:vince-system-explainer",
+   "kind": "archived"
+  },
+  {
+   "source": "vault:personal",
+   "target": "personal:visual-pipeline",
+   "kind": "archived"
+  },
+  {
+   "source": "rollie:rollie-jesse-complexcon",
+   "target": "canon:rollie-jesse-complexcon:2026-07-03-jesse-us-launch-wargame:rollie:rollie-jesse-complexcon",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:airtable-interfaces-research",
+   "target": "canon:airtable-interfaces-research:2026-07-18-airtable-interfaces-programmatic-creation-research:rollie:airtable-interfaces-research",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:rollie-recon",
+   "target": "canon:rollie-recon:2026-07-28-klaviyo-rfm-sync-design:rollie:rollie-recon",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:rollie-team-fork",
+   "target": "canon:rollie-team-fork:2026-07-03-team-fork-plan:rollie:rollie-team-fork",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:voice-of-customer",
+   "target": "canon:voice-of-customer:2026-07-03-voc-synthesis-01:rollie:voice-of-customer",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:rollie-kumo-magazine-style",
+   "target": "canon:rollie-kumo-magazine-style:brief:rollie:rollie-kumo-magazine-style",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-brain",
+   "target": "canon:atlas-brain:2026-07-29-librechat-install-plan:personal:atlas-brain",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-brain",
+   "target": "canon:atlas-brain:2026-07-29-agent-workspace-research:personal:atlas-brain",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-brain",
+   "target": "canon:atlas-brain:2026-07-10-phase0-deploy-report:personal:atlas-brain",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-architecture",
+   "target": "canon:atlas-architecture:2026-07-28-axis-workstation-specs:personal:atlas-architecture",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-os",
+   "target": "canon:atlas-os:2026-07-03-one-thing-candidates:personal:atlas-os",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-os",
+   "target": "canon:atlas-os:2026-07-03-barbell-model-audit:personal:atlas-os",
+   "kind": "output"
+  },
+  {
+   "source": "personal:atlas-pwa",
+   "target": "canon:atlas-pwa:PRODUCT-SPEC:personal:atlas-pwa",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-agents-meta",
+   "target": "canon:vince-agents-meta:2026-07-31-k3-weights-live:personal:vince-agents-meta",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-agents-meta",
+   "target": "canon:vince-agents-meta:2026-07-31-vince-writing-and-thinking-doctrine:personal:vince-agents-meta",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-agents-meta",
+   "target": "canon:vince-agents-meta:2026-07-30-k3-weights-live:personal:vince-agents-meta",
+   "kind": "output"
+  },
+  {
+   "source": "personal:turner",
+   "target": "canon:turner:2026-07-03-skill-md-patches:personal:turner",
+   "kind": "output"
+  },
+  {
+   "source": "personal:3d-capability-scans",
+   "target": "canon:3d-capability-scans:2026-07-29-scan:personal:3d-capability-scans",
+   "kind": "output"
+  },
+  {
+   "source": "personal:higgsfield-asics-novalis-study",
+   "target": "canon:higgsfield-asics-novalis-study:study:personal:higgsfield-asics-novalis-study",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-studio",
+   "target": "canon:vince-studio:model-router-matrix:personal:vince-studio",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-studio",
+   "target": "canon:vince-studio:2026-07-19-recreate-vince-cap-workflow:personal:vince-studio",
+   "kind": "output"
+  },
+  {
+   "source": "personal:higgsfield-mastery",
+   "target": "canon:higgsfield-mastery:2026-07-19-higgsfield-unlimited-addon-analysis:personal:higgsfield-mastery",
+   "kind": "output"
+  },
+  {
+   "source": "personal:higgsfield-mastery",
+   "target": "canon:higgsfield-mastery:2026-07-19-vince-studio-constitution-v0-1:personal:higgsfield-mastery",
+   "kind": "output"
+  },
+  {
+   "source": "personal:deconstruction-analyses",
+   "target": "canon:deconstruction-analyses:2026-07-18-monochrome-editorial-portrait-round-sunglasses-hoodie:personal:deconstruction-analyses",
+   "kind": "output"
+  },
+  {
+   "source": "personal:vince-system-explainer",
+   "target": "canon:vince-system-explainer:Vince-System-Explainer-2026-06-24:personal:vince-system-explainer",
+   "kind": "output"
+  },
+  {
+   "source": "rollie:klaviyo-sync",
+   "target": "rollie:rollie-recon",
+   "kind": "wikilink"
+  }
+ ]
+}

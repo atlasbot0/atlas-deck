@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Atlas · Second Brain</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --cr:  #F2EDE4;
+  --ink: #1A1714;
+  --wdark: #1E1C17;
+  --sig: #FF4713;
+  --grey:#8C8782;
+  --rule:#D4CEC7;
+  --ri: rgba(242,237,228,0.10);
+  --dim: rgba(26,23,20,0.44);
+  --f: "Helvetica Neue","Arial",system-ui,sans-serif;
+  --fm: "SF Mono","Fira Mono","Courier New",monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100vh;overflow:hidden;background:var(--cr);
+  font-family:var(--f);-webkit-font-smoothing:antialiased;color:var(--ink);user-select:none}
+
+/* ── HEADER ── */
+#head{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 20px 12px;
+  background:var(--cr);border-bottom:1px solid var(--rule);display:flex;
+  align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#head .lbl{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+#head h1{font-size:clamp(15px, 2.5vw, 20px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+#head h1 span{color:var(--sig)}
+#head .meta{font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.06em}
+
+/* ── FILTERS ── */
+#filters{position:fixed;top:60px;left:20px;z-index:150;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 40px)}
+.filt{padding:4px 10px;border:1px solid var(--rule);background:transparent;
+  font-family:var(--fm);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--dim);cursor:pointer;transition:all 120ms}
+.filt:hover{border-color:var(--ink);color:var(--ink)}
+.filt.on{background:var(--ink);color:var(--cr);border-color:var(--ink)}
+
+/* ── GRAPH CANVAS ── */
+#g{position:fixed;top:0;left:0;width:100%;height:100%}
+.link{stroke:var(--rule);stroke-opacity:.55;stroke-width:.8;transition:stroke-opacity 180ms,stroke-width 180ms,stroke 180ms}
+.link.doctrine{stroke:var(--sig);stroke-opacity:.4;stroke-dasharray:3,3}
+.link.wikilink{stroke:var(--sig);stroke-opacity:.25}
+.link.output{stroke:var(--grey);stroke-opacity:.3}
+.link.faded{stroke-opacity:.06}
+.link.highlight{stroke:var(--sig);stroke-opacity:.95;stroke-width:1.6}
+
+.node circle{cursor:pointer;transition:stroke-width 140ms,fill-opacity 140ms}
+.node text{font-family:var(--f);font-size:11px;font-weight:600;fill:var(--ink);pointer-events:none;letter-spacing:-.005em}
+.node.faded circle{fill-opacity:.18}
+.node.faded text{fill:rgba(26,23,20,.25)}
+.node.dim text{fill:rgba(26,23,20,.35)}
+.node.highlight circle{stroke:var(--sig);stroke-width:2.2}
+.node.highlight text{fill:var(--sig);font-weight:800}
+
+/* Node styles by type */
+.n-root       {fill:var(--ink)}
+.n-vault      {fill:var(--ink)}
+.n-project    {fill:var(--cr);stroke:var(--ink);stroke-width:1}
+.n-project.p-Active   {fill:var(--sig)}
+.n-project.p-Completed{fill:#C8B99C}
+.n-project.p-Archived {fill:rgba(26,23,20,.15);stroke:rgba(26,23,20,.3)}
+.n-doctrine   {fill:#F2D08C;stroke:var(--ink);stroke-width:1.2}
+.n-canonical  {fill:none;stroke:var(--grey);stroke-width:1}
+
+/* ── SIDE PANEL ── */
+#panel{position:fixed;top:0;right:0;height:100%;width:min(380px, 90vw);
+  background:var(--wdark);color:var(--cr);z-index:400;
+  transform:translateX(100%);transition:transform 320ms cubic-bezier(0.16,1,0.3,1);
+  padding:56px 24px 24px;display:flex;flex-direction:column;overflow:hidden;
+  border-left:1px solid rgba(0,0,0,.4)}
+#panel.on{transform:translateX(0)}
+#panel .close{position:absolute;top:14px;right:14px;background:transparent;border:1px solid var(--ri);
+  color:var(--cr);width:28px;height:28px;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center}
+#panel .kind{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:var(--sig);
+  text-transform:uppercase;margin-bottom:10px}
+#panel h2{font-size:clamp(20px, 4vw, 28px);font-weight:800;letter-spacing:-.02em;
+  line-height:1.1;color:var(--cr);word-break:break-word}
+#panel .status{margin-top:8px;font-family:var(--fm);font-size:10px;letter-spacing:.1em;
+  color:rgba(242,237,228,.5);text-transform:uppercase}
+#panel .summary{margin-top:16px;font-size:14px;line-height:1.65;color:rgba(242,237,228,.75);
+  overflow-y:auto;flex:1;padding-right:8px}
+#panel .summary::-webkit-scrollbar{width:2px}
+#panel .summary::-webkit-scrollbar-thumb{background:var(--ri)}
+#panel .meta-row{display:flex;justify-content:space-between;padding:8px 0;
+  border-top:1px solid var(--ri);font-family:var(--fm);font-size:11px;color:rgba(242,237,228,.5)}
+#panel .meta-row .k{color:rgba(242,237,228,.35)}
+#panel .meta-row:last-child{border-bottom:1px solid var(--ri)}
+#panel .neighbors{margin-top:14px}
+#panel .neighbors h3{font-family:var(--fm);font-size:10px;letter-spacing:.16em;color:rgba(242,237,228,.4);
+  text-transform:uppercase;margin-bottom:8px}
+#panel .n-chip{display:inline-block;padding:3px 8px;border:1px solid var(--ri);
+  font-size:11px;color:var(--cr);margin:0 4px 4px 0;cursor:pointer}
+#panel .n-chip:hover{border-color:var(--sig);color:var(--sig)}
+
+/* ── LEGEND (bottom-left) ── */
+#leg{position:fixed;bottom:18px;left:20px;z-index:120;font-family:var(--fm);
+  font-size:10px;color:var(--dim);letter-spacing:.05em;display:flex;gap:14px;flex-wrap:wrap}
+#leg .item{display:flex;align-items:center;gap:5px}
+#leg .swatch{width:10px;height:10px;border:1px solid var(--ink)}
+
+/* ── STATS (bottom-right) ── */
+#stats{position:fixed;bottom:18px;right:20px;z-index:120;font-family:var(--fm);
+  font-size:10px;color:var(--grey);letter-spacing:.05em;text-align:right}
+
+/* ── BACK LINK ── */
+#back{position:fixed;top:14px;left:20px;z-index:200;font-family:var(--fm);font-size:10px;
+  letter-spacing:.08em;color:var(--dim);text-decoration:none;text-transform:uppercase;
+  padding:3px 0;border-bottom:1px solid transparent;transition:color 120ms,border-color 120ms}
+#back:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ── LOADING ── */
+#load{position:fixed;inset:0;background:var(--cr);z-index:900;display:flex;
+  align-items:center;justify-content:center;transition:opacity 400ms}
+#load.gone{opacity:0;pointer-events:none}
+#load .dot{width:8px;height:8px;background:var(--sig);border-radius:50%;animation:pulse 900ms ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.6);opacity:.4}}
+
+@media(max-width: 640px) {
+  #panel{width:100%}
+  #head h1{max-width:60%}
+  #filters{top:52px;font-size:10px}
+  .filt{padding:3px 8px;font-size:10px}
+}
+</style>
+</head>
+<body>
+
+<div id="load"><div class="dot"></div></div>
+
+<a href="deck.html" id="back">← Atlas deck</a>
+
+<div id="head">
+  <div>
+    <div class="lbl">Atlas · Interactive</div>
+    <h1>Second Brain <span>—</span> live graph of everything I know</h1>
+  </div>
+  <div class="meta" id="stat-meta">— nodes · — links</div>
+</div>
+
+<div id="filters">
+  <button class="filt on" data-f="all">ALL</button>
+  <button class="filt" data-f="rollie">ROLLIE</button>
+  <button class="filt" data-f="personal">PERSONAL</button>
+  <button class="filt" data-f="active">ACTIVE</button>
+  <button class="filt" data-f="archived">ARCHIVED</button>
+  <button class="filt" data-f="doctrine">DOCTRINE</button>
+  <button class="filt" data-f="canonical">CANONICAL OUTPUTS</button>
+</div>
+
+<svg id="g"></svg>
+
+<div id="panel">
+  <button class="close" onclick="clearSel()">×</button>
+  <div class="kind" id="p-kind"></div>
+  <h2 id="p-title"></h2>
+  <div class="status" id="p-status"></div>
+  <div class="summary" id="p-summary"></div>
+  <div id="p-meta"></div>
+  <div class="neighbors" id="p-neighbors"></div>
+</div>
+
+<div id="leg">
+  <div class="item"><span class="swatch" style="background:var(--sig)"></span> Active project</div>
+  <div class="item"><span class="swatch" style="background:#C8B99C"></span> Completed</div>
+  <div class="item"><span class="swatch" style="background:rgba(26,23,20,.15)"></span> Archived</div>
+  <div class="item"><span class="swatch" style="background:#F2D08C"></span> Doctrine</div>
+  <div class="item"><span class="swatch" style="background:transparent;border:1px solid var(--grey)"></span> Canonical output</div>
+</div>
+
+<div id="stats" id="stat-updated"></div>
+
+<script>
+const W = () => window.innerWidth;
+const H = () => window.innerHeight;
+
+let DATA = null;
+let CURRENT_FILTER = 'all';
+let SIM = null;
+let SELECTED = null;
+
+const svg = d3.select('#g').attr('width', W()).attr('height', H());
+const g = svg.append('g');
+
+// Zoom
+svg.call(d3.zoom().scaleExtent([0.3, 3]).on('zoom', (e) => g.attr('transform', e.transform)));
+
+function nodeRadius(n) {
+  if (n.type === 'root') return 22;
+  if (n.type === 'vault') return 15;
+  if (n.type === 'doctrine') return 9;
+  if (n.type === 'project') {
+    if (n.status === 'Archived') return 6;
+    return 10;
+  }
+  if (n.type === 'canonical') return 3;
+  return 5;
+}
+
+function nodeClass(n) {
+  let c = 'node';
+  if (n.type === 'project') c += ` n-project p-${n.status}`;
+  return c;
+}
+function circleClass(n) {
+  if (n.type === 'root') return 'n-root';
+  if (n.type === 'vault') return 'n-vault';
+  if (n.type === 'project') return `n-project p-${n.status}`;
+  if (n.type === 'doctrine') return 'n-doctrine';
+  if (n.type === 'canonical') return 'n-canonical';
+  return '';
+}
+
+function showLabel(n) {
+  // Only show labels for root, vaults, and important projects (not archived, not canonical)
+  if (n.type === 'root' || n.type === 'vault') return true;
+  if (n.type === 'project' && n.status !== 'Archived') return true;
+  if (n.type === 'doctrine') return true;
+  return false;
+}
+
+function passesFilter(n) {
+  if (CURRENT_FILTER === 'all') return true;
+  if (CURRENT_FILTER === 'rollie') return n.vault === 'rollie' || n.id === 'root' || n.id === 'vault:rollie';
+  if (CURRENT_FILTER === 'personal') return n.vault === 'personal' || n.id === 'root' || n.id === 'vault:personal';
+  if (CURRENT_FILTER === 'active') return n.status === 'Active' || n.type === 'root' || n.type === 'vault';
+  if (CURRENT_FILTER === 'archived') return n.status === 'Archived' || n.type === 'root' || n.type === 'vault';
+  if (CURRENT_FILTER === 'doctrine') return n.type === 'doctrine' || n.type === 'root' || n.type === 'vault';
+  if (CURRENT_FILTER === 'canonical') return n.type === 'canonical' || n.type === 'project' || n.type === 'root' || n.type === 'vault';
+  return true;
+}
+
+function applyFilter() {
+  const links = g.selectAll('.link');
+  const nodes = g.selectAll('.node');
+  nodes.classed('faded', n => !passesFilter(n));
+  links.classed('faded', l => !passesFilter(l.source) || !passesFilter(l.target));
+}
+
+function render() {
+  const nodes = DATA.nodes;
+  const links = DATA.links;
+
+  // Only include valid links (source + target exist in nodes)
+  const idset = new Set(nodes.map(n => n.id));
+  const validLinks = links.filter(l => idset.has(l.source) && idset.has(l.target));
+
+  SIM = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(validLinks).id(d => d.id)
+      .distance(l => {
+        if (l.kind === 'vault') return 160;
+        if (l.kind === 'doctrine') return 90;
+        if (l.kind === 'output') return 40;
+        if (l.kind === 'wikilink') return 130;
+        return 100;
+      })
+      .strength(l => {
+        if (l.kind === 'vault') return 1;
+        if (l.kind === 'output') return 0.35;
+        if (l.kind === 'wikilink') return 0.15;
+        return 0.6;
+      })
+    )
+    .force('charge', d3.forceManyBody().strength(n => n.type === 'root' ? -800 : n.type === 'vault' ? -600 : n.type === 'project' ? -280 : -50))
+    .force('center', d3.forceCenter(W()/2, H()/2))
+    .force('collide', d3.forceCollide().radius(n => nodeRadius(n) + 6));
+
+  const link = g.selectAll('.link').data(validLinks).enter()
+    .append('line')
+    .attr('class', d => 'link ' + (d.kind || ''));
+
+  const node = g.selectAll('.node').data(nodes).enter()
+    .append('g')
+    .attr('class', d => nodeClass(d))
+    .on('click', (e, d) => selectNode(d))
+    .call(d3.drag()
+      .on('start', (e, d) => { if (!e.active) SIM.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end', (e, d) => { if (!e.active) SIM.alphaTarget(0); if (d.type !== 'vault' && d.type !== 'root') { d.fx = null; d.fy = null; } }));
+
+  node.append('circle')
+    .attr('r', d => nodeRadius(d))
+    .attr('class', d => circleClass(d));
+
+  node.filter(d => showLabel(d))
+    .append('text')
+    .attr('x', d => nodeRadius(d) + 5)
+    .attr('y', 4)
+    .text(d => d.label.length > 26 ? d.label.substring(0, 24) + '…' : d.label);
+
+  // Fix root at center
+  const root = nodes.find(n => n.id === 'root');
+  if (root) { root.fx = W()/2; root.fy = H()/2; }
+
+  // Fix vaults left/right
+  const vr = nodes.find(n => n.id === 'vault:rollie');
+  const vp = nodes.find(n => n.id === 'vault:personal');
+  if (vr) { vr.fx = W()/2 - 180; vr.fy = H()/2; }
+  if (vp) { vp.fx = W()/2 + 180; vp.fy = H()/2; }
+
+  SIM.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
+  });
+}
+
+function selectNode(n) {
+  if (SELECTED === n.id) { clearSel(); return; }
+  SELECTED = n.id;
+  d3.select('#panel').classed('on', true);
+  d3.select('#p-kind').text(n.type === 'project' ? `Project · ${n.vault}` : n.type);
+  d3.select('#p-title').text(n.label);
+  d3.select('#p-status').text(n.status ? `Status · ${n.status}` : '');
+  d3.select('#p-summary').text(n.summary || '(no summary)');
+
+  // Meta rows
+  let meta = '';
+  if (n.last_touched) meta += `<div class="meta-row"><span class="k">last touched</span><span>${n.last_touched}</span></div>`;
+  if (n.date) meta += `<div class="meta-row"><span class="k">shipped</span><span>${n.date}</span></div>`;
+  if (n.subgroup) meta += `<div class="meta-row"><span class="k">group</span><span>${n.subgroup}</span></div>`;
+  if (n.project) meta += `<div class="meta-row"><span class="k">from project</span><span>${n.project}</span></div>`;
+  if (n.canonical_path) meta += `<div class="meta-row"><span class="k">outputs at</span><span style="font-size:10px">${n.canonical_path}</span></div>`;
+  document.getElementById('p-meta').innerHTML = meta;
+
+  // Neighbors
+  const neighborIds = new Set();
+  DATA.links.forEach(l => {
+    const sid = typeof l.source === 'object' ? l.source.id : l.source;
+    const tid = typeof l.target === 'object' ? l.target.id : l.target;
+    if (sid === n.id) neighborIds.add(tid);
+    if (tid === n.id) neighborIds.add(sid);
+  });
+  const neighbors = DATA.nodes.filter(nn => neighborIds.has(nn.id));
+  let nh = '';
+  if (neighbors.length) {
+    nh = '<h3>Connected to</h3>' + neighbors.map(nn =>
+      `<span class="n-chip" onclick="selectById('${nn.id.replace(/'/g, "\\'")}')">${nn.label}</span>`
+    ).join('');
+  }
+  document.getElementById('p-neighbors').innerHTML = nh;
+
+  // Highlight in graph
+  g.selectAll('.node').classed('highlight', d => d.id === n.id).classed('dim', d => d.id !== n.id && !neighborIds.has(d.id));
+  g.selectAll('.link').classed('highlight', l => {
+    const sid = typeof l.source === 'object' ? l.source.id : l.source;
+    const tid = typeof l.target === 'object' ? l.target.id : l.target;
+    return sid === n.id || tid === n.id;
+  });
+}
+
+function selectById(id) {
+  const n = DATA.nodes.find(x => x.id === id);
+  if (n) selectNode(n);
+}
+
+function clearSel() {
+  SELECTED = null;
+  d3.select('#panel').classed('on', false);
+  g.selectAll('.node').classed('highlight', false).classed('dim', false);
+  g.selectAll('.link').classed('highlight', false);
+}
+
+// Wire filters
+document.querySelectorAll('.filt').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.filt').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    CURRENT_FILTER = b.dataset.f;
+    applyFilter();
+  };
+});
+
+// Load + render
+d3.json('second-brain-data.json').then(d => {
+  DATA = d;
+  render();
+  document.getElementById('load').classList.add('gone');
+  document.getElementById('stat-meta').textContent = `${d.stats.nodes} nodes · ${d.stats.links} connections`;
+  document.getElementById('stats').innerHTML = `Updated ${d.stats.generated_at.substring(0,10)} · ${d.stats.projects_active} active · ${d.stats.doctrine_files} doctrine · ${d.stats.canonical_outputs} outputs`;
+});
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  svg.attr('width', W()).attr('height', H());
+  if (SIM) {
+    SIM.force('center', d3.forceCenter(W()/2, H()/2));
+    SIM.alpha(0.3).restart();
+    // reposition fixed vaults
+    const nodes = SIM.nodes();
+    const root = nodes.find(n => n.id === 'root');
+    const vr = nodes.find(n => n.id === 'vault:rollie');
+    const vp = nodes.find(n => n.id === 'vault:personal');
+    if (root) { root.fx = W()/2; root.fy = H()/2; }
+    if (vr) { vr.fx = W()/2 - 180; vr.fy = H()/2; }
+    if (vp) { vp.fx = W()/2 + 180; vp.fy = H()/2; }
+  }
+});
+
+// Escape to clear
+document.addEventListener('keydown', e => { if (e.key === 'Escape') clearSel(); });
+</script>
+</body>
+</html>
