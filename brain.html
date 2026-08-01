@@ -312,10 +312,14 @@ function initGraph() {
     .linkOpacity(0.28)
     .linkWidth(0.4)
     .linkDirectionalParticles(0)
-    .warmupTicks(80)
-    .cooldownTicks(300)
-    .d3AlphaDecay(0.028)
-    .d3VelocityDecay(0.28)
+    .warmupTicks(120)
+    .cooldownTicks(400)
+    .d3AlphaDecay(0.0228)
+    .d3VelocityDecay(0.32)
+    .onEngineStop(() => {
+      // Auto-zoom camera to fit the entire graph after force layout settles
+      GRAPH.zoomToFit(1200, 80);
+    })
     .onNodeClick(node => {
       showPanel(node);
       // Fly camera to it
@@ -329,9 +333,8 @@ function initGraph() {
     })
     .onBackgroundClick(() => clearSel());
 
-  // Fog for depth — additive-blend sprite stacking gives the bloom-like effect
-  // without needing UnrealBloomPass (which caused a Three.js version conflict)
-  GRAPH.scene().fog = new THREE.FogExp2(0x050403, 0.0022);
+  // Very subtle fog for depth — must be low or 1600-node spread gets blacked out
+  GRAPH.scene().fog = new THREE.FogExp2(0x050403, 0.00035);
 
   // Camera auto-drift
   const controls = GRAPH.controls();
@@ -342,11 +345,14 @@ function initGraph() {
     controls.dampingFactor = 0.08;
   }
 
-  // Hide loading + hint after warmup
+  // Set initial camera far enough to see the whole galaxy while it settles
+  GRAPH.cameraPosition({ x: 0, y: 0, z: 800 });
+
+  // Hide loading + hint after force layout has had time to settle
   setTimeout(() => {
     document.getElementById('load').classList.add('gone');
     setTimeout(() => document.getElementById('load').remove(), 400);
-  }, 1400);
+  }, 3200);
   setTimeout(() => {
     document.getElementById('hint').classList.add('gone');
     setTimeout(() => document.getElementById('hint').remove(), 700);
