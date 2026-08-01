@@ -205,19 +205,12 @@ html,body{width:100%;height:100vh;overflow:hidden;background:var(--wdark);
   <div class="lbl">assembling the galaxy…</div>
 </div>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
-  }
-}
-</script>
+<!-- Use UMD script tags (single Three.js instance to avoid version mismatch with 3d-force-graph) -->
+<script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+<script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
 
-<script type="module">
-import * as THREE from 'three';
-import ForceGraph3D from 'https://cdn.jsdelivr.net/npm/3d-force-graph@1.73.4/+esm';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+<script>
+// THREE and ForceGraph3D are globals from the UMD scripts above
 
 // ── COLOUR MAP ─────────────────────────────────────────────
 const TYPE_COLORS = {
@@ -298,13 +291,13 @@ function initGraph() {
       // Custom sprite for glow — additive-blended billboard for each node
       const color = TYPE_COLORS[n.type] ?? 0x807870;
       const bright = BRIGHT_TYPES.has(n.type);
-      const size = (n.size || 1) * (bright ? 3.6 : 2.4);
+      const size = (n.size || 1) * (bright ? 5.2 : 3.4);
       const spriteMap = getGlowTexture();
       const material = new THREE.SpriteMaterial({
         map: spriteMap,
         color: color,
         transparent: true,
-        opacity: bright ? 0.95 : 0.75,
+        opacity: bright ? 1.0 : 0.85,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
@@ -336,14 +329,8 @@ function initGraph() {
     })
     .onBackgroundClick(() => clearSel());
 
-  // Bloom post-processing
-  const bloomPass = new UnrealBloomPass();
-  bloomPass.strength = 1.35;
-  bloomPass.radius = 0.75;
-  bloomPass.threshold = 0.1;
-  GRAPH.postProcessingComposer().addPass(bloomPass);
-
-  // Fog for depth
+  // Fog for depth — additive-blend sprite stacking gives the bloom-like effect
+  // without needing UnrealBloomPass (which caused a Three.js version conflict)
   GRAPH.scene().fog = new THREE.FogExp2(0x050403, 0.0022);
 
   // Camera auto-drift
