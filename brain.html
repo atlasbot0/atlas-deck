@@ -285,22 +285,22 @@ function initGraph() {
     .nodeVal(n => n.size * n.size)  // radius ∝ sqrt(val)
     .nodeAutoColorBy(null)
     .nodeColor(n => `#${(TYPE_COLORS[n.type] ?? 0x807870).toString(16).padStart(6,'0')}`)
-    .nodeOpacity(0.95)
-    .nodeResolution(8)
-    .nodeRelSize(28)
+    .nodeOpacity(0.75)
+    .nodeResolution(6)
+    .nodeRelSize(5)
     .nodeThreeObjectExtend(true)
     .nodeThreeObject(n => {
-      // Glow halo sprite added on top of default sphere. Additive-blend so
-      // stacked sprites brighten cluster hotspots naturally.
+      // Glow halo dominates — sphere core is tiny, sprite around it is the
+      // visual. Additive stacking of sprites brightens cluster hotspots.
       const color = TYPE_COLORS[n.type] ?? 0x807870;
       const bright = BRIGHT_TYPES.has(n.type);
-      const size = (n.size || 1) * (bright ? 90 : 55);
+      const size = (n.size || 1) * (bright ? 55 : 32);
       const spriteMap = getGlowTexture();
       const material = new THREE.SpriteMaterial({
         map: spriteMap,
         color: color,
         transparent: true,
-        opacity: bright ? 0.85 : 0.55,
+        opacity: bright ? 0.98 : 0.72,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
@@ -347,8 +347,8 @@ function initGraph() {
   GRAPH.d3Force('charge').strength(-14).distanceMax(400);
   GRAPH.d3Force('link').distance(28).strength(0.6);
 
-  // Fixed camera position — start close enough for nodes to be visible
-  GRAPH.cameraPosition({ x: 0, y: 0, z: 1600 });
+  // Fixed camera position — closer for the "flying through the galaxy" feel
+  GRAPH.cameraPosition({ x: 0, y: 0, z: 950 });
 
   // Hide loading + hint after force layout has had time to settle
   setTimeout(() => {
