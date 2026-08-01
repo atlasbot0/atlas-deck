@@ -202,6 +202,11 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
   .tlr{flex:none;min-height:0}
   #s10 .ir, #s10 [class~="ir"]{flex:none !important}
 
+  /* Middle content divs (class e.e2 with inline flex:1) — release from flex:1
+     on mobile so they size to their content. Prevents footer text painting
+     over the last row when 6+ rows exceed the desktop flex allotment. */
+  .cr > .e.e2, .dk > .e.e2 {flex:0 0 auto !important}
+
   /* Stack every side-by-side layout vertically */
   .cols{flex-direction:column}
   .vr{width:100%;height:1px;background:var(--rule);align-self:stretch}
