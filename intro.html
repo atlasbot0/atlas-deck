@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Atlas — an intro before the deck</title>
+<style>
+/* ═══════════════════════════════════════════════════════
+   ATLAS — one-pager intro. Reads like a designed document,
+   prints cleanly on A4, holds up on a phone.
+═══════════════════════════════════════════════════════ */
+:root {
+  --cr:  #F2EDE4;
+  --ink: #1A1714;
+  --sig: #FF4713;
+  --grey:#8C8782;
+  --rule:#D4CEC7;
+  --dim: rgba(26,23,20,0.62);
+  --f:  "Helvetica Neue","Arial",system-ui,sans-serif;
+  --fm: "SF Mono","Fira Mono","Courier New",monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--cr)}
+body{
+  font-family:var(--f);
+  -webkit-font-smoothing:antialiased;
+  color:var(--ink);
+  background:var(--cr);
+  line-height:1.55;
+  min-height:100vh;
+  padding:56px 24px 96px;
+}
+
+.page{
+  max-width:720px;
+  margin:0 auto;
+  position:relative;
+}
+
+/* ── HEADER ── */
+.masthead{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--rule);
+}
+.masthead .lockup{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.masthead .rule-stack{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}
+.masthead .rule-stack .r{height:1px;background:var(--rule)}
+.masthead .rule-stack .r.sig{height:2px;background:var(--sig);width:36px}
+.masthead .rule-stack .r.short{width:80px}
+.masthead .rule-stack .r.full{width:120px}
+
+.wordmark{
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:-.045em;
+  line-height:.9;
+  color:var(--ink);
+}
+.strap{
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-top:4px;
+}
+.masthead .meta{
+  text-align:right;
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:.08em;
+  color:var(--grey);
+  line-height:1.5;
+}
+.masthead .meta .k{color:var(--grey);display:block}
+.masthead .meta .v{color:var(--ink);font-weight:600}
+
+/* ── DECK ── */
+.deck-hint{
+  margin-top:12px;
+  font-family:var(--fm);
+  font-size:10px;
+  letter-spacing:.08em;
+  color:var(--grey);
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--rule);
+}
+.deck-hint span{color:var(--dim)}
+.deck-hint a{color:var(--sig);text-decoration:none;border-bottom:1px solid var(--sig);padding-bottom:1px}
+.deck-hint a:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ── OPENING LINE ── */
+.opener{
+  margin-top:28px;
+  font-size:22px;
+  font-weight:400;
+  letter-spacing:-.015em;
+  line-height:1.3;
+  color:var(--ink);
+  max-width:600px;
+}
+.opener em{font-style:italic;color:var(--dim)}
+
+/* ── SECTIONS ── */
+.section{
+  display:flex;
+  gap:18px;
+  padding:26px 0 24px;
+  border-bottom:1px solid var(--rule);
+}
+.section:last-of-type{border-bottom:none}
+.section .num{
+  font-family:var(--fm);
+  font-size:11px;
+  letter-spacing:.1em;
+  color:var(--sig);
+  width:28px;
+  flex-shrink:0;
+  padding-top:4px;
+}
+.section .body{flex:1;min-width:0}
+.section h2{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:-.02em;
+  line-height:1.2;
+  color:var(--ink);
+  margin-bottom:10px;
+}
+.section h2 em{
+  color:var(--sig);
+  font-style:normal;
+}
+.section p{
+  font-size:15px;
+  line-height:1.65;
+  color:var(--ink);
+  margin-bottom:10px;
+}
+.section p:last-child{margin-bottom:0}
+.section p .m{
+  font-family:var(--fm);
+  font-size:12px;
+  color:var(--dim);
+  letter-spacing:.02em;
+}
+
+/* ── SIGN-OFF ── */
+.signoff{
+  margin-top:36px;
+  padding-top:18px;
+  border-top:1px solid var(--rule);
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.signoff .who{
+  font-family:var(--fm);
+  font-size:11px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:700;
+}
+.signoff .who .role{color:var(--dim);font-weight:400;display:block;margin-top:3px;letter-spacing:.08em}
+.signoff .cta{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 16px;
+  background:var(--ink);
+  color:var(--cr);
+  text-decoration:none;
+  font-family:var(--fm);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:700;
+  border:1px solid var(--ink);
+  transition:background 140ms,color 140ms;
+}
+.signoff .cta:hover{background:var(--cr);color:var(--ink)}
+.signoff .cta .arw{color:var(--sig)}
+
+/* ── PAGE FOOT ── */
+.foot{
+  margin-top:36px;
+  font-family:var(--fm);
+  font-size:9px;
+  letter-spacing:.14em;
+  color:var(--grey);
+  text-transform:uppercase;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  body{padding:32px 18px 64px}
+  .wordmark{font-size:34px}
+  .masthead{flex-direction:column;align-items:flex-start;gap:14px}
+  .masthead .meta{text-align:left}
+  .opener{font-size:18px;margin-top:20px}
+  .section{padding:22px 0}
+  .section .num{width:24px;font-size:10px}
+  .section h2{font-size:17px}
+  .section p{font-size:14px;line-height:1.6}
+  .deck-hint{flex-direction:column;gap:6px;align-items:flex-start}
+  .signoff{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:420px){
+  body{padding:24px 14px 48px}
+  .wordmark{font-size:30px}
+}
+
+/* ── PRINT ── */
+@media print{
+  html,body{background:#fff}
+  body{padding:0;color:#000}
+  .page{max-width:none;margin:0;padding:14mm 16mm}
+  .masthead,.deck-hint,.section,.signoff{border-color:#cfcfcf !important}
+  .opener{font-size:18pt;margin-top:18pt}
+  .wordmark{font-size:36pt}
+  .section h2{font-size:14pt}
+  .section p{font-size:10.5pt;line-height:1.5}
+  .section .num{color:#000}
+  .signoff .cta{background:#fff;color:#000;border:1px solid #000}
+  .signoff .cta .arw{color:#000}
+  .foot{color:#666}
+  a{color:#000;text-decoration:none}
+  @page{size:A4;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="lockup">
+      <div class="rule-stack">
+        <div class="r sig"></div>
+        <div class="r short"></div>
+        <div class="r full"></div>
+      </div>
+      <div class="wordmark">ATLAS</div>
+      <div class="strap">An intro before the deck</div>
+    </div>
+    <div class="meta">
+      <span class="k">Author</span><span class="v">Vince Lebon</span>
+      <span class="k" style="margin-top:6px">Version</span><span class="v">Rev 2026.07</span>
+      <span class="k" style="margin-top:6px">Location</span><span class="v">Melbourne, AU</span>
+    </div>
+  </div>
+
+  <div class="deck-hint">
+    <span>Read this first. It's the shape of what you're about to see.</span>
+    <a href="deck.html">Open the deck →</a>
+  </div>
+
+  <p class="opener">
+    Most of the AI conversation is still about tools. I've been less interested in that. The interesting question, at least for me, has been about what kind of <em>system</em> a founder actually needs when the operational load starts to crowd out the work that matters.
+  </p>
+
+  <div class="section">
+    <div class="num">01</div>
+    <div class="body">
+      <h2>The problem I was actually solving</h2>
+      <p>I've spent fourteen years running Rollie. The work that compounds — decisions, relationships, taste, judgement — is maybe 5% of any given day. The rest is administration. I refused to accept that the 95% had to keep stealing from the 5%. Atlas is what got built.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="num">02</div>
+    <div class="body">
+      <h2>What it is</h2>
+      <p>It isn't an assistant. It isn't a wrapper for one. It's an operating system that runs my company across four rebuilds and every specific failure they exposed. Ten layers, four rails — I'll walk you through those in the deck.</p>
+      <p>The short version: one Git repository is the source of truth every runtime reads from. One Obsidian vault is the persistent memory each project loads before doing anything. One advisory of 36 people I trust across six hats pressure-tests decisions I'd otherwise make alone. And two evaluative gates — a taste gate and a destination gate — sit between the work and me, so nothing ships that hasn't been checked against a standard.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="num">03</div>
+    <div class="body">
+      <h2>How I use it</h2>
+      <p>Every day the 95% runs itself. Research briefs before I wake up. Wellness check-ins tied to my training program. Start-of-day and end-of-day briefs from the live state of my calendar, my tasks, my dashboards. On-demand dispatch from my phone. Nightly data reconciliation. Weekly review. Every scheduled job that has ever failed has a specific daemon named after the failure.</p>
+      <p>That leaves my head free for the 5%. When I'm making a decision I care about, the advisory loads. When I'm shipping something creative, the taste gate loads. When I'm writing as myself, the voice gate loads. The system knows which mode it's in.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="num">04</div>
+    <div class="body">
+      <h2>The moat, <em>as I see it</em></h2>
+      <p>I don't think the moat is any single tool inside the stack. Every tool is portable. The moat is what the stack was built out of.</p>
+      <p>Every rebuild left a scar file. The Klaviyo Path A failure is why the load-state-before-you-act rule fires in every session now. The LibreChat trial is why the model-routing lane is a first-class architectural concern. The reap-stale-processes daemon exists because 145 orphan processes once ate 14 GB. Nothing here is defensive-in-general — everything is defensive-against-something-that-broke. That's the difference between a stack you assembled and a stack you earned.</p>
+      <p>The second moat is that the system encodes a specific culture. The advisory is who I listen to. The taste gate is what I think is good. The doctrine is what I believe about how work should happen. Copying the tools would leave you with tools. Not with fourteen years of Rollie's culture running the loop.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="num">05</div>
+    <div class="body">
+      <h2>Where I think this is heading</h2>
+      <p>Systems-thinking applied to a new medium. Footwear was one medium — I'd spent years designing shoes by treating them like architecture. AI is the next. The questions don't change: what problem are we actually solving, what's the underlying system, what's changing, what are we missing. The substrate does.</p>
+      <p>I don't think of Atlas as a product. It's the operating environment I'm running the next decade of Rollie inside. This page is just the shape of what you're about to see.</p>
+    </div>
+  </div>
+
+  <div class="signoff">
+    <div class="who">
+      VINCE LEBON
+      <span class="role">Founder — Rollie Nation · Melbourne</span>
+    </div>
+    <a href="deck.html" class="cta">Walk me through the deck <span class="arw">→</span></a>
+  </div>
+
+  <div class="foot">
+    <span>Atlas · Rev 2026.07 · Built out of its own scars</span>
+    <span>One page · Then the deck · Then the questions</span>
+  </div>
+
+</div>
+</body>
+</html>
