@@ -313,14 +313,10 @@ function initGraph() {
     .linkOpacity(0.28)
     .linkWidth(0.4)
     .linkDirectionalParticles(0)
-    .warmupTicks(120)
-    .cooldownTicks(400)
+    .warmupTicks(140)
+    .cooldownTicks(500)
     .d3AlphaDecay(0.0228)
-    .d3VelocityDecay(0.32)
-    .onEngineStop(() => {
-      // Auto-zoom camera to fit the entire graph after force layout settles
-      GRAPH.zoomToFit(1200, 80);
-    })
+    .d3VelocityDecay(0.35)
     .onNodeClick(node => {
       showPanel(node);
       // Fly camera to it
@@ -346,8 +342,13 @@ function initGraph() {
     controls.dampingFactor = 0.08;
   }
 
-  // Set initial camera far enough to see the whole galaxy while it settles
-  GRAPH.cameraPosition({ x: 0, y: 0, z: 800 });
+  // Tighter forces to keep 1600 nodes in a compact galaxy instead of a
+  // sparse spread that would need the camera 7000 units back
+  GRAPH.d3Force('charge').strength(-14).distanceMax(400);
+  GRAPH.d3Force('link').distance(28).strength(0.6);
+
+  // Fixed camera position — start close enough for nodes to be visible
+  GRAPH.cameraPosition({ x: 0, y: 0, z: 1600 });
 
   // Hide loading + hint after force layout has had time to settle
   setTimeout(() => {
