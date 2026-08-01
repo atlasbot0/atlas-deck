@@ -242,10 +242,10 @@ const BRIGHT_TYPES = new Set([
 ]);
 
 // ── LOAD DATA ──────────────────────────────────────────────
-let RAW = null;
-let GRAPH = null;
-let CURRENT_FILTER = 'all';
-let SEL = null;
+var RAW = null;
+var GRAPH = null;
+var CURRENT_FILTER = 'all';
+var SEL = null;
 
 fetch('brain-data.json?v=' + Date.now())
   .then(r => r.json())
@@ -286,28 +286,28 @@ function initGraph() {
     .nodeAutoColorBy(null)
     .nodeColor(n => `#${(TYPE_COLORS[n.type] ?? 0x807870).toString(16).padStart(6,'0')}`)
     .nodeOpacity(0.92)
-    .nodeResolution(6)
+    .nodeResolution(8)
+    .nodeRelSize(6)
+    .nodeThreeObjectExtend(true)
     .nodeThreeObject(n => {
-      // Custom sprite for glow — additive-blended billboard for each node
+      // Sprite EXTENDS the default sphere — adds a glowing halo around it
       const color = TYPE_COLORS[n.type] ?? 0x807870;
       const bright = BRIGHT_TYPES.has(n.type);
-      const size = (n.size || 1) * (bright ? 5.2 : 3.4);
+      const size = (n.size || 1) * (bright ? 22 : 14);
       const spriteMap = getGlowTexture();
       const material = new THREE.SpriteMaterial({
         map: spriteMap,
         color: color,
         transparent: true,
-        opacity: bright ? 1.0 : 0.85,
+        opacity: bright ? 0.85 : 0.55,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
       const sprite = new THREE.Sprite(material);
       sprite.scale.set(size, size, 1);
-      // Store node ref so filter/click can find it
       sprite.userData.node = n;
       return sprite;
     })
-    .nodeThreeObjectExtend(false)
     .linkColor(l => 'rgba(242,237,228,0.08)')
     .linkOpacity(0.28)
     .linkWidth(0.4)
