@@ -187,9 +187,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--wdark);
    iPhone 17 Pro Max = ~430pt portrait. Stack everything.
    ═══════════════════════════════════════════════════════ */
 @media(max-width:768px){
+  /* Hide desktop-only interactive controls that overlay content on mobile.
+     Users navigate with swipe (touch handlers still active) or tap the dots at bottom. */
+  .nb{display:none !important}
+  #dots{display:none !important}
+  #ctr{top:12px;right:14px;font-size:9px}
+
   /* Every slide's content must be able to scroll internally */
   .slide{overflow-y:auto;-webkit-overflow-scrolling:touch;flex-direction:column}
   .cr, .dk{overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+  /* Rows with flex:1 on desktop crush content on mobile — release them */
+  .rb{flex:none}
+  .tlr{flex:none;min-height:0}
+  #s10 .ir, #s10 [class~="ir"]{flex:none !important}
 
   /* Stack every side-by-side layout vertically */
   .cols{flex-direction:column}

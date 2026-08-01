@@ -107,11 +107,48 @@ html,body{width:100%;height:100vh;overflow:hidden;background:var(--cr);
   font-family:var(--fm);font-size:10px;color:var(--grey);letter-spacing:.05em;
   display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
-@media(max-width:640px){
-  #capnl{position:fixed;top:auto;bottom:60px;right:10px;left:10px;width:auto;transform:none;max-height:40%}
-  .ly-t{flex:0 0 130px;font-size:12px}
-  .ly-c{font-size:10px}
-  .ctx-bar{width:120px}
+@media(max-width:768px){
+  /* Header: allow it to wrap tighter, no left-padding for the fixed #back link (it moves inline) */
+  #head{padding:38px 14px 10px;flex-direction:column;align-items:flex-start;gap:6px}
+  #head h1{font-size:15px;line-height:1.2}
+  #head .meta{font-size:9px}
+  #back{top:12px;left:14px;font-size:10px}
+  #play-btn{padding:4px 10px;font-size:9px}
+
+  /* Stage: shrink to fit between the compressed header + footer */
+  #stage{top:96px;bottom:60px}
+
+  /* Kill the decorative rail-cells on mobile — they add 88px of empty width crushing the layer content.
+     The main "10 layers" story is what matters on a phone. */
+  .rail{width:16px}
+  .rail-lbl{display:none}
+  .rail-cell .r-check{width:8px;height:8px;border-width:1px}
+
+  /* Layers: content-first on mobile */
+  .ly{padding:0 10px;flex-direction:column;align-items:flex-start;justify-content:center;gap:2px}
+  .ly-n{width:auto;font-size:9px}
+  .ly-t{flex:none;padding-left:0;font-size:12px;line-height:1.15}
+  .ly-t small{font-size:9px;display:inline}
+  .ly-c{padding-left:0;font-size:9px;line-height:1.35;max-width:100%}
+
+  /* Context bar: hide on mobile — it competes with the layer titles for space */
+  .ctx-bar, .ctx-lbl{display:none}
+
+  /* Task dot: shrink so it doesn't dominate */
+  .task-dot{width:10px;height:10px;box-shadow:0 0 8px rgba(255,71,19,.5)}
+
+  /* Caption panel: full-width bottom sheet on mobile */
+  #capnl{position:fixed;top:auto;bottom:52px;right:8px;left:8px;width:auto;transform:none;
+    max-height:44vh;overflow-y:auto;padding:12px 14px}
+  #capnl h3{font-size:16px}
+  #capnl .body{font-size:11px;line-height:1.5}
+
+  /* Footer: compress */
+  #foot{padding:8px 12px;font-size:9px;gap:6px}
+}
+@media(max-width:420px){
+  .ly-t{font-size:11px}
+  .ly-c{font-size:8px}
 }
 </style>
 </head>
