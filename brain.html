@@ -285,15 +285,16 @@ function initGraph() {
     .nodeVal(n => n.size * n.size)  // radius ∝ sqrt(val)
     .nodeAutoColorBy(null)
     .nodeColor(n => `#${(TYPE_COLORS[n.type] ?? 0x807870).toString(16).padStart(6,'0')}`)
-    .nodeOpacity(0.92)
+    .nodeOpacity(0.95)
     .nodeResolution(8)
-    .nodeRelSize(6)
+    .nodeRelSize(28)
     .nodeThreeObjectExtend(true)
     .nodeThreeObject(n => {
-      // Sprite EXTENDS the default sphere — adds a glowing halo around it
+      // Glow halo sprite added on top of default sphere. Additive-blend so
+      // stacked sprites brighten cluster hotspots naturally.
       const color = TYPE_COLORS[n.type] ?? 0x807870;
       const bright = BRIGHT_TYPES.has(n.type);
-      const size = (n.size || 1) * (bright ? 22 : 14);
+      const size = (n.size || 1) * (bright ? 90 : 55);
       const spriteMap = getGlowTexture();
       const material = new THREE.SpriteMaterial({
         map: spriteMap,
