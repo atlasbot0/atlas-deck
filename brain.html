@@ -208,9 +208,10 @@ html,body{width:100%;height:100vh;overflow:hidden;background:var(--wdark);
 <!-- Use UMD script tags (single Three.js instance to avoid version mismatch with 3d-force-graph) -->
 <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 <script src="https://unpkg.com/3d-force-graph@1.73.4/dist/3d-force-graph.min.js"></script>
+<script src="https://unpkg.com/three-spritetext@1.8.2/dist/three-spritetext.min.js"></script>
 
 <script>
-// THREE and ForceGraph3D are globals from the UMD scripts above
+// THREE, ForceGraph3D, SpriteText are globals from the UMD scripts above
 
 // ── COLOUR MAP ─────────────────────────────────────────────
 const TYPE_COLORS = {
@@ -272,46 +273,81 @@ function initGraph() {
   // Filter edges to only include those with valid source/target
   const validEdges = RAW.edges.filter(e => nodeById.has(e.source) && nodeById.has(e.target));
 
+  // Compute node degree (in + out) so hub nodes can be labelled by default
+  const degree = new Map();
+  validEdges.forEach(e => {
+    degree.set(e.source, (degree.get(e.source) || 0) + 1);
+    degree.set(e.target, (degree.get(e.target) || 0) + 1);
+  });
+
   const gData = {
-    nodes: RAW.nodes.map(n => ({ ...n })),
+    nodes: RAW.nodes.map(n => ({ ...n, degree: degree.get(n.id) || 0 })),
     links: validEdges.map(e => ({ source: e.source, target: e.target, type: e.type })),
   };
 
   const container = document.getElementById('scene');
   GRAPH = ForceGraph3D()(container)
     .graphData(gData)
-    .backgroundColor('#050403')
+    .backgroundColor('#04060C')
     .nodeId('id')
     .nodeVal(n => n.size * n.size)  // radius ∝ sqrt(val)
     .nodeAutoColorBy(null)
     .nodeColor(n => `#${(TYPE_COLORS[n.type] ?? 0x807870).toString(16).padStart(6,'0')}`)
-    .nodeOpacity(0.75)
-    .nodeResolution(6)
-    .nodeRelSize(5)
+    .nodeOpacity(0.85)
+    .nodeResolution(8)
+    .nodeRelSize(6)
     .nodeThreeObjectExtend(true)
     .nodeThreeObject(n => {
-      // Glow halo dominates — sphere core is tiny, sprite around it is the
-      // visual. Additive stacking of sprites brightens cluster hotspots.
+      // Container: glow halo + (for hub nodes) a persistent label
+      const container = new THREE.Group();
       const color = TYPE_COLORS[n.type] ?? 0x807870;
       const bright = BRIGHT_TYPES.has(n.type);
-      const size = (n.size || 1) * (bright ? 55 : 32);
-      const spriteMap = getGlowTexture();
+
+      // Glow halo — softer than before so cluster centres don't blow out to white
+      const size = (n.size || 1) * (bright ? 32 : 20);
       const material = new THREE.SpriteMaterial({
-        map: spriteMap,
+        map: getGlowTexture(),
         color: color,
         transparent: true,
-        opacity: bright ? 0.98 : 0.72,
+        opacity: bright ? 0.75 : 0.5,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
       });
       const sprite = new THREE.Sprite(material);
       sprite.scale.set(size, size, 1);
       sprite.userData.node = n;
-      return sprite;
+      container.add(sprite);
+
+      // Persistent label only for the biggest hubs so the scene doesn't clutter.
+      // Everything else gets a hover tooltip via .nodeLabel().
+      const isHub = (n.degree && n.degree >= 14) || n.type === 'doctrine' || n.type === 'index';
+      if (isHub && typeof SpriteText !== 'undefined') {
+        const text = new SpriteText(n.label.length > 40 ? n.label.slice(0, 38) + '…' : n.label);
+        text.color = '#F2EDE4';
+        text.backgroundColor = false;
+        text.fontFace = 'SF Mono, Fira Mono, monospace';
+        text.fontWeight = '600';
+        text.padding = 0;
+        text.textHeight = bright ? 3.5 : 2.8;
+        text.material.depthWrite = false;
+        text.material.transparent = true;
+        text.material.opacity = 0.85;
+        text.position.set(0, size * 0.6 + 4, 0);
+        container.add(text);
+      }
+      return container;
     })
-    .linkColor(l => 'rgba(242,237,228,0.08)')
-    .linkOpacity(0.28)
-    .linkWidth(0.4)
+    .linkColor(l => 'rgba(180,190,220,0.18)')
+    .linkOpacity(0.45)
+    .linkWidth(0.6)
+    .nodeLabel(n => {
+      const t = n.type.replace(/-/g, ' ').toUpperCase();
+      return `<div style="background:rgba(4,6,12,.92);color:#F2EDE4;padding:6px 10px;font-family:'SF Mono','Fira Mono',monospace;font-size:11px;border:1px solid rgba(242,237,228,.15);letter-spacing:.02em;max-width:340px;line-height:1.4">
+        <div style="font-size:9px;color:#FF4713;letter-spacing:.14em;margin-bottom:3px">${t}</div>
+        <div>${n.label}</div>
+        <div style="font-size:9px;color:rgba(242,237,228,.45);margin-top:4px">${n.folder || '/'}</div>
+      </div>`;
+    })
     .linkDirectionalParticles(0)
     .warmupTicks(140)
     .cooldownTicks(500)
@@ -331,7 +367,7 @@ function initGraph() {
     .onBackgroundClick(() => clearSel());
 
   // Very subtle fog for depth — must be low or 1600-node spread gets blacked out
-  GRAPH.scene().fog = new THREE.FogExp2(0x050403, 0.00035);
+  GRAPH.scene().fog = new THREE.FogExp2(0x04060C, 0.00028);
 
   // Camera auto-drift
   const controls = GRAPH.controls();
